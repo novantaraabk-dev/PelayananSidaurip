@@ -134,6 +134,7 @@ export type VillageProfileInfo = {
   imageUrl?: string;
   youtubeVideoUrl?: string;
   kadesPhotoUrl?: string;
+  pengaduanImageUrl?: string;
 };
 
 export type DriveSettingsInfo = {

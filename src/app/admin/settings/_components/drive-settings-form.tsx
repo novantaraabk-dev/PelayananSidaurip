@@ -88,7 +88,7 @@ export function DriveSettingsForm() {
   if (isLoading) return <Skeleton className="h-64 w-full rounded-2xl" />;
 
   return (
-    <Card>
+    <Card className="h-full flex flex-col justify-between">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Cloud className="h-5 w-5 text-primary" />
@@ -98,10 +98,10 @@ export function DriveSettingsForm() {
           Atur lokasi penyimpanan berkas lampiran pengajuan surat secara dinamis.
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <CardContent className="flex-1 flex flex-col justify-between">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="drive-link">
+            <Label htmlFor="drive-link" className="text-sm font-semibold">
               Link Folder Google Drive (Arsip)
             </Label>
             <Input
@@ -110,15 +110,17 @@ export function DriveSettingsForm() {
               value={googleDriveLink}
               onChange={(e) => setGoogleDriveLink(e.target.value)}
               disabled={isSaving}
+              className="w-full"
             />
-            <p className="text-sm text-muted-foreground">
-              Pintasan untuk membuka folder Drive dari panel admin.
+            <p className="text-xs text-muted-foreground">
+              Pintasan folder Drive dari panel admin.
             </p>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="root-id" className="flex items-center gap-1.5">
-              <FolderKey className="h-4 w-4 text-muted-foreground" /> ID Folder Utama (ROOT_FOLDER_ID)
+            <Label htmlFor="root-id" className="flex items-center gap-1.5 text-sm font-semibold">
+              <FolderKey className="h-4 w-4 text-muted-foreground shrink-0" />
+              ID Folder Utama (ROOT_FOLDER_ID)
             </Label>
             <Input
               id="root-id"
@@ -126,15 +128,15 @@ export function DriveSettingsForm() {
               value={rootFolderId}
               onChange={(e) => setRootFolderId(e.target.value)}
               disabled={isSaving}
-              className="font-mono text-xs"
+              className="font-mono text-xs w-full"
             />
-            <p className="text-sm text-muted-foreground">
-              ID folder tempat sistem akan membuat folder per-pengajuan. Anda bisa menempelkan link lengkap Google Drive, sistem akan mengekstrak ID-nya secara otomatis.
+            <p className="text-xs text-muted-foreground">
+              ID folder tempat sistem membuat folder per-pengajuan.
             </p>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="script-url">
+            <Label htmlFor="script-url" className="text-sm font-semibold">
               Apps Script Web App URL
             </Label>
             <Input
@@ -143,13 +145,14 @@ export function DriveSettingsForm() {
               value={appsScriptUrl}
               onChange={(e) => setAppsScriptUrl(e.target.value)}
               disabled={isSaving}
+              className="w-full text-xs"
             />
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               URL endpoint Web App dari Google Apps Script.
             </p>
           </div>
 
-          <Button type="submit" disabled={isSaving}>
+          <Button type="submit" disabled={isSaving} className="w-full sm:w-auto mt-2">
             {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
             Simpan Konfigurasi
           </Button>

@@ -301,7 +301,7 @@ export function FooterLogosSettingsForm() {
             <ul className="list-disc list-inside space-y-1 text-blue-800">
               <li>Format gambar: PNG, JPG, WebP</li>
               <li>Ukuran rekomendasi: 200x200px atau 300x300px</li>
-              <li>Semua logo akan diupload ke Cloudinary secara otomatis</li>
+              <li>Semua logo akan diupload ke Sistem secara otomatis</li>
               <li>Isi link (optional) jika logo ingin dihubungkan ke URL tertentu</li>
             </ul>
           </div>

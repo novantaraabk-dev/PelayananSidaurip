@@ -31,6 +31,12 @@ interface DBItemData {
   imageName?: string;
   pdfs?: Array<{ url: string; name: string }>;
   images?: Array<{ url: string; name: string }>;
+  tahunData?: {
+    [tahun: string]: {
+      pdfs?: Array<{ url: string; name: string }>;
+      images?: Array<{ url: string; name: string }>;
+    };
+  };
   updatedAt?: any;
 }
 
@@ -51,9 +57,44 @@ const getEmbedImageUrl = (url: string): string => {
   return url;
 };
 
+const getPdfsForYear = (files: DBItemData | undefined, year: string): Array<{ url: string; name: string }> => {
+  if (!files) return [];
+  
+  if (files.tahunData?.[year]?.pdfs && files.tahunData[year].pdfs.length > 0) {
+    return files.tahunData[year].pdfs;
+  }
+
+  const topPdfs = files.pdfs || (files.pdfUrl ? [{ url: files.pdfUrl, name: files.pdfName || 'Dokumen PDF' }] : []);
+  
+  return topPdfs.filter(pdf => {
+    if (pdf.name?.includes('2024')) return year === '2024';
+    if (pdf.name?.includes('2025')) return year === '2025';
+    if (pdf.name?.includes('2026')) return year === '2026';
+    return year === '2026';
+  });
+};
+
+const getImagesForYear = (files: DBItemData | undefined, year: string): Array<{ url: string; name: string }> => {
+  if (!files) return [];
+
+  if (files.tahunData?.[year]?.images && files.tahunData[year].images.length > 0) {
+    return files.tahunData[year].images;
+  }
+
+  const topImages = files.images || (files.imageUrl ? [{ url: files.imageUrl, name: files.imageName || 'Foto Dukung' }] : []);
+  
+  return topImages.filter(img => {
+    if (img.name?.includes('2024')) return year === '2024';
+    if (img.name?.includes('2025')) return year === '2025';
+    if (img.name?.includes('2026')) return year === '2026';
+    return year === '2026';
+  });
+};
+
 export default function DesaAntiKorupsi() {
   const [activeTab, setActiveTab] = useState<string>("1");
-  const [selectedImages, setSelectedImages] = useState<Array<{ url: string; name: string }> | null>(null);
+  const [selectedYear, setSelectedYear] = useState<string>("semua");
+  const [selectedImages, setSelectedImages] = useState<Array<{ url: string; name: string; tahun?: string }> | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
   const [activeItemTitle, setActiveItemTitle] = useState<string>('');
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -123,7 +164,7 @@ export default function DesaAntiKorupsi() {
                       : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-50'
                   }`}
                 >
-                  <span className="block text-[8px] opacity-60 mb-0.5">PILAR {pilar.id}</span>
+                  <span className="block text-[8px] opacity-60 mb-0.5">PILAR {pilar.id.replace('pilar-', '')}</span>
                   <span className="line-clamp-1">{pilar.title}</span>
                 </button>
               );
@@ -135,7 +176,7 @@ export default function DesaAntiKorupsi() {
             <div className="space-y-6 animate-fadeIn">
               <div className="border-l-4 border-emerald-600 pl-4 py-1">
                 <h2 className="text-lg font-bold text-slate-800 uppercase tracking-wider">
-                  Pilar {activePilar.id}: {activePilar.title}
+                  Pilar {activePilar.id.replace('pilar-', '')}: {activePilar.title}
                 </h2>
                 <p className="text-xs text-slate-400">
                   Berikut adalah daftar regulasi, dokumen pendukung, dan bukti implementasi pilar anti-korupsi.
@@ -176,74 +217,99 @@ export default function DesaAntiKorupsi() {
                         <div className="space-y-3 mt-4">
                           {subMenu.items.map((item) => {
                             const files = uploadedFilesMap.get(item.id);
-                            const pdfList = files?.pdfs || (files?.pdfUrl ? [{ url: files.pdfUrl, name: files.pdfName || 'Dokumen PDF' }] : []);
-                            const imageList = files?.images || (files?.imageUrl ? [{ url: files.imageUrl, name: files.imageName || 'Foto Dukung' }] : []);
-                            const hasPdf = pdfList.length > 0;
-                            const hasImage = imageList.length > 0;
-                            
+                            const yearsToDisplay = selectedYear === 'semua' ? ['2024', '2025', '2026'] : [selectedYear];
+
+                            const hasAnyFile = yearsToDisplay.some(yr => {
+                              const p = getPdfsForYear(files, yr);
+                              const img = getImagesForYear(files, yr);
+                              return p.length > 0 || img.length > 0;
+                            });
+
                             return (
                               <div
                                 key={item.id}
-                                className="flex flex-col md:flex-row md:items-start justify-between gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors min-w-0"
+                                className="p-4 rounded-xl border border-slate-200/90 bg-slate-50/60 hover:bg-slate-50 transition-all space-y-3"
                               >
-                                <div className="space-y-1 md:w-1/3 shrink-0">
-                                  <div className="flex items-start gap-2">
-                                    <span className="font-mono text-[10px] text-slate-400 font-bold mt-0.5 shrink-0">
-                                      {item.id}
-                                    </span>
-                                    <h4 className="text-xs md:text-sm font-bold text-slate-800 leading-snug">
-                                      {item.title}
-                                    </h4>
-                                  </div>
+                                <div className="flex items-start gap-2.5">
+                                  <span className="font-mono text-[11px] text-emerald-700 font-black bg-emerald-100/90 px-2 py-0.5 rounded-md shrink-0 mt-0.5">
+                                    {item.id}
+                                  </span>
+                                  <h4 className="text-xs md:text-sm font-bold text-slate-800 leading-snug">
+                                    {item.title}
+                                  </h4>
                                 </div>
 
-                                {(hasPdf || hasImage) && (
-                                  <div className="flex flex-wrap items-center gap-2 md:justify-end flex-1 min-w-0">
-                                    {/* PDF List */}
-                                    {hasPdf && pdfList.map((pdf, idx) => (
-                                      <a
-                                        key={`pdf-${idx}`}
-                                        href={pdf.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        title={pdf.name}
-                                        className="inline-block"
-                                      >
-                                        <Button
-                                          variant="outline"
-                                          size="sm"
-                                          className="h-8 rounded-full border-red-200 bg-red-50/50 text-red-700 hover:bg-red-50 hover:text-red-800 text-[10px] font-bold uppercase tracking-wider max-w-full"
-                                        >
-                                          <FileText className="h-3.5 w-3.5 mr-1 shrink-0" />
-                                          <span className="max-w-[140px] sm:max-w-[200px] truncate">
-                                            {pdf.name}
-                                          </span>
-                                        </Button>
-                                      </a>
-                                    ))}
+                                {hasAnyFile ? (
+                                  <div className="space-y-2 pt-1">
+                                    {yearsToDisplay.map((yr) => {
+                                      const yearPdfs = getPdfsForYear(files, yr);
+                                      const yearImages = getImagesForYear(files, yr);
 
-                                    {/* Image List */}
-                                    {hasImage && imageList.map((img, idx) => (
-                                      <Button
-                                        key={`img-${idx}`}
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => {
-                                          setSelectedImages(imageList);
-                                          setActiveImageIndex(idx);
-                                          setActiveItemTitle(item.title);
-                                          setIsDialogOpen(true);
-                                        }}
-                                        title={img.name}
-                                        className="h-8 rounded-full border-blue-200 bg-blue-50/50 text-blue-700 hover:bg-blue-50 hover:text-blue-800 text-[10px] font-bold uppercase tracking-wider max-w-full"
-                                      >
-                                        <ImageIcon className="h-3.5 w-3.5 mr-1 shrink-0" />
-                                        <span className="max-w-[140px] sm:max-w-[200px] truncate">
-                                          {img.name}
-                                        </span>
-                                      </Button>
-                                    ))}
+                                      if (yearPdfs.length === 0 && yearImages.length === 0) return null;
+
+                                      return (
+                                        <div 
+                                          key={yr} 
+                                          className="bg-white border border-slate-200/80 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs hover:border-slate-300 transition-colors"
+                                        >
+                                          <div className="flex items-center gap-1.5 shrink-0">
+                                            <span className="px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-950 text-[10px] font-black uppercase font-mono tracking-wide border border-amber-300/60">
+                                              Tahun {yr}
+                                            </span>
+                                          </div>
+
+                                          <div className="flex flex-wrap items-center gap-2 flex-1 sm:justify-end">
+                                            {yearPdfs.map((pdf, idx) => (
+                                              <a
+                                                key={`pdf-${yr}-${idx}`}
+                                                href={pdf.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                title={pdf.name}
+                                              >
+                                                <Button
+                                                  variant="outline"
+                                                  size="sm"
+                                                  className="h-8 rounded-lg border-red-200 bg-red-50/70 text-red-700 hover:bg-red-100 hover:text-red-900 text-[10px] font-bold uppercase tracking-wider max-w-full gap-1.5"
+                                                >
+                                                  <FileText className="h-3.5 w-3.5 text-red-600 shrink-0" />
+                                                  <span className="max-w-[140px] sm:max-w-[200px] truncate">
+                                                    {pdf.name}
+                                                  </span>
+                                                  <ExternalLink className="h-2.5 w-2.5 text-red-400 shrink-0" />
+                                                </Button>
+                                              </a>
+                                            ))}
+
+                                            {yearImages.map((img, idx) => (
+                                              <Button
+                                                key={`img-${yr}-${idx}`}
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => {
+                                                  setSelectedImages(yearImages);
+                                                  setActiveImageIndex(idx);
+                                                  setActiveItemTitle(`${item.title} (Tahun ${yr})`);
+                                                  setIsDialogOpen(true);
+                                                }}
+                                                title={img.name}
+                                                className="h-8 rounded-lg border-blue-200 bg-blue-50/70 text-blue-700 hover:bg-blue-100 hover:text-blue-900 text-[10px] font-bold uppercase tracking-wider max-w-full gap-1.5"
+                                              >
+                                                <ImageIcon className="h-3.5 w-3.5 text-blue-600 shrink-0" />
+                                                <span className="max-w-[140px] sm:max-w-[200px] truncate">
+                                                  {img.name}
+                                                </span>
+                                              </Button>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      );
+                                    })}
                                   </div>
+                                ) : (
+                                  <p className="text-[11px] font-medium text-slate-400 italic pt-1 pl-1">
+                                    Belum ada dokumen terunggah untuk item ini.
+                                  </p>
                                 )}
                               </div>
                             );

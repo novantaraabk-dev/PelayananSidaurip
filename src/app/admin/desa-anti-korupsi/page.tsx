@@ -41,6 +41,12 @@ interface DBItemData {
   imageName?: string;
   pdfs?: Array<{ url: string; name: string }>;
   images?: Array<{ url: string; name: string }>;
+  tahunData?: {
+    [tahun: string]: {
+      pdfs?: Array<{ url: string; name: string }>;
+      images?: Array<{ url: string; name: string }>;
+    };
+  };
   updatedAt?: any;
 }
 
@@ -84,6 +90,7 @@ export default function AdminDesaAntiKorupsi() {
   const [selectedPilarId, setSelectedPilarId] = useState<string>('');
   const [selectedSubMenuId, setSelectedSubMenuId] = useState<string>('');
   const [selectedItemId, setSelectedItemId] = useState<string>('');
+  const [selectedSubTahun, setSelectedSubTahun] = useState<string>('semua');
 
   // Selected Item Details
   const [currentItem, setCurrentItem] = useState<AntiKorupsiItem | null>(null);
@@ -331,6 +338,203 @@ export default function AdminDesaAntiKorupsi() {
     };
   };
 
+  // Helper lists for multiple files view for selected sub-tahun
+  const pdfList = useMemo(() => {
+    if (!dbData) return [];
+    
+    const results: Array<{ url: string; name: string; tahun: string }> = [];
+
+    if (dbData.tahunData) {
+      ['2024', '2025', '2026'].forEach(yr => {
+        const items = dbData.tahunData?.[yr]?.pdfs || [];
+        items.forEach(p => {
+          results.push({ ...p, tahun: yr });
+        });
+      });
+    }
+
+    if (results.length === 0) {
+      const topPdfs = dbData.pdfs || (dbData.pdfUrl ? [{ url: dbData.pdfUrl, name: dbData.pdfName || 'Dokumen PDF' }] : []);
+      topPdfs.forEach(p => {
+        let yr = '2026';
+        if (p.name?.includes('2024')) yr = '2024';
+        else if (p.name?.includes('2025')) yr = '2025';
+        else if (p.name?.includes('2026')) yr = '2026';
+        results.push({ ...p, tahun: yr });
+      });
+    }
+
+    if (selectedSubTahun !== 'semua') {
+      return results.filter(item => item.tahun === selectedSubTahun);
+    }
+
+    return results;
+  }, [dbData, selectedSubTahun]);
+
+  const imageList = useMemo(() => {
+    if (!dbData) return [];
+    
+    const results: Array<{ url: string; name: string; tahun: string }> = [];
+
+    if (dbData.tahunData) {
+      ['2024', '2025', '2026'].forEach(yr => {
+        const items = dbData.tahunData?.[yr]?.images || [];
+        items.forEach(img => {
+          results.push({ ...img, tahun: yr });
+        });
+      });
+    }
+
+    if (results.length === 0) {
+      const topImages = dbData.images || (dbData.imageUrl ? [{ url: dbData.imageUrl, name: dbData.imageName || 'Gambar Dukung' }] : []);
+      topImages.forEach(img => {
+        let yr = '2026';
+        if (img.name?.includes('2024')) yr = '2024';
+        else if (img.name?.includes('2025')) yr = '2025';
+        else if (img.name?.includes('2026')) yr = '2026';
+        results.push({ ...img, tahun: yr });
+      });
+    }
+
+    if (selectedSubTahun !== 'semua') {
+      return results.filter(item => item.tahun === selectedSubTahun);
+    }
+
+    return results;
+  }, [dbData, selectedSubTahun]);
+
+  // Update year for a specific PDF item
+  const handleUpdatePdfYear = async (targetPdf: { url: string; name: string; tahun: string }, newYear: string) => {
+    if (!currentItem || !firestore || !dbData) return;
+
+    try {
+      let allPdfs: Array<{ url: string; name: string; tahun: string }> = [];
+      if (dbData.tahunData) {
+        ['2024', '2025', '2026'].forEach(yr => {
+          (dbData.tahunData?.[yr]?.pdfs || []).forEach(p => {
+            allPdfs.push({ ...p, tahun: yr });
+          });
+        });
+      }
+      if (allPdfs.length === 0) {
+        const topPdfs = dbData.pdfs || (dbData.pdfUrl ? [{ url: dbData.pdfUrl, name: dbData.pdfName || 'Dokumen PDF' }] : []);
+        topPdfs.forEach(p => {
+          let yr = '2026';
+          if (p.name?.includes('2024')) yr = '2024';
+          else if (p.name?.includes('2025')) yr = '2025';
+          else if (p.name?.includes('2026')) yr = '2026';
+          allPdfs.push({ ...p, tahun: yr });
+        });
+      }
+
+      const updatedAllPdfs = allPdfs.map(p => {
+        if (p.url === targetPdf.url && p.name === targetPdf.name) {
+          return { ...p, tahun: newYear };
+        }
+        return p;
+      });
+
+      const newTahunData: any = {};
+      ['2024', '2025', '2026'].forEach(yr => {
+        const yearPdfs = updatedAllPdfs.filter(p => p.tahun === yr).map(({ url, name }) => ({ url, name }));
+        const existingImages = dbData.tahunData?.[yr]?.images || (yr === '2026' ? (dbData.images || []) : []);
+        newTahunData[yr] = {
+          pdfs: yearPdfs,
+          images: existingImages
+        };
+      });
+
+      const docRef = doc(firestore, 'desaAntiKorupsi', currentItem.id);
+      const updatePayload: any = {
+        itemId: currentItem.id,
+        tahunData: newTahunData,
+        updatedAt: serverTimestamp()
+      };
+
+      const pdfs2026 = newTahunData['2026']?.pdfs || [];
+      updatePayload.pdfs = pdfs2026;
+      updatePayload.pdfUrl = pdfs2026.length > 0 ? pdfs2026[0].url : null;
+      updatePayload.pdfName = pdfs2026.length > 0 ? pdfs2026[0].name : null;
+
+      await setDoc(docRef, updatePayload, { merge: true });
+
+      toast({
+        title: 'Tahun PDF Berhasil Diubah',
+        description: `Dokumen "${targetPdf.name}" dipindahkan ke Tahun ${newYear}.`,
+      });
+
+      fetchItemData(currentItem.id);
+    } catch (error: any) {
+      toast({ title: 'Gagal Mengubah Tahun', description: error.message, variant: 'destructive' });
+    }
+  };
+
+  // Update year for a specific Image item
+  const handleUpdateImageYear = async (targetImg: { url: string; name: string; tahun: string }, newYear: string) => {
+    if (!currentItem || !firestore || !dbData) return;
+
+    try {
+      let allImages: Array<{ url: string; name: string; tahun: string }> = [];
+      if (dbData.tahunData) {
+        ['2024', '2025', '2026'].forEach(yr => {
+          (dbData.tahunData?.[yr]?.images || []).forEach(img => {
+            allImages.push({ ...img, tahun: yr });
+          });
+        });
+      }
+      if (allImages.length === 0) {
+        const topImages = dbData.images || (dbData.imageUrl ? [{ url: dbData.imageUrl, name: dbData.imageName || 'Gambar Dukung' }] : []);
+        topImages.forEach(img => {
+          let yr = '2026';
+          if (img.name?.includes('2024')) yr = '2024';
+          else if (img.name?.includes('2025')) yr = '2025';
+          else if (img.name?.includes('2026')) yr = '2026';
+          allImages.push({ ...img, tahun: yr });
+        });
+      }
+
+      const updatedAllImages = allImages.map(img => {
+        if (img.url === targetImg.url && img.name === targetImg.name) {
+          return { ...img, tahun: newYear };
+        }
+        return img;
+      });
+
+      const newTahunData: any = {};
+      ['2024', '2025', '2026'].forEach(yr => {
+        const yearImages = updatedAllImages.filter(img => img.tahun === yr).map(({ url, name }) => ({ url, name }));
+        const existingPdfs = dbData.tahunData?.[yr]?.pdfs || (yr === '2026' ? (dbData.pdfs || []) : []);
+        newTahunData[yr] = {
+          pdfs: existingPdfs,
+          images: yearImages
+        };
+      });
+
+      const docRef = doc(firestore, 'desaAntiKorupsi', currentItem.id);
+      const updatePayload: any = {
+        itemId: currentItem.id,
+        tahunData: newTahunData,
+        updatedAt: serverTimestamp()
+      };
+
+      const images2026 = newTahunData['2026']?.images || [];
+      updatePayload.images = images2026;
+      updatePayload.imageUrl = images2026.length > 0 ? images2026[0].url : null;
+      updatePayload.imageName = images2026.length > 0 ? images2026[0].name : null;
+
+      await setDoc(docRef, updatePayload, { merge: true });
+
+      toast({
+        title: 'Tahun Foto Berhasil Diubah',
+        description: `Foto "${targetImg.name}" dipindahkan ke Tahun ${newYear}.`,
+      });
+
+      fetchItemData(currentItem.id);
+    } catch (error: any) {
+      toast({ title: 'Gagal Mengubah Tahun', description: error.message, variant: 'destructive' });
+    }
+  };
+
   // Upload PDF to Google Drive
   const handlePdfUpload = async () => {
     if (!pdfFile || !currentItem || !firestore) return;
@@ -338,23 +542,56 @@ export default function AdminDesaAntiKorupsi() {
 
     try {
       const uploadResult = await uploadToDrive(pdfFile, 'PDF');
+      const uploadYear = selectedSubTahun === 'semua' ? '2026' : selectedSubTahun;
 
-      const currentPdfs = dbData?.pdfs || (dbData?.pdfUrl ? [{ url: dbData.pdfUrl, name: dbData.pdfName || 'Dokumen PDF' }] : []);
-      const newPdfs = [...currentPdfs, { url: uploadResult.url, name: uploadResult.name }];
+      let allPdfs: Array<{ url: string; name: string; tahun: string }> = [];
+      if (dbData?.tahunData) {
+        ['2024', '2025', '2026'].forEach(yr => {
+          (dbData.tahunData?.[yr]?.pdfs || []).forEach(p => {
+            allPdfs.push({ ...p, tahun: yr });
+          });
+        });
+      }
+      if (allPdfs.length === 0 && dbData) {
+        const topPdfs = dbData.pdfs || (dbData.pdfUrl ? [{ url: dbData.pdfUrl, name: dbData.pdfName || 'Dokumen PDF' }] : []);
+        topPdfs.forEach(p => {
+          let yr = '2026';
+          if (p.name?.includes('2024')) yr = '2024';
+          else if (p.name?.includes('2025')) yr = '2025';
+          else if (p.name?.includes('2026')) yr = '2026';
+          allPdfs.push({ ...p, tahun: yr });
+        });
+      }
 
-      // Save to Firestore
+      allPdfs.push({ url: uploadResult.url, name: uploadResult.name, tahun: uploadYear });
+
+      const newTahunData: any = {};
+      ['2024', '2025', '2026'].forEach(yr => {
+        const yearPdfs = allPdfs.filter(p => p.tahun === yr).map(({ url, name }) => ({ url, name }));
+        const existingImages = dbData?.tahunData?.[yr]?.images || (yr === '2026' ? (dbData?.images || []) : []);
+        newTahunData[yr] = {
+          pdfs: yearPdfs,
+          images: existingImages
+        };
+      });
+
       const docRef = doc(firestore, 'desaAntiKorupsi', currentItem.id);
-      await setDoc(docRef, {
+      const updatePayload: any = {
         itemId: currentItem.id,
-        pdfs: newPdfs,
-        pdfUrl: newPdfs[0].url,
-        pdfName: newPdfs[0].name,
+        tahunData: newTahunData,
         updatedAt: serverTimestamp()
-      }, { merge: true });
+      };
+
+      const pdfs2026 = newTahunData['2026']?.pdfs || [];
+      updatePayload.pdfs = pdfs2026;
+      updatePayload.pdfUrl = pdfs2026.length > 0 ? pdfs2026[0].url : null;
+      updatePayload.pdfName = pdfs2026.length > 0 ? pdfs2026[0].name : null;
+
+      await setDoc(docRef, updatePayload, { merge: true });
 
       toast({
         title: 'PDF Berhasil Unggah',
-        description: `Dokumen ${pdfFile.name} disimpan ke Google Drive.`,
+        description: `Dokumen ${pdfFile.name} (Tahun ${uploadYear}) disimpan ke Google Drive.`,
       });
 
       setPdfFile(null);
@@ -377,26 +614,58 @@ export default function AdminDesaAntiKorupsi() {
     setIsImageUploading(true);
 
     try {
-      // Compress client-side
       const compressedFile = await compressImage(imageFile);
       const uploadResult = await uploadToDrive(compressedFile, 'IMG');
+      const uploadYear = selectedSubTahun === 'semua' ? '2026' : selectedSubTahun;
 
-      const currentImages = dbData?.images || (dbData?.imageUrl ? [{ url: dbData.imageUrl, name: dbData.imageName || 'Gambar Dukung' }] : []);
-      const newImages = [...currentImages, { url: uploadResult.url, name: uploadResult.name }];
+      let allImages: Array<{ url: string; name: string; tahun: string }> = [];
+      if (dbData?.tahunData) {
+        ['2024', '2025', '2026'].forEach(yr => {
+          (dbData.tahunData?.[yr]?.images || []).forEach(img => {
+            allImages.push({ ...img, tahun: yr });
+          });
+        });
+      }
+      if (allImages.length === 0 && dbData) {
+        const topImages = dbData.images || (dbData.imageUrl ? [{ url: dbData.imageUrl, name: dbData.imageName || 'Gambar Dukung' }] : []);
+        topImages.forEach(img => {
+          let yr = '2026';
+          if (img.name?.includes('2024')) yr = '2024';
+          else if (img.name?.includes('2025')) yr = '2025';
+          else if (img.name?.includes('2026')) yr = '2026';
+          allImages.push({ ...img, tahun: yr });
+        });
+      }
 
-      // Save to Firestore
+      allImages.push({ url: uploadResult.url, name: uploadResult.name, tahun: uploadYear });
+
+      const newTahunData: any = {};
+      ['2024', '2025', '2026'].forEach(yr => {
+        const yearImages = allImages.filter(img => img.tahun === yr).map(({ url, name }) => ({ url, name }));
+        const existingPdfs = dbData?.tahunData?.[yr]?.pdfs || (yr === '2026' ? (dbData?.pdfs || []) : []);
+        newTahunData[yr] = {
+          pdfs: existingPdfs,
+          images: yearImages
+        };
+      });
+
       const docRef = doc(firestore, 'desaAntiKorupsi', currentItem.id);
-      await setDoc(docRef, {
+      const updatePayload: any = {
         itemId: currentItem.id,
-        images: newImages,
-        imageUrl: newImages[0].url,
-        imageName: newImages[0].name,
+        tahunData: newTahunData,
         updatedAt: serverTimestamp()
-      }, { merge: true });
+      };
+
+      const images2026 = newTahunData['2026']?.images || [];
+      updatePayload.images = images2026;
+      updatePayload.imageUrl = images2026.length > 0 ? images2026[0].url : null;
+      updatePayload.imageName = images2026.length > 0 ? images2026[0].name : null;
+
+      await setDoc(docRef, updatePayload, { merge: true });
 
       toast({
         title: 'Foto Berhasil Unggah',
-        description: `Gambar ${imageFile.name} berhasil dikompresi dan disimpan ke Google Drive.`,
+        description: `Gambar ${imageFile.name} (Tahun ${uploadYear}) berhasil dikompresi dan disimpan.`,
       });
 
       setImageFile(null);
@@ -413,68 +682,116 @@ export default function AdminDesaAntiKorupsi() {
     }
   };
 
-  // Delete a specific PDF from multiple list
-  const handleDeletePdfItem = async (indexToDelete: number) => {
+  // Delete a specific PDF from list
+  const handleDeletePdfItem = async (targetPdf: { url: string; name: string; tahun: string }) => {
     if (!currentItem || !firestore || !dbData) return;
-    if (!confirm('Apakah Anda yakin ingin menghapus PDF ini?')) return;
+    if (!confirm(`Apakah Anda yakin ingin menghapus PDF "${targetPdf.name}" (Tahun ${targetPdf.tahun})?`)) return;
 
     try {
-      const currentPdfs = dbData.pdfs || (dbData.pdfUrl ? [{ url: dbData.pdfUrl, name: dbData.pdfName || 'Dokumen PDF' }] : []);
-      const newPdfs = currentPdfs.filter((_, idx) => idx !== indexToDelete);
-
-      const docRef = doc(firestore, 'desaAntiKorupsi', currentItem.id);
-      const currentImages = dbData.images || (dbData.imageUrl ? [{ url: dbData.imageUrl, name: dbData.imageName || 'Gambar Dukung' }] : []);
-      
-      if (newPdfs.length === 0 && currentImages.length === 0) {
-        await deleteDoc(docRef);
-      } else {
-        await setDoc(docRef, {
-          itemId: currentItem.id,
-          pdfs: newPdfs,
-          pdfUrl: newPdfs.length > 0 ? newPdfs[0].url : null,
-          pdfName: newPdfs.length > 0 ? newPdfs[0].name : null,
-          images: currentImages,
-          imageUrl: currentImages.length > 0 ? currentImages[0].url : (dbData.imageUrl || null),
-          imageName: currentImages.length > 0 ? currentImages[0].name : (dbData.imageName || null),
-          updatedAt: serverTimestamp()
+      let allPdfs: Array<{ url: string; name: string; tahun: string }> = [];
+      if (dbData.tahunData) {
+        ['2024', '2025', '2026'].forEach(yr => {
+          (dbData.tahunData?.[yr]?.pdfs || []).forEach(p => {
+            allPdfs.push({ ...p, tahun: yr });
+          });
+        });
+      }
+      if (allPdfs.length === 0) {
+        const topPdfs = dbData.pdfs || (dbData.pdfUrl ? [{ url: dbData.pdfUrl, name: dbData.pdfName || 'Dokumen PDF' }] : []);
+        topPdfs.forEach(p => {
+          let yr = '2026';
+          if (p.name?.includes('2024')) yr = '2024';
+          else if (p.name?.includes('2025')) yr = '2025';
+          else if (p.name?.includes('2026')) yr = '2026';
+          allPdfs.push({ ...p, tahun: yr });
         });
       }
 
-      toast({ title: 'Berhasil Dihapus', description: 'Dokumen PDF telah dihapus.' });
+      const updatedAllPdfs = allPdfs.filter(p => !(p.url === targetPdf.url && p.name === targetPdf.name));
+
+      const newTahunData: any = {};
+      ['2024', '2025', '2026'].forEach(yr => {
+        const yearPdfs = updatedAllPdfs.filter(p => p.tahun === yr).map(({ url, name }) => ({ url, name }));
+        const existingImages = dbData.tahunData?.[yr]?.images || (yr === '2026' ? (dbData.images || []) : []);
+        newTahunData[yr] = {
+          pdfs: yearPdfs,
+          images: existingImages
+        };
+      });
+
+      const docRef = doc(firestore, 'desaAntiKorupsi', currentItem.id);
+      const updatePayload: any = {
+        itemId: currentItem.id,
+        tahunData: newTahunData,
+        updatedAt: serverTimestamp()
+      };
+
+      const pdfs2026 = newTahunData['2026']?.pdfs || [];
+      updatePayload.pdfs = pdfs2026;
+      updatePayload.pdfUrl = pdfs2026.length > 0 ? pdfs2026[0].url : null;
+      updatePayload.pdfName = pdfs2026.length > 0 ? pdfs2026[0].name : null;
+
+      await setDoc(docRef, updatePayload, { merge: true });
+
+      toast({ title: 'Berhasil Dihapus', description: `Dokumen PDF "${targetPdf.name}" telah dihapus.` });
       fetchItemData(currentItem.id);
     } catch (error: any) {
       toast({ title: 'Gagal Menghapus', description: error.message, variant: 'destructive' });
     }
   };
 
-  // Delete a specific Image from multiple list
-  const handleDeleteImageItem = async (indexToDelete: number) => {
+  // Delete a specific Image from list
+  const handleDeleteImageItem = async (targetImg: { url: string; name: string; tahun: string }) => {
     if (!currentItem || !firestore || !dbData) return;
-    if (!confirm('Apakah Anda yakin ingin menghapus foto dukung ini?')) return;
+    if (!confirm(`Apakah Anda yakin ingin menghapus foto "${targetImg.name}" (Tahun ${targetImg.tahun})?`)) return;
 
     try {
-      const currentImages = dbData.images || (dbData.imageUrl ? [{ url: dbData.imageUrl, name: dbData.imageName || 'Gambar Dukung' }] : []);
-      const newImages = currentImages.filter((_, idx) => idx !== indexToDelete);
-
-      const docRef = doc(firestore, 'desaAntiKorupsi', currentItem.id);
-      const currentPdfs = dbData.pdfs || (dbData.pdfUrl ? [{ url: dbData.pdfUrl, name: dbData.pdfName || 'Dokumen PDF' }] : []);
-
-      if (newImages.length === 0 && currentPdfs.length === 0) {
-        await deleteDoc(docRef);
-      } else {
-        await setDoc(docRef, {
-          itemId: currentItem.id,
-          images: newImages,
-          imageUrl: newImages.length > 0 ? newImages[0].url : null,
-          imageName: newImages.length > 0 ? newImages[0].name : null,
-          pdfs: currentPdfs,
-          pdfUrl: currentPdfs.length > 0 ? currentPdfs[0].url : (dbData.pdfUrl || null),
-          pdfName: currentPdfs.length > 0 ? currentPdfs[0].name : (dbData.pdfName || null),
-          updatedAt: serverTimestamp()
+      let allImages: Array<{ url: string; name: string; tahun: string }> = [];
+      if (dbData.tahunData) {
+        ['2024', '2025', '2026'].forEach(yr => {
+          (dbData.tahunData?.[yr]?.images || []).forEach(img => {
+            allImages.push({ ...img, tahun: yr });
+          });
+        });
+      }
+      if (allImages.length === 0) {
+        const topImages = dbData.images || (dbData.imageUrl ? [{ url: dbData.imageUrl, name: dbData.imageName || 'Gambar Dukung' }] : []);
+        topImages.forEach(img => {
+          let yr = '2026';
+          if (img.name?.includes('2024')) yr = '2024';
+          else if (img.name?.includes('2025')) yr = '2025';
+          else if (img.name?.includes('2026')) yr = '2026';
+          allImages.push({ ...img, tahun: yr });
         });
       }
 
-      toast({ title: 'Berhasil Dihapus', description: 'Foto dukung telah dihapus.' });
+      const updatedAllImages = allImages.filter(img => !(img.url === targetImg.url && img.name === targetImg.name));
+
+      const newTahunData: any = {};
+      ['2024', '2025', '2026'].forEach(yr => {
+        const yearImages = updatedAllImages.filter(img => img.tahun === yr).map(({ url, name }) => ({ url, name }));
+        const existingPdfs = dbData.tahunData?.[yr]?.pdfs || (yr === '2026' ? (dbData.pdfs || []) : []);
+        newTahunData[yr] = {
+          pdfs: existingPdfs,
+          images: yearImages
+        };
+      });
+
+      const docRef = doc(firestore, 'desaAntiKorupsi', currentItem.id);
+      const updatePayload: any = {
+        itemId: currentItem.id,
+        tahunData: newTahunData,
+        updatedAt: serverTimestamp()
+      };
+
+      const images2026 = newTahunData['2026']?.images || [];
+      updatePayload.images = images2026;
+      updatePayload.imageUrl = images2026.length > 0 ? images2026[0].url : null;
+      updatePayload.imageName = images2026.length > 0 ? images2026[0].name : null;
+
+      await setDoc(docRef, updatePayload, { merge: true });
+
+      toast({ title: 'Berhasil Dihapus', description: `Foto dukung "${targetImg.name}" telah dihapus.` });
       fetchItemData(currentItem.id);
     } catch (error: any) {
       toast({ title: 'Gagal Menghapus', description: error.message, variant: 'destructive' });
@@ -488,23 +805,56 @@ export default function AdminDesaAntiKorupsi() {
     try {
       const url = manualPdfUrl.trim();
       const name = manualPdfName.trim() || currentItem.title;
+      const uploadYear = selectedSubTahun === 'semua' ? '2026' : selectedSubTahun;
 
-      const currentPdfs = dbData?.pdfs || (dbData?.pdfUrl ? [{ url: dbData.pdfUrl, name: dbData.pdfName || 'Dokumen PDF' }] : []);
-      const newPdfs = [...currentPdfs, { url, name }];
+      let allPdfs: Array<{ url: string; name: string; tahun: string }> = [];
+      if (dbData?.tahunData) {
+        ['2024', '2025', '2026'].forEach(yr => {
+          (dbData.tahunData?.[yr]?.pdfs || []).forEach(p => {
+            allPdfs.push({ ...p, tahun: yr });
+          });
+        });
+      }
+      if (allPdfs.length === 0 && dbData) {
+        const topPdfs = dbData.pdfs || (dbData.pdfUrl ? [{ url: dbData.pdfUrl, name: dbData.pdfName || 'Dokumen PDF' }] : []);
+        topPdfs.forEach(p => {
+          let yr = '2026';
+          if (p.name?.includes('2024')) yr = '2024';
+          else if (p.name?.includes('2025')) yr = '2025';
+          else if (p.name?.includes('2026')) yr = '2026';
+          allPdfs.push({ ...p, tahun: yr });
+        });
+      }
 
-      // Save to Firestore
+      allPdfs.push({ url, name, tahun: uploadYear });
+
+      const newTahunData: any = {};
+      ['2024', '2025', '2026'].forEach(yr => {
+        const yearPdfs = allPdfs.filter(p => p.tahun === yr).map(({ url, name }) => ({ url, name }));
+        const existingImages = dbData?.tahunData?.[yr]?.images || (yr === '2026' ? (dbData?.images || []) : []);
+        newTahunData[yr] = {
+          pdfs: yearPdfs,
+          images: existingImages
+        };
+      });
+
       const docRef = doc(firestore, 'desaAntiKorupsi', currentItem.id);
-      await setDoc(docRef, {
+      const updatePayload: any = {
         itemId: currentItem.id,
-        pdfs: newPdfs,
-        pdfUrl: newPdfs[0].url,
-        pdfName: newPdfs[0].name,
+        tahunData: newTahunData,
         updatedAt: serverTimestamp()
-      }, { merge: true });
+      };
+
+      const pdfs2026 = newTahunData['2026']?.pdfs || [];
+      updatePayload.pdfs = pdfs2026;
+      updatePayload.pdfUrl = pdfs2026.length > 0 ? pdfs2026[0].url : null;
+      updatePayload.pdfName = pdfs2026.length > 0 ? pdfs2026[0].name : null;
+
+      await setDoc(docRef, updatePayload, { merge: true });
 
       toast({
         title: 'Tautan PDF Berhasil Disimpan',
-        description: 'Tautan dokumen PDF manual telah ditambahkan ke daftar.',
+        description: `Tautan dokumen PDF manual (Tahun ${uploadYear}) telah ditambahkan.`,
       });
 
       setManualPdfUrl('');
@@ -529,23 +879,56 @@ export default function AdminDesaAntiKorupsi() {
     try {
       const url = manualImageUrl.trim();
       const name = manualImageName.trim() || currentItem.title;
+      const uploadYear = selectedSubTahun === 'semua' ? '2026' : selectedSubTahun;
 
-      const currentImages = dbData?.images || (dbData?.imageUrl ? [{ url: dbData.imageUrl, name: dbData.imageName || 'Gambar Dukung' }] : []);
-      const newImages = [...currentImages, { url, name }];
+      let allImages: Array<{ url: string; name: string; tahun: string }> = [];
+      if (dbData?.tahunData) {
+        ['2024', '2025', '2026'].forEach(yr => {
+          (dbData.tahunData?.[yr]?.images || []).forEach(img => {
+            allImages.push({ ...img, tahun: yr });
+          });
+        });
+      }
+      if (allImages.length === 0 && dbData) {
+        const topImages = dbData.images || (dbData.imageUrl ? [{ url: dbData.imageUrl, name: dbData.imageName || 'Gambar Dukung' }] : []);
+        topImages.forEach(img => {
+          let yr = '2026';
+          if (img.name?.includes('2024')) yr = '2024';
+          else if (img.name?.includes('2025')) yr = '2025';
+          else if (img.name?.includes('2026')) yr = '2026';
+          allImages.push({ ...img, tahun: yr });
+        });
+      }
 
-      // Save to Firestore
+      allImages.push({ url, name, tahun: uploadYear });
+
+      const newTahunData: any = {};
+      ['2024', '2025', '2026'].forEach(yr => {
+        const yearImages = allImages.filter(img => img.tahun === yr).map(({ url, name }) => ({ url, name }));
+        const existingPdfs = dbData?.tahunData?.[yr]?.pdfs || (yr === '2026' ? (dbData?.pdfs || []) : []);
+        newTahunData[yr] = {
+          pdfs: existingPdfs,
+          images: yearImages
+        };
+      });
+
       const docRef = doc(firestore, 'desaAntiKorupsi', currentItem.id);
-      await setDoc(docRef, {
+      const updatePayload: any = {
         itemId: currentItem.id,
-        images: newImages,
-        imageUrl: newImages[0].url,
-        imageName: newImages[0].name,
+        tahunData: newTahunData,
         updatedAt: serverTimestamp()
-      }, { merge: true });
+      };
+
+      const images2026 = newTahunData['2026']?.images || [];
+      updatePayload.images = images2026;
+      updatePayload.imageUrl = images2026.length > 0 ? images2026[0].url : null;
+      updatePayload.imageName = images2026.length > 0 ? images2026[0].name : null;
+
+      await setDoc(docRef, updatePayload, { merge: true });
 
       toast({
         title: 'Tautan Gambar Berhasil Disimpan',
-        description: 'Tautan foto dukung manual telah ditambahkan ke daftar.',
+        description: `Tautan foto dukung manual (Tahun ${uploadYear}) telah ditambahkan.`,
       });
 
       setManualImageUrl('');
@@ -562,17 +945,6 @@ export default function AdminDesaAntiKorupsi() {
       setIsManualImageSaving(false);
     }
   };
-
-  // Helper lists for multiple files view
-  const pdfList = useMemo(() => {
-    if (!dbData) return [];
-    return dbData.pdfs || (dbData.pdfUrl ? [{ url: dbData.pdfUrl, name: dbData.pdfName || 'Dokumen PDF' }] : []);
-  }, [dbData]);
-
-  const imageList = useMemo(() => {
-    if (!dbData) return [];
-    return dbData.images || (dbData.imageUrl ? [{ url: dbData.imageUrl, name: dbData.imageName || 'Gambar Dukung' }] : []);
-  }, [dbData]);
 
   return (
     <div className="space-y-6">
@@ -601,7 +973,7 @@ export default function AdminDesaAntiKorupsi() {
           </CardDescription>
         </CardHeader>
         <CardContent className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {/* Pilar Selector */}
             <div className="space-y-2">
               <Label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Kategori Pilar Utama</Label>
@@ -660,6 +1032,23 @@ export default function AdminDesaAntiKorupsi() {
                 </SelectContent>
               </Select>
             </div>
+
+            {/* Sub Tahun Selector */}
+            <div className="space-y-2">
+              <Label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Sub Tahun</Label>
+              <Select value={selectedSubTahun} onValueChange={setSelectedSubTahun}>
+                <SelectTrigger className="rounded-xl h-11 border-slate-200 bg-emerald-50/50 border-emerald-300 font-bold text-xs text-emerald-900">
+                  <SelectValue placeholder="Pilih Tahun..." />
+                </SelectTrigger>
+                <SelectContent className="rounded-xl border-slate-200 bg-white">
+                  {['2024', '2025', '2026'].map((tahun) => (
+                    <SelectItem key={tahun} value={tahun} className="text-xs font-semibold py-2">
+                      Tahun {tahun}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -670,9 +1059,14 @@ export default function AdminDesaAntiKorupsi() {
           <CardHeader className="bg-emerald-50/40 border-b border-emerald-100 p-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1">
-                <Badge className="bg-emerald-600 hover:bg-emerald-600 rounded-full font-mono text-[10px] font-bold px-2 py-0.5">
-                  ID: {currentItem.id}
-                </Badge>
+                <div className="flex items-center gap-2">
+                  <Badge className="bg-emerald-600 hover:bg-emerald-600 rounded-full font-mono text-[10px] font-bold px-2 py-0.5">
+                    ID: {currentItem.id}
+                  </Badge>
+                  <Badge className="bg-amber-500 hover:bg-amber-500 text-slate-950 rounded-full font-sans text-[10px] font-black px-2.5 py-0.5 uppercase tracking-wider">
+                    Sub Tahun {selectedSubTahun}
+                  </Badge>
+                </div>
                 <CardTitle className="text-slate-800 text-sm md:text-base font-extrabold tracking-tight mt-1">
                   {currentItem.title}
                 </CardTitle>
@@ -726,7 +1120,7 @@ export default function AdminDesaAntiKorupsi() {
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Daftar Dokumen PDF Terunggah:</p>
                       <div className="space-y-2.5 max-h-60 overflow-y-auto pr-1">
                         {pdfList.map((pdf, idx) => (
-                          <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex items-center justify-between gap-3">
+                          <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center justify-between gap-3">
                             <div className="flex items-center gap-2.5 min-w-0 flex-1">
                               <div className="h-8 w-8 bg-red-100 text-red-600 flex items-center justify-center rounded-lg shrink-0">
                                 <FileText className="h-4.5 w-4.5" />
@@ -746,14 +1140,33 @@ export default function AdminDesaAntiKorupsi() {
                                 </a>
                               </div>
                             </div>
-                            <Button 
-                              onClick={() => handleDeletePdfItem(idx)} 
-                              variant="ghost" 
-                              size="icon"
-                              className="h-8 w-8 rounded-full text-red-500 hover:text-red-750 hover:bg-red-50 shrink-0"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
+
+                            <div className="flex items-center gap-1.5 shrink-0">
+                              <Select
+                                value={pdf.tahun || '2026'}
+                                onValueChange={(newYear) => handleUpdatePdfYear(pdf, newYear)}
+                              >
+                                <SelectTrigger className="h-7 w-24 px-2 text-[9px] font-extrabold uppercase rounded-lg border-amber-300 bg-amber-50 text-amber-950">
+                                  <SelectValue placeholder="Tahun" />
+                                </SelectTrigger>
+                                <SelectContent className="rounded-xl border-slate-200 bg-white">
+                                  {['2024', '2025', '2026'].map((yr) => (
+                                    <SelectItem key={yr} value={yr} className="text-xs font-semibold py-1">
+                                      Tahun {yr}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+
+                              <Button 
+                                onClick={() => handleDeletePdfItem(pdf)} 
+                                variant="ghost" 
+                                size="icon"
+                                className="h-7 w-7 rounded-full text-red-500 hover:text-red-750 hover:bg-red-50 shrink-0"
+                              >
+                                <Trash2 className="h-3.5 w-3.5" />
+                              </Button>
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -907,18 +1320,37 @@ export default function AdminDesaAntiKorupsi() {
                                   />
                                 </div>
                               )}
-                              <div className="min-w-0 flex items-center justify-between gap-2">
-                                <span className="text-[9px] font-bold text-slate-500 truncate block text-[9px] truncate">
+                              <div className="min-w-0 space-y-2">
+                                <span className="text-[9px] font-bold text-slate-700 truncate block">
                                   {img.name || `Foto ${idx + 1}`}
                                 </span>
-                                <Button 
-                                  onClick={() => handleDeleteImageItem(idx)} 
-                                  variant="ghost" 
-                                  size="icon"
-                                  className="h-6 w-6 rounded-full text-red-500 hover:text-red-750 hover:bg-red-50 shrink-0"
-                                >
-                                  <Trash2 className="h-3 w-3" />
-                                </Button>
+                                
+                                <div className="flex items-center justify-between gap-1.5 pt-1.5 border-t border-slate-200/60">
+                                  <Select
+                                    value={img.tahun || '2026'}
+                                    onValueChange={(newYear) => handleUpdateImageYear(img, newYear)}
+                                  >
+                                    <SelectTrigger className="h-6 px-1.5 text-[8px] font-black uppercase rounded-md border-amber-300 bg-amber-50 text-amber-950 flex-1">
+                                      <SelectValue placeholder="Tahun" />
+                                    </SelectTrigger>
+                                    <SelectContent className="rounded-xl border-slate-200 bg-white">
+                                      {['2024', '2025', '2026'].map((yr) => (
+                                        <SelectItem key={yr} value={yr} className="text-xs font-semibold py-1">
+                                          Tahun {yr}
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
+
+                                  <Button 
+                                    onClick={() => handleDeleteImageItem(img)} 
+                                    variant="ghost" 
+                                    size="icon"
+                                    className="h-6 w-6 rounded-full text-red-500 hover:text-red-750 hover:bg-red-50 shrink-0"
+                                  >
+                                    <Trash2 className="h-3 w-3" />
+                                  </Button>
+                                </div>
                               </div>
                             </div>
                           );

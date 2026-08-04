@@ -109,7 +109,7 @@ export function SettingsForm() {
   }
 
   return (
-    <Card>
+    <Card className="h-full flex flex-col justify-between">
       <CardHeader>
         <CardTitle>Templete Kop Surat</CardTitle>
         <CardDescription>Unggah satu gambar kop surat yang sudah jadi. Gambar ini akan digunakan di semua dokumen yang dicetak.</CardDescription>
