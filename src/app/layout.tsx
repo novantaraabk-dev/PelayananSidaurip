@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={`${sans.variable} ${display.variable} font-sans antialiased relative min-h-screen overflow-x-hidden`}>
+      <body className={`${sans.variable} ${display.variable} font-sans antialiased relative min-h-screen overflow-x-hidden`} suppressHydrationWarning>
         <FirebaseClientProvider>
           <FaviconManager />
           {children}

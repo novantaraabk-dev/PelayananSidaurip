@@ -9,12 +9,12 @@ import { ArrowRight, BarChart3, Building2, CheckCircle2, ChevronDown, FileText, 
 import { Button } from '@/components/ui/button';
 
 const floatingItems = [
-  { icon: FileText, label: 'Ajukan Surat', href: '/layanan-surat' },
-  { icon: BarChart3, label: 'Cek Status Permohonan', href: '/layanan-surat' },
-  { icon: Users, label: 'Statistik Desa', href: '/statistik' },
-  { icon: Newspaper, label: 'Berita Desa', href: '/BeritaDesa' },
-  { icon: Building2, label: 'Pengumuman', href: '/pengumuman' },
-  { icon: Sparkles, label: 'Layanan Online', href: '/pelayanan-desa' },
+  { icon: FileText, label: 'Ajukan Surat', href: '/layanan-surat/' },
+  { icon: BarChart3, label: 'Cek Status Permohonan', href: '/layanan-surat/' },
+  { icon: Users, label: 'Statistik Desa', href: '/statistik/' },
+  { icon: Newspaper, label: 'Berita Desa', href: '/BeritaDesa/' },
+  { icon: Building2, label: 'Pengumuman', href: '/pengumuman/' },
+  { icon: Sparkles, label: 'Layanan Online', href: '/pelayanan-desa/' },
 ];
 
 const containerVariants = {
@@ -88,13 +88,13 @@ export function HeroSection() {
               <span>Seluruh pelayanan administrasi di Desa Pangawaren adalah <strong className="font-semibold text-amber-200">GRATIS</strong>.</span>
             </motion.div>
             <motion.div variants={itemVariants} className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/layanan-surat" aria-label="Ajukan layanan desa">
+              <Link href="/layanan-surat/" aria-label="Ajukan layanan desa">
                 <Button className="h-12 rounded-full bg-amber-400 px-7 text-base font-semibold text-slate-950 shadow-[0_20px_45px_rgba(250,204,21,0.25)] transition-all duration-300 hover:-translate-y-1 hover:bg-amber-300">
                   Ajukan Layanan
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/profil-desa" aria-label="Lihat profil desa">
+              <Link href="/profil-desa/" aria-label="Lihat profil desa">
                 <Button variant="outline" className="h-12 rounded-full border-white/25 bg-white/10 px-7 text-base font-semibold text-white backdrop-blur-sm hover:bg-white/15">
                   Profil Desa
                 </Button>

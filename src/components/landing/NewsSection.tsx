@@ -66,7 +66,7 @@ export function NewsSection() {
             Informasi dan kegiatan terbaru dari Pemerintah Desa Pangawaren.
           </p>
         </div>
-        <Link href="/BeritaDesa" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700">
+        <Link href="/BeritaDesa/" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700">
           Lihat semua berita
           <ArrowRight className="h-4 w-4" />
         </Link>

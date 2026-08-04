@@ -21,7 +21,7 @@ export default function LayananSuratPage() {
                 <span className="hidden sm:inline">Beranda</span>
                 </Button>
             </Link>
-            <Link href="/pengaduan">
+            <Link href="/pengaduan/">
                 <Button className="bg-secondary hover:bg-yellow-600 text-primary-foreground font-black px-6 rounded-xl shadow-lg shadow-secondary/20 h-10">Pengaduan Warga</Button>
             </Link>
           </div>

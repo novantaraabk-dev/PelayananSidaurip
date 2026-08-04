@@ -22,18 +22,18 @@ import {
 import { cn } from '@/lib/utils';
 
 const primaryLinks = [
-  { href: '/pelayanan-desa', label: 'Pelayanan Desa' },
-  { href: '/profil-desa', label: 'Profil Desa' },
-  { href: '/statistik', label: 'Statistik' },
-  { href: '/BeritaDesa', label: 'Berita Desa' },
+  { href: '/pelayanan-desa/', label: 'Pelayanan Desa' },
+  { href: '/profil-desa/', label: 'Profil Desa' },
+  { href: '/statistik/', label: 'Statistik' },
+  { href: '/BeritaDesa/', label: 'Berita Desa' },
 ];
 
 const moreLinks = [
-  { href: '/layanan-surat', label: 'Layanan Surat' },
-  { href: '/tata-kelola-desa', label: 'Tata Kelola Desa' },
-  { href: '/pengumuman', label: 'Pengumuman' },
-  { href: '/pengaduan', label: 'Pengaduan Warga' },
-  { href: '/nomor-penting', label: 'Nomor Penting' },
+  { href: '/layanan-surat/', label: 'Layanan Surat' },
+  { href: '/tata-kelola-desa/', label: 'Tata Kelola Desa' },
+  { href: '/pengumuman/', label: 'Pengumuman' },
+  { href: '/pengaduan/', label: 'Pengaduan Warga' },
+  { href: '/nomor-penting/', label: 'Nomor Penting' },
 ];
 
 const potensiSubLinks = [
@@ -141,7 +141,7 @@ export function Header() {
 
           {/* Desa Anti Korupsi Link */}
           <Link
-            href="/desa-anti-korupsi"
+            href="/desa-anti-korupsi/"
             className={cn(
               'group relative text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors duration-300 whitespace-nowrap',
               isScrolled ? 'text-slate-600 hover:text-emerald-700' : 'text-white/90 hover:text-white'
@@ -178,7 +178,7 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Link href="/login" aria-label="Masuk area admin">
+          <Link href="/login/" aria-label="Masuk area admin">
             <Button variant="outline" size="sm" className={cn(
               'h-8 rounded-full border px-3 text-[11px] font-semibold',
               isScrolled
@@ -188,7 +188,7 @@ export function Header() {
               Admin
             </Button>
           </Link>
-          <Link href="/layanan-surat" aria-label="Ajukan layanan desa">
+          <Link href="/layanan-surat/" aria-label="Ajukan layanan desa">
             <Button className="h-8 rounded-full bg-emerald-700 px-3 text-[11px] font-semibold text-white shadow-[0_12px_30px_rgba(5,150,105,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-800">
               Ajukan Layanan
             </Button>
@@ -243,7 +243,7 @@ export function Header() {
                   </div>
 
                   {/* Desa Anti Korupsi on Mobile */}
-                  <Link href="/desa-anti-korupsi" className="block rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white/80 transition-colors hover:bg-white/10 hover:text-white">
+                  <Link href="/desa-anti-korupsi/" className="block rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white/80 transition-colors hover:bg-white/10 hover:text-white">
                     Desa Anti Korupsi
                   </Link>
 
@@ -253,7 +253,7 @@ export function Header() {
                     </Link>
                   ))}
                 </div>
-                <Link href="/layanan-surat" className="shrink-0">
+                <Link href="/layanan-surat/" className="shrink-0">
                   <Button className="mt-2 h-12 w-full rounded-full bg-emerald-600 text-white">
                     Ajukan Layanan
                     <ArrowRight className="h-4 w-4" />

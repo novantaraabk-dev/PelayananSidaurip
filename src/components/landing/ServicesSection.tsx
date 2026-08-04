@@ -5,12 +5,12 @@ import { motion } from 'framer-motion';
 import { ArrowRight, BarChart3, BookOpenText, FileText, Landmark, Megaphone, Newspaper, Users2, Info } from 'lucide-react';
 
 const services = [
-  { href: '/pelayanan-desa', title: 'Pelayanan Desa', description: 'Akses layanan administrasi dan dokumen resmi dengan langkah yang sederhana.', icon: FileText },
-  { href: '/profil-desa', title: 'Profil Desa', description: 'Kenali sejarah, struktur, dan identitas pemerintahan desa secara lengkap.', icon: Landmark },
-  { href: '/statistik', title: 'Statistik', description: 'Lihat data kependudukan dan informasi desa secara realtime dan transparan.', icon: BarChart3 },
-  { href: '/BeritaDesa', title: 'Berita Desa', description: 'Ikuti informasi dan kegiatan terbaru dari Pemerintah Desa Pangawaren.', icon: Newspaper },
-  { href: '/layanan-surat', title: 'Layanan', description: 'Ajukan berbagai surat keterangan dan kebutuhan administrasi secara online.', icon: Users2 },
-  { href: '/pengumuman', title: 'Pengumuman', description: 'Temukan pengumuman penting serta agenda desa yang harus diketahui.', icon: Megaphone },
+  { href: '/pelayanan-desa/', title: 'Pelayanan Desa', description: 'Akses layanan administrasi dan dokumen resmi dengan langkah yang sederhana.', icon: FileText },
+  { href: '/profil-desa/', title: 'Profil Desa', description: 'Kenali sejarah, struktur, dan identitas pemerintahan desa secara lengkap.', icon: Landmark },
+  { href: '/statistik/', title: 'Statistik', description: 'Lihat data kependudukan dan informasi desa secara realtime dan transparan.', icon: BarChart3 },
+  { href: '/BeritaDesa/', title: 'Berita Desa', description: 'Ikuti informasi dan kegiatan terbaru dari Pemerintah Desa Pangawaren.', icon: Newspaper },
+  { href: '/layanan-surat/', title: 'Layanan', description: 'Ajukan berbagai surat keterangan dan kebutuhan administrasi secara online.', icon: Users2 },
+  { href: '/pengumuman/', title: 'Pengumuman', description: 'Temukan pengumuman penting serta agenda desa yang harus diketahui.', icon: Megaphone },
 ];
 
 export function ServicesSection() {

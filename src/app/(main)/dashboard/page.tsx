@@ -47,7 +47,7 @@ export default function DashboardPage() {
       <section className="grid grid-cols-1 gap-4 md:hidden">
         <h2 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Akses Cepat Layanan</h2>
         
-        <Link href="/layanan-surat">
+        <Link href="/layanan-surat/">
           <Card className="rounded-3xl border-none shadow-sm bg-white overflow-hidden active:scale-95 transition-all">
             <CardContent className="p-5 flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -64,7 +64,7 @@ export default function DashboardPage() {
           </Card>
         </Link>
 
-        <Link href="/BeritaDesa">
+        <Link href="/BeritaDesa/">
           <Card className="rounded-3xl border-none shadow-sm bg-white overflow-hidden active:scale-95 transition-all">
             <CardContent className="p-5 flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -81,7 +81,7 @@ export default function DashboardPage() {
           </Card>
         </Link>
 
-        <Link href="/pengaduan">
+        <Link href="/pengaduan/">
           <Card className="rounded-3xl border-none shadow-sm bg-white overflow-hidden active:scale-95 transition-all">
             <CardContent className="p-5 flex items-center justify-between">
               <div className="flex items-center gap-4">

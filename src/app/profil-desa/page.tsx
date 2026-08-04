@@ -233,7 +233,7 @@ export default function ProfilDesaPage() {
               <div className="relative z-10 space-y-4">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary">Akses Cepat</p>
                 <h4 className="text-xl font-display font-semibold italic">Butuh bantuan administrasi?</h4>
-                <Link href="/layanan-surat">
+                <Link href="/layanan-surat/">
                   <Button className="bg-secondary text-primary font-black uppercase text-[10px] tracking-widest w-full h-12 rounded-xl mt-4">
                     Buka Layanan Surat
                   </Button>
@@ -685,7 +685,7 @@ function GaleriTab({ youtubeEmbedUrl, newsData, isLoadingNews }: { youtubeEmbedU
         )}
 
         <div className="text-center py-10">
-          <Link href="/BeritaDesa">
+          <Link href="/BeritaDesa/">
             <Button variant="outline" className="rounded-xl font-bold gap-2 border-primary text-primary h-12 px-10">
               Lihat Seluruh Berita
               <ArrowRight className="h-4 w-4" />

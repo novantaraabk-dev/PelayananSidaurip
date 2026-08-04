@@ -71,7 +71,7 @@ export function AboutSection() {
               Digital dan modern
             </div>
           </div>
-          <Link href="/profil-desa" aria-label="Lihat profil desa lengkap">
+          <Link href="/profil-desa/" aria-label="Lihat profil desa lengkap">
             <Button className="h-11 rounded-full bg-emerald-700 px-6 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-800">
               Selengkapnya
               <ArrowRight className="h-4 w-4" />

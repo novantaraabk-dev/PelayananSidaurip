@@ -42,7 +42,7 @@ export default function PengumumanPage() {
                 <span className="hidden sm:inline">Beranda</span>
                 </Button>
             </Link>
-            <Link href="/layanan-surat">
+            <Link href="/layanan-surat/">
                 <Button className="bg-secondary hover:bg-yellow-600 text-primary-foreground font-black px-6 rounded-xl shadow-lg shadow-secondary/20 h-10">Portal Layanan</Button>
             </Link>
           </div>

@@ -46,7 +46,7 @@ export default function AnnouncementDetailPage() {
                 <span className="hidden sm:inline">Beranda</span>
                 </Button>
             </Link>
-            <Link href="/pengumuman">
+            <Link href="/pengumuman/">
                 <Button className="bg-secondary hover:bg-yellow-600 text-primary-foreground font-black px-6 rounded-xl shadow-lg shadow-secondary/20 h-10">Daftar Pengumuman</Button>
             </Link>
           </div>

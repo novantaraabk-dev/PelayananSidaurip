@@ -59,7 +59,7 @@ export function ComplaintSection() {
             <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-emerald-700 text-white shadow-xl shadow-emerald-700/20">
               <MessageSquareWarning className="h-9 w-9" />
             </div>
-            <Link href="/pengaduan" aria-label="Buat pengaduan warga">
+            <Link href="/pengaduan/" aria-label="Buat pengaduan warga">
               <Button className="h-11 rounded-full bg-emerald-700 px-6 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-800 shadow-[0_12px_30px_rgba(5,150,105,0.2)]">
                 Buat Pengaduan
                 <ArrowRight className="h-4 w-4" />

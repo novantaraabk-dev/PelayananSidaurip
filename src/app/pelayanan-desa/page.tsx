@@ -173,7 +173,7 @@ export default function PelayananDesaPage() {
                   <h4 className="text-xl font-display font-semibold italic">Punya Keluhan Pelayanan?</h4>
                   <p className="text-xs text-slate-400 leading-relaxed font-medium">Sampaikan aduan Anda jika mendapatkan pelayanan yang kurang memuaskan.</p>
                   <Button className="bg-secondary text-primary font-black uppercase text-[10px] tracking-widest w-full h-12 rounded-xl mt-4" asChild>
-                    <Link href="/pengaduan">Lapor Pengaduan</Link>
+                    <Link href="/pengaduan/">Lapor Pengaduan</Link>
                   </Button>
                </div>
             </div>
