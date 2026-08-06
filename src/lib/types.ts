@@ -215,3 +215,17 @@ export type PotensiDesa = {
   updatedAt?: Timestamp;
 };
 
+export type ImportantNumberContact = {
+  id: string;
+  label: string;
+  number: string;
+  category: 'pemerintah' | 'keamanan' | 'kesehatan' | 'wilayah';
+};
+
+export type ImportantNumbersData = {
+  contacts: ImportantNumberContact[];
+  servicePhoneNumber?: string;
+  updatedAt?: any;
+};
+
+

@@ -124,7 +124,7 @@ export function DriveSettingsForm() {
             </Label>
             <Input
               id="root-id"
-              placeholder="Contoh: 1h7bN7GMASbXOgOhxjMHXEkxR-yg5p0iq"
+              placeholder="Contoh: 11h8J7mBqe0XH1wbpf3lorVlEPIL-eKuZR"
               value={rootFolderId}
               onChange={(e) => setRootFolderId(e.target.value)}
               disabled={isSaving}

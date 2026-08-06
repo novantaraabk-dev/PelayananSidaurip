@@ -66,7 +66,7 @@ function GoogleFileUploader({ label, onFileSelect, fieldName, isRequired, disabl
       <FormControl>
         <div className={cn(
           "relative group border-2 border-dashed rounded-2xl p-4 transition-all hover:border-primary/50 bg-slate-50/50",
-          fileName && "border-emerald-200 bg-emerald-50/30",
+          fileName && "border-sky-200 bg-sky-50/30",
           disabled && "opacity-50 cursor-not-allowed"
         )}>
           <input
@@ -80,9 +80,9 @@ function GoogleFileUploader({ label, onFileSelect, fieldName, isRequired, disabl
             {fileName ? (
               <>
                 <div className="p-2 bg-white rounded-full shadow-sm">
-                  <FileCheck className="h-6 w-6 text-emerald-600 animate-in zoom-in" />
+                  <FileCheck className="h-6 w-6 text-sky-600 animate-in zoom-in" />
                 </div>
-                <p className="text-[10px] font-black text-emerald-700 line-clamp-1 uppercase px-2 tracking-tight">{fileName}</p>
+                <p className="text-[10px] font-black text-sky-700 line-clamp-1 uppercase px-2 tracking-tight">{fileName}</p>
               </>
             ) : (
               <>
@@ -162,7 +162,7 @@ export function ReaktivasiBpjsForm({ isAdmin = false }: { isAdmin?: boolean }) {
             form.setValue('birthPlace', resident.placeOfBirth);
             form.setValue('birthDate', formatDbDateToForm(resident.dateOfBirth));
             form.setValue('job', resident.occupation);
-            const fullAddress = `${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Karangpucung, Kab. Cilacap`.toUpperCase();
+            const fullAddress = `${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Gandrungmangu, Kab. Cilacap`.toUpperCase();
             form.setValue('address', fullAddress);
             toast({ title: "Data Pemohon Ditemukan" });
           }

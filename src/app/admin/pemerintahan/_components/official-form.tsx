@@ -34,7 +34,7 @@ interface OfficialFormProps {
 }
 
 const CLOUD_NAME = 'dgsxujjb1';
-const UPLOAD_PRESET = 'webdesa'; 
+const UPLOAD_PRESET = 'webdesa';
 
 export function OfficialForm({ open, onOpenChange, official }: OfficialFormProps) {
   const [formData, setFormData] = useState({
@@ -66,12 +66,12 @@ export function OfficialForm({ open, onOpenChange, official }: OfficialFormProps
     if (!file) return;
 
     if (file.size > 1024 * 1024) {
-        toast({
-            title: "File Terlalu Besar",
-            description: "Maksimal ukuran foto adalah 1MB.",
-            variant: "destructive",
-        });
-        return;
+      toast({
+        title: "File Terlalu Besar",
+        description: "Maksimal ukuran foto adalah 1MB.",
+        variant: "destructive",
+      });
+      return;
     }
 
     setIsUploading(true);
@@ -95,11 +95,11 @@ export function OfficialForm({ open, onOpenChange, official }: OfficialFormProps
       toast({ title: 'Foto Terunggah' });
 
     } catch (error: any) {
-        toast({
-            title: 'Gagal Mengunggah',
-            description: error.message,
-            variant: 'destructive',
-        });
+      toast({
+        title: 'Gagal Mengunggah',
+        description: error.message,
+        variant: 'destructive',
+      });
     } finally {
       setIsUploading(false);
     }
@@ -144,23 +144,23 @@ export function OfficialForm({ open, onOpenChange, official }: OfficialFormProps
           <div className="space-y-2">
             <Label>Foto Profil</Label>
             <div className="flex flex-col gap-4">
-               {formData.imageUrl && (
-                 <div className="relative aspect-[3/4] w-32 overflow-hidden rounded-2xl border-2 border-primary/10 bg-muted">
-                    <img src={formData.imageUrl} alt="Preview" className="h-full w-full object-cover" />
-                 </div>
-               )}
-               <div className="flex items-center gap-4">
-                  <Input type="file" accept="image/*" onChange={handleFileChange} disabled={isUploading || isSubmitting} className="max-w-xs" />
-                  {isUploading && <Loader2 className="h-5 w-5 animate-spin text-primary" />}
-               </div>
-               <p className="text-[10px] text-muted-foreground uppercase font-bold">Maks 1MB. Rekomendasi rasio 3:4.</p>
+              {formData.imageUrl && (
+                <div className="relative aspect-[3/4] w-32 overflow-hidden rounded-2xl border-2 border-primary/10 bg-muted">
+                  <img src={formData.imageUrl} alt="Preview" className="h-full w-full object-cover" />
+                </div>
+              )}
+              <div className="flex items-center gap-4">
+                <Input type="file" accept="image/*" onChange={handleFileChange} disabled={isUploading || isSubmitting} className="max-w-xs" />
+                {isUploading && <Loader2 className="h-5 w-5 animate-spin text-primary" />}
+              </div>
+              <p className="text-[10px] text-muted-foreground uppercase font-bold">Maks 1MB. Rekomendasi rasio 3:4.</p>
             </div>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="category">Kategori Jabatan</Label>
-            <Select 
-              value={formData.category} 
+            <Select
+              value={formData.category}
               onValueChange={(v: any) => setFormData(p => ({ ...p, category: v }))}
             >
               <SelectTrigger>
@@ -176,23 +176,23 @@ export function OfficialForm({ open, onOpenChange, official }: OfficialFormProps
 
           <div className="space-y-2">
             <Label htmlFor="name">Nama Lengkap</Label>
-            <Input 
-              id="name" 
-              value={formData.name} 
+            <Input
+              id="name"
+              value={formData.name}
               onChange={e => setFormData(p => ({ ...p, name: e.target.value.toUpperCase() }))}
               placeholder="Contool: BUDI SANTOSO"
-              required 
+              required
             />
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="position">Jabatan</Label>
-            <Input 
-              id="position" 
-              value={formData.position} 
+            <Input
+              id="position"
+              value={formData.position}
               onChange={e => setFormData(p => ({ ...p, position: e.target.value }))}
               placeholder="Contoh: Kepala Dusun / Ketua RT 01"
-              required 
+              required
             />
           </div>
 

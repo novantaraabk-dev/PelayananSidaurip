@@ -39,8 +39,8 @@ export function KematianPrintTemplate({ submission }: { submission: LetterSubmis
   return (
     <PrintLayout submission={submission} requesterLabel="Pelapor" reverseSignatures={true}>
       <p className="mt-6 text-justify leading-relaxed">
-        Yang bertanda tangan di bawah ini Kepala Desa Pangawaren, Kecamatan
-        Karangpucung, Kabupaten Cilacap, menerangkan dengan sesungguhnya bahwa :
+        Yang bertanda tangan di bawah ini Kepala Desa Sidaurip, Kecamatan
+        Gandrungmangu, Kabupaten Cilacap, menerangkan dengan sesungguhnya bahwa :
       </p>
 
       <table className="mt-4 border-collapse w-full text-sm">

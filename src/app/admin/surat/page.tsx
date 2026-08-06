@@ -9,7 +9,7 @@ export default function AdminSuratPage() {
     <>
       <PageHeader
         title="Kelola Pengajuan Surat"
-        description="Tinjau, setujui, atau tolak pengajuan surat dari warga Desa Pangawaren."
+        description="Tinjau, setujui, atau tolak pengajuan surat dari warga Desa Sidaurip."
       />
       <Card className="rounded-[2.5rem] border-none shadow-sm overflow-hidden bg-white">
         <CardHeader className="p-8 border-b bg-slate-50/50">

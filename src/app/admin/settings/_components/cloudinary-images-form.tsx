@@ -128,7 +128,7 @@ export function AccompanyingImageSettingsForm() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <ImageIcon className="h-5 w-5 text-emerald-600" />
+          <ImageIcon className="h-5 w-5 text-sky-600" />
           Upload Gambar Pendamping
         </CardTitle>
         <CardDescription>

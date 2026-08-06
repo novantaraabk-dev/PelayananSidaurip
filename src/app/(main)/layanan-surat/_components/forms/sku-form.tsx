@@ -54,7 +54,7 @@ function GoogleFileUploader({ label, onFileSelect, fieldName, isRequired, disabl
         <div className="relative">
           <Input type="file" onChange={handleFileChange} disabled={disabled || !!fileName} className="pr-10" accept="image/jpeg,image/png,application/pdf" />
           <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4">
-            {fileName ? <FileCheck className="text-green-600" /> : <Paperclip className="text-muted-foreground" />}
+            {fileName ? <FileCheck className="text-sky-600" /> : <Paperclip className="text-muted-foreground" />}
           </div>
         </div>
       </FormControl>
@@ -146,7 +146,7 @@ export function SkuForm({ isAdmin = false }: { isAdmin?: boolean }) {
             form.setValue('birthPlace', res.placeOfBirth);
             form.setValue('birthDate', formatDbDateToForm(res.dateOfBirth));
             form.setValue('job', res.occupation);
-            const fullAddress = `${res.address}, RT ${res.rt} RW ${res.rw}, ${res.kelurahan}Kec. Karangpucung, Kab. Cilacap`.toUpperCase();
+            const fullAddress = `${res.address}, RT ${res.rt} RW ${res.rw}, ${res.kelurahan}Kec. Gandrungmangu, Kab. Cilacap`.toUpperCase();
             form.setValue('address', fullAddress);
             toast({ title: "Data Pemohon Ditemukan" });
           }

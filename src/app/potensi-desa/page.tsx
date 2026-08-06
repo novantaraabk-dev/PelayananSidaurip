@@ -12,11 +12,11 @@ import { useFirestore, useCollection, useMemoFirebase } from '@/firebase';
 import { collection, query, orderBy } from 'firebase/firestore';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
-import { 
-  Landmark, 
-  MapPin, 
-  Store, 
-  Compass, 
+import {
+  Landmark,
+  MapPin,
+  Store,
+  Compass,
   Leaf,
   ChevronLeft,
   ChevronRight,
@@ -35,7 +35,7 @@ import {
 const POTENSI_CATEGORIES = [
   { id: 'pariwisata-kebudayaan', label: 'Pariwisata & Kebudayaan', icon: Compass, color: 'text-rose-600', bg: 'bg-rose-50', border: 'border-rose-100' },
   { id: 'umkm-industri', label: 'UMKM & Industri Kreatif', icon: Store, color: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-100' },
-  { id: 'bumdes', label: 'BUMDes Pangawaren', icon: Landmark, color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-100' },
+  { id: 'bumdes', label: 'BUMDes Sidaurip', icon: Landmark, color: 'text-sky-600', bg: 'bg-sky-50', border: 'border-sky-100' },
   { id: 'pertanian-perkebunan', label: 'Pertanian & Perkebunan', icon: Leaf, color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100' },
   { id: 'sda-lingkungan', label: 'Sumber Daya Alam & Lingkungan', icon: MapPin, color: 'text-teal-600', bg: 'bg-teal-50', border: 'border-teal-100' }
 ] as const;
@@ -45,7 +45,7 @@ type CategoryId = typeof POTENSI_CATEGORIES[number]['id'];
 function PotensiDesaContent() {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get('tab') as CategoryId | null;
-  
+
   const [activeTab, setActiveTab] = useState<CategoryId>('pariwisata-kebudayaan');
   const firestore = useFirestore();
 
@@ -78,18 +78,18 @@ function PotensiDesaContent() {
     <div className="relative flex min-h-screen flex-col bg-slate-50 text-slate-900 overflow-x-hidden pt-24 font-sans">
       <BackgroundPattern />
       <Header />
-      
+
       <main className="relative flex-1 container mx-auto px-4 py-12 md:py-16 max-w-7xl">
         {/* Banner Title */}
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-12 md:mb-16 animate-in fade-in slide-in-from-top-4 duration-500">
-          <Badge className="bg-emerald-50 text-emerald-700 font-black uppercase text-[10px] tracking-widest px-4 py-1.5 border-none shadow-sm mb-2">
+          <Badge className="bg-sky-50 text-sky-700 font-black uppercase text-[10px] tracking-widest px-4 py-1.5 border-none shadow-sm mb-2">
             Potensi & Keunggulan Desa
           </Badge>
           <h1 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight uppercase font-display italic tracking-tighter">
-            Kekayaan <span className="text-primary not-italic">Desa</span> Pangawaren
+            Kekayaan <span className="text-primary not-italic">Desa</span> Sidaurip
           </h1>
           <p className="text-slate-500 font-medium text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Menelusuri keanekaragaman pariwisata, produk kreatif lokal, pertanian subur, serta tata kelola lingkungan hidup di Desa Pangawaren.
+            Menelusuri keanekaragaman pariwisata, produk kreatif lokal, pertanian subur, serta tata kelola lingkungan hidup di Desa Sidaurip.
           </p>
         </div>
 
@@ -162,8 +162,8 @@ function PotensiDesaContent() {
               const hasMultipleImages = item.imageUrls && item.imageUrls.length > 1;
 
               return (
-                <div 
-                  key={item.id} 
+                <div
+                  key={item.id}
                   className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center bg-white p-6 md:p-10 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden"
                 >
                   {/* Left Side: Images Carousel/Single */}
@@ -186,7 +186,7 @@ function PotensiDesaContent() {
                             </CarouselItem>
                           ))}
                         </CarouselContent>
-                        
+
                         {/* Carousel controls with absolute positioning */}
                         <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <CarouselPrevious className="relative left-0 translate-y-0 h-9 w-9 pointer-events-auto bg-white/90 hover:bg-white text-slate-800 shadow-md border-slate-200" />
@@ -219,11 +219,11 @@ function PotensiDesaContent() {
                           {activeCategoryDetails.label}
                         </span>
                       </div>
-                      
+
                       <h2 className="text-3xl md:text-4xl font-black text-slate-900 uppercase font-display italic tracking-tight leading-tight">
                         {item.title}
                       </h2>
-                      
+
                       {item.subtitle && (
                         <p className="text-base font-bold text-primary uppercase tracking-wider border-l-4 border-secondary pl-4 py-0.5">
                           {item.subtitle}

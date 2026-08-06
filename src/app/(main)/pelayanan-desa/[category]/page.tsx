@@ -70,7 +70,7 @@ export default function PelayananCategoryPage() {
                 </CardHeader>
                 <CardContent className="p-8 pt-0">
                   <p className="text-xl font-medium leading-relaxed italic">
-                    "Terwujudnya pelayanan desa yang cepat, transparan, dan akuntabel demi kesejahteraan masyarakat Desa Pangawaren."
+                    "Terwujudnya pelayanan desa yang cepat, transparan, dan akuntabel demi kesejahteraan masyarakat Desa Sidaurip."
                   </p>
                 </CardContent>
               </Card>
@@ -98,7 +98,7 @@ export default function PelayananCategoryPage() {
                   "Merespon setiap keluhan warga secara proaktif."
                 ].map((misi, i) => (
                   <li key={i} className="flex items-start gap-3 p-4 bg-slate-50 rounded-2xl text-sm font-medium text-slate-700">
-                    <div className="h-5 w-5 rounded-full bg-primary text-white flex items-center justify-center text-[10px] font-black shrink-0">{i+1}</div>
+                    <div className="h-5 w-5 rounded-full bg-primary text-white flex items-center justify-center text-[10px] font-black shrink-0">{i + 1}</div>
                     {misi}
                   </li>
                 ))}
@@ -133,7 +133,7 @@ export default function PelayananCategoryPage() {
                 <p>"Apabila tidak menepati janji ini, kami siap menerima sanksi sesuai peraturan perundang-undangan yang berlaku."</p>
               </div>
               <div className="pt-6">
-                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Pemerintah Desa Pangawaren</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Pemerintah Desa Sidaurip</p>
               </div>
             </CardContent>
           </Card>
@@ -142,32 +142,32 @@ export default function PelayananCategoryPage() {
         return (
           <div className="grid md:grid-cols-3 gap-8 mb-10">
             <Card className="md:col-span-1 rounded-[2.5rem] bg-slate-900 text-white p-8 flex flex-col items-center justify-center text-center space-y-4">
-               <BarChart className="h-10 w-10 text-secondary" />
-               <div>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-white/50">Nilai Akhir IKM</p>
-                  <h3 className="text-6xl font-black text-secondary tracking-tighter">85.5</h3>
-               </div>
-               <Badge className="bg-emerald-500 text-white border-none font-bold px-4 py-1">SANGAT BAIK (A)</Badge>
+              <BarChart className="h-10 w-10 text-secondary" />
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/50">Nilai Akhir IKM</p>
+                <h3 className="text-6xl font-black text-secondary tracking-tighter">85.5</h3>
+              </div>
+              <Badge className="bg-sky-500 text-white border-none font-bold px-4 py-1">SANGAT BAIK (A)</Badge>
             </Card>
             <Card className="md:col-span-2 rounded-[2.5rem] bg-white border p-8 flex flex-col justify-center">
-               <h4 className="font-black uppercase text-sm mb-4 flex items-center gap-2">
-                 <Info className="h-4 w-4 text-blue-500" />
-                 Analisis Kepuasan
-               </h4>
-               <p className="text-slate-600 leading-relaxed">
-                 Berdasarkan hasil survei periode terakhir, tingkat kepuasan masyarakat Desa Pangawaren menunjukkan tren positif terutama pada aspek kesopanan petugas and kecepatan waktu penyelesaian dokumen.
-               </p>
+              <h4 className="font-black uppercase text-sm mb-4 flex items-center gap-2">
+                <Info className="h-4 w-4 text-blue-500" />
+                Analisis Kepuasan
+              </h4>
+              <p className="text-slate-600 leading-relaxed">
+                Berdasarkan hasil survei periode terakhir, tingkat kepuasan masyarakat Desa Sidaurip menunjukkan tren positif terutama pada aspek kesopanan petugas and kecepatan waktu penyelesaian dokumen.
+              </p>
             </Card>
           </div>
         );
       case 'survey':
         return (
-          <Card className="rounded-[2.5rem] border-none shadow-sm bg-emerald-50 p-10 mb-10 flex flex-col md:flex-row items-center gap-8">
+          <Card className="rounded-[2.5rem] border-none shadow-sm bg-sky-50 p-10 mb-10 flex flex-col md:flex-row items-center gap-8">
             <div className="flex-1 space-y-4">
-              <h3 className="text-2xl font-black uppercase text-emerald-900 font-display italic">Bantu Kami Meningkatkan Layanan</h3>
-              <p className="text-emerald-700/80 font-medium">Partisipasi Anda dalam mengisi survey kepuasan sangat berarti bagi perbaikan kualitas pelayanan kami di masa depan.</p>
+              <h3 className="text-2xl font-black uppercase text-sky-900 font-display italic">Bantu Kami Meningkatkan Layanan</h3>
+              <p className="text-sky-700/80 font-medium">Partisipasi Anda dalam mengisi survey kepuasan sangat berarti bagi perbaikan kualitas pelayanan kami di masa depan.</p>
             </div>
-            <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-black uppercase px-8 h-14" asChild>
+            <Button size="lg" className="bg-sky-600 hover:bg-sky-700 text-white rounded-xl font-black uppercase px-8 h-14" asChild>
               <a href="https://sisukma.cilacapkab.go.id/Home/pelayanan/4012310" target="_blank" rel="noopener noreferrer">
                 Isi Survey Online <ChevronRight className="ml-2 h-4 w-4" />
               </a>
@@ -194,7 +194,7 @@ export default function PelayananCategoryPage() {
                     </div>
                   </Card>
                 );
-                
+
                 if (docItem.link) {
                   return (
                     <a key={docItem.id} href={docItem.link} target="_blank" rel="noopener noreferrer" className="block h-full">
@@ -209,8 +209,8 @@ export default function PelayananCategoryPage() {
         }
         return (
           <div className="bg-white p-10 rounded-[3rem] border border-dashed text-center space-y-4 mb-10">
-             <LibraryBig className="h-12 w-12 text-slate-200 mx-auto" />
-             <p className="text-slate-400 font-bold uppercase text-xs tracking-widest">Belum ada konten Pojok Baca yang tersedia.</p>
+            <LibraryBig className="h-12 w-12 text-slate-200 mx-auto" />
+            <p className="text-slate-400 font-bold uppercase text-xs tracking-widest">Belum ada konten Pojok Baca yang tersedia.</p>
           </div>
         );
       default:

@@ -32,7 +32,7 @@ const UPLOAD_PRESET = 'webdesa';
 export const POTENSI_CATEGORIES = [
   { id: 'pariwisata-kebudayaan', label: 'Pariwisata & Kebudayaan' },
   { id: 'umkm-industri', label: 'UMKM & Industri Kreatif' },
-  { id: 'bumdes', label: 'BUMDes Pangawaren' },
+  { id: 'bumdes', label: 'BUMDes Sidaurip' },
   { id: 'pertanian-perkebunan', label: 'Pertanian & Perkebunan' },
   { id: 'sda-lingkungan', label: 'Sumber Daya Alam & Lingkungan' }
 ] as const;
@@ -151,14 +151,14 @@ export function PotensiForm({ open, onOpenChange, potensi }: PotensiFormProps) {
     try {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        
+
         toast({
           title: `Mengunggah Foto ${i + 1} dari ${files.length}...`,
           description: file.name,
         });
 
         const processingFile = await compressImage(file);
-        
+
         const uploadFormData = new FormData();
         uploadFormData.append('file', processingFile);
         uploadFormData.append('upload_preset', UPLOAD_PRESET);
@@ -209,12 +209,12 @@ export function PotensiForm({ open, onOpenChange, potensi }: PotensiFormProps) {
   const moveImage = (index: number, direction: 'up' | 'down') => {
     const newImages = [...formData.imageUrls];
     const targetIndex = direction === 'up' ? index - 1 : index + 1;
-    
+
     if (targetIndex >= 0 && targetIndex < newImages.length) {
       const temp = newImages[index];
       newImages[index] = newImages[targetIndex];
       newImages[targetIndex] = temp;
-      
+
       setFormData(prev => ({
         ...prev,
         imageUrls: newImages
@@ -306,7 +306,7 @@ export function PotensiForm({ open, onOpenChange, potensi }: PotensiFormProps) {
               id="title"
               value={formData.title}
               onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-              placeholder="Contoh: Desa Wisata Curug Pangawaren"
+              placeholder="Contoh: Desa Wisata Curug Sidaurip"
               className="rounded-xl border-slate-200 h-12 font-semibold text-slate-700 placeholder-slate-400 bg-slate-50/50 focus:bg-white transition-all"
             />
           </div>
@@ -335,12 +335,12 @@ export function PotensiForm({ open, onOpenChange, potensi }: PotensiFormProps) {
 
           <div className="space-y-3">
             <Label className="text-xs font-black uppercase tracking-widest text-slate-600">Unggah Foto Potensi (Mendukung Lebih Dari 1 Foto)</Label>
-            
+
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-2">
               {formData.imageUrls.map((url, index) => (
                 <div key={index} className="group relative aspect-[4/3] rounded-2xl overflow-hidden border-2 border-slate-100 bg-slate-50 shadow-sm transition-all duration-300 hover:shadow-md">
                   <img src={url} alt={`Preview ${index + 1}`} className="w-full h-full object-cover" />
-                  
+
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
                     {index > 0 && (
                       <Button
@@ -377,7 +377,7 @@ export function PotensiForm({ open, onOpenChange, potensi }: PotensiFormProps) {
                       <X className="h-4 w-4" />
                     </Button>
                   </div>
-                  
+
                   <div className="absolute bottom-2 left-2 bg-slate-900/80 text-white px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider">
                     Foto {index + 1}
                   </div>
@@ -386,10 +386,10 @@ export function PotensiForm({ open, onOpenChange, potensi }: PotensiFormProps) {
 
               <label className="flex flex-col items-center justify-center aspect-[4/3] rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-slate-300 transition-all cursor-pointer group">
                 {isUploading ? (
-                  <Loader2 className="h-8 w-8 animate-spin text-emerald-600" />
+                  <Loader2 className="h-8 w-8 animate-spin text-sky-600" />
                 ) : (
                   <>
-                    <ImageIcon className="h-8 w-8 text-slate-400 group-hover:scale-110 group-hover:text-emerald-600 transition-all duration-300" />
+                    <ImageIcon className="h-8 w-8 text-slate-400 group-hover:scale-110 group-hover:text-sky-600 transition-all duration-300" />
                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 mt-2 text-center px-2">Unggah Foto</span>
                   </>
                 )}
@@ -403,7 +403,7 @@ export function PotensiForm({ open, onOpenChange, potensi }: PotensiFormProps) {
                 />
               </label>
             </div>
-            
+
             <p className="text-[10px] text-slate-400 font-semibold italic mt-1">
               * Mendukung unggah banyak foto sekaligus. Rekomendasi rasio foto 4:3 dengan ukuran di bawah 1MB per file. Geser foto untuk mengurutkan urutan tampil.
             </p>
@@ -421,7 +421,7 @@ export function PotensiForm({ open, onOpenChange, potensi }: PotensiFormProps) {
             <Button
               type="submit"
               disabled={isSubmitting || isUploading}
-              className="rounded-xl h-12 font-black px-8 bg-emerald-700 hover:bg-emerald-800 text-white shadow-md shadow-emerald-700/10 flex items-center justify-center gap-2"
+              className="rounded-xl h-12 font-black px-8 bg-sky-700 hover:bg-sky-800 text-white shadow-md shadow-sky-700/10 flex items-center justify-center gap-2"
             >
               {isSubmitting ? (
                 <Loader2 className="h-4 w-4 animate-spin" />

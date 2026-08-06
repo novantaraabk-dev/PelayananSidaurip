@@ -100,7 +100,7 @@ export function ImportOfficialDialog({ open, onOpenChange, defaultCategory = 'pe
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <FileSpreadsheet className="h-5 w-5 text-emerald-600" />
+            <FileSpreadsheet className="h-5 w-5 text-sky-600" />
             Impor Data {categoryLabels[category]}
           </DialogTitle>
           <DialogDescription>Unggah file Excel (.xlsx) khusus untuk kategori ini. Kolom wajib: **Nama**, **Jabatan**.</DialogDescription>

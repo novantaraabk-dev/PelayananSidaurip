@@ -429,7 +429,7 @@ export function NewsForm({ initialData }: NewsFormProps) {
                           <div key={idx} className="relative group aspect-square rounded-xl overflow-hidden border bg-white shadow-sm">
                             <img src={url} alt={`Preview ${idx + 1}`} className="w-full h-full object-cover" />
                             {idx === 0 && (
-                              <span className="absolute top-1.5 left-1.5 bg-emerald-600 text-white text-[9px] font-bold uppercase px-2 py-0.5 rounded-full shadow">
+                              <span className="absolute top-1.5 left-1.5 bg-sky-600 text-white text-[9px] font-bold uppercase px-2 py-0.5 rounded-full shadow">
                                 Utama
                               </span>
                             )}
@@ -534,7 +534,7 @@ export function NewsForm({ initialData }: NewsFormProps) {
               id="title"
               value={formData.title ?? ''}
               onChange={e => setFormData(p => ({ ...p, title: e.target.value }))}
-              placeholder="Contoh: Musyawarah Desa Pangawaren 2026"
+              placeholder="Contoh: Musyawarah Desa Sidaurip 2026"
               required
             />
           </div>

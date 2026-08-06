@@ -8,8 +8,8 @@ export function PemakamanPrintTemplate({ submission }: { submission: LetterSubmi
   return (
     <PrintLayout submission={submission} hideRequesterSignature={true}>
       <p className="mt-8 text-justify leading-relaxed">
-        Yang bertanda tangan di bawah ini Kepala Desa Pangawaren, Kecamatan
-        Karangpucung, Kabupaten Cilacap, menerangkan dengan sebenarnya bahwa:
+        Yang bertanda tangan di bawah ini Kepala Desa Sidaurip, Kecamatan
+        Gandrungmangu, Kabupaten Cilacap, menerangkan dengan sebenarnya bahwa:
       </p>
 
       <table className="mt-4 border-collapse w-full">

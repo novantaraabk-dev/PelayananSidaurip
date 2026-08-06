@@ -9,16 +9,16 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "group relative overflow-hidden rounded-[1.5rem] border border-emerald-600/20 bg-card text-card-foreground shadow-sm transition-all duration-300 hover:border-emerald-500/40 hover:shadow-[0_20px_45px_rgba(16,185,129,0.04)]",
+      "group relative overflow-hidden rounded-[1.5rem] border border-sky-600/20 bg-card text-card-foreground shadow-sm transition-all duration-300 hover:border-sky-500/40 hover:shadow-[0_20px_45px_rgba(16,185,129,0.04)]",
       className
     )}
     {...props}
   >
     {/* Glowing Corner Accent */}
-    <div className="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-emerald-500/5 blur-xl transition-all duration-500 group-hover:bg-emerald-500/10 group-hover:scale-125 pointer-events-none" />
+    <div className="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-sky-500/5 blur-xl transition-all duration-500 group-hover:bg-sky-500/10 group-hover:scale-125 pointer-events-none" />
     
     {/* Subtle Dot Grid pattern */}
-    <div className="absolute right-5 top-5 text-slate-200/50 transition-colors duration-300 group-hover:text-emerald-200/40 pointer-events-none">
+    <div className="absolute right-5 top-5 text-slate-200/50 transition-colors duration-300 group-hover:text-sky-200/40 pointer-events-none">
       <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
         <pattern id="card-ui-dots" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
           <circle cx="2" cy="2" r="1" fill="currentColor" />

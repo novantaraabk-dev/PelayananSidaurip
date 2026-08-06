@@ -14,10 +14,10 @@ interface AuthGuardProps {
   description?: string;
 }
 
-export function AuthGuard({ 
-  children, 
-  title = "Akses Terbatas", 
-  description = "Silakan masuk ke portal warga untuk mengakses layanan ini." 
+export function AuthGuard({
+  children,
+  title = "Akses Terbatas",
+  description = "Silakan masuk ke portal warga untuk mengakses layanan ini."
 }: AuthGuardProps) {
   const { user, isUserLoading, firestore } = useFirebase();
   const [hasProfile, setHasProfile] = useState<boolean | null>(null);
@@ -82,7 +82,7 @@ export function AuthGuard({
           </Button>
         </div>
         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-          Layanan Mandiri Desa Pangawaren
+          Layanan Mandiri Desa Sidaurip
         </p>
       </div>
     );

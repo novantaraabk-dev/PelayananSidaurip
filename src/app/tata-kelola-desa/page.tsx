@@ -133,17 +133,17 @@ export default function TataKelolaDesa() {
     if (!currentApbdes?.items || !currentRealisasi?.items) {
       return { percentage: 0, formatted: '0.0%' };
     }
-    
+
     let totalItems = 0;
     let totalAchievementSum = 0;
-    
+
     currentRealisasi.items.forEach(realisasiItem => {
       // Cocokkan berdasarkan nama kegiatan terlebih dahulu agar lebih spesifik (karena kodeRekening bisa duplikat untuk sub-kegiatan berbeda)
       const apbdesItem = currentApbdes.items.find(
         a => a.kegiatan.trim().toLowerCase() === realisasiItem.kegiatan.trim().toLowerCase()
       ) || currentApbdes.items.find(
         a => a.kodeRekening.trim() === realisasiItem.kodeRekening.trim() &&
-             a.bidang.trim().toLowerCase() === realisasiItem.bidang.trim().toLowerCase()
+          a.bidang.trim().toLowerCase() === realisasiItem.bidang.trim().toLowerCase()
       );
 
       if (apbdesItem && apbdesItem.nominal > 0) {
@@ -155,7 +155,7 @@ export default function TataKelolaDesa() {
         totalItems++;
       }
     });
-    
+
     const pct = totalItems > 0 ? totalAchievementSum / totalItems : 0;
     return {
       percentage: pct,
@@ -188,7 +188,7 @@ export default function TataKelolaDesa() {
         {/* JUDUL */}
         <div className="mb-12 space-y-4">
           <h1 className="text-5xl font-black text-slate-900 uppercase font-display italic">Tata Kelola <span className="text-primary not-italic">Desa</span></h1>
-          <p className="text-slate-500 font-bold max-w-2xl">Transparansi anggaran dan produk hukum desa Pangawaren untuk akuntabilitas publik.</p>
+          <p className="text-slate-500 font-bold max-w-2xl">Transparansi anggaran dan produk hukum desa Sidaurip untuk akuntabilitas publik.</p>
         </div>
 
         {/* TABS */}
@@ -236,7 +236,7 @@ export default function TataKelolaDesa() {
           <div className="space-y-8">
             {isLoadingApbdes ? (
               <Skeleton className="h-96 rounded-3xl" />
-                        ) : currentApbdes ? (
+            ) : currentApbdes ? (
               <>
                 {/* APBDes Overview Card */}
                 <Card className="rounded-[2.5rem] border-none shadow-xl bg-gradient-to-br from-blue-50 to-indigo-50/50">
@@ -244,7 +244,7 @@ export default function TataKelolaDesa() {
                     <div className="space-y-2">
                       <span className="text-xs font-black bg-blue-100 text-blue-800 px-3 py-1 rounded-full uppercase tracking-wider">Anggaran Pendapatan & Belanja Desa</span>
                       <h3 className="text-3xl font-black text-slate-900">APBDes Tahun {selectedYear}</h3>
-                      <p className="text-slate-500 font-medium">Rekapitulasi rencana anggaran belanja desa Pangawaren.</p>
+                      <p className="text-slate-500 font-medium">Rekapitulasi rencana anggaran belanja desa Sidaurip.</p>
                     </div>
                     <div className="p-6 bg-white rounded-3xl shadow-sm border border-slate-100/80 min-w-[280px]">
                       <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Total Rencana Anggaran</span>
@@ -264,32 +264,32 @@ export default function TataKelolaDesa() {
                         <h4 className="text-xl font-black text-slate-900 font-display">Perbandingan Total per Bidang</h4>
                         <p className="text-sm text-slate-500 font-medium">Rincian alokasi anggaran belanja untuk setiap bidang pembangunan.</p>
                       </div>
-                      
+
                       {apbdesChartData.length > 0 ? (
                         <ResponsiveContainer width="100%" height={320}>
                           <BarChart data={apbdesChartData} margin={{ top: 20, right: 10, left: 10, bottom: 20 }}>
                             <defs>
                               <linearGradient id="apbdesColorBidang" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.9}/>
-                                <stop offset="95%" stopColor="#1d4ed8" stopOpacity={0.4}/>
+                                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.9} />
+                                <stop offset="95%" stopColor="#1d4ed8" stopOpacity={0.4} />
                               </linearGradient>
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                            <XAxis 
-                              dataKey="name" 
-                              tick={{ fill: '#64748b', fontSize: 10, fontWeight: 'bold' }} 
-                              axisLine={false} 
+                            <XAxis
+                              dataKey="name"
+                              tick={{ fill: '#64748b', fontSize: 10, fontWeight: 'bold' }}
+                              axisLine={false}
                               tickLine={false}
                               interval={0}
                               tickFormatter={(value) => value.length > 15 ? `${value.substring(0, 15)}...` : value}
                             />
-                            <YAxis 
-                              tick={{ fill: '#64748b', fontSize: 10 }} 
-                              axisLine={false} 
+                            <YAxis
+                              tick={{ fill: '#64748b', fontSize: 10 }}
+                              axisLine={false}
                               tickLine={false}
-                              tickFormatter={(val) => `Rp ${(val/1e6)}jt`} 
+                              tickFormatter={(val) => `Rp ${(val / 1e6)}jt`}
                             />
-                            <Tooltip 
+                            <Tooltip
                               contentStyle={{ backgroundColor: '#ffffff', borderRadius: '16px', border: 'none', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)' }}
                               formatter={(value: any) => [`Rp ${value.toLocaleString('id-ID')}`, 'Rencana Anggaran']}
                             />
@@ -309,30 +309,30 @@ export default function TataKelolaDesa() {
                         <h4 className="text-xl font-black text-slate-900 font-display">Perbandingan Total per Sumber Anggaran</h4>
                         <p className="text-sm text-slate-500 font-medium">Asal/sumber dana anggaran pendapatan dan belanja desa.</p>
                       </div>
-                      
+
                       {apbdesSumberChartData.length > 0 ? (
                         <ResponsiveContainer width="100%" height={320}>
                           <BarChart data={apbdesSumberChartData} margin={{ top: 20, right: 10, left: 10, bottom: 20 }}>
                             <defs>
                               <linearGradient id="apbdesColorSumber" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.9}/>
-                                <stop offset="95%" stopColor="#6d28d9" stopOpacity={0.4}/>
+                                <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.9} />
+                                <stop offset="95%" stopColor="#6d28d9" stopOpacity={0.4} />
                               </linearGradient>
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                            <XAxis 
-                              dataKey="name" 
-                              tick={{ fill: '#64748b', fontSize: 10, fontWeight: 'bold' }} 
-                              axisLine={false} 
+                            <XAxis
+                              dataKey="name"
+                              tick={{ fill: '#64748b', fontSize: 10, fontWeight: 'bold' }}
+                              axisLine={false}
                               tickLine={false}
                             />
-                            <YAxis 
-                              tick={{ fill: '#64748b', fontSize: 10 }} 
-                              axisLine={false} 
+                            <YAxis
+                              tick={{ fill: '#64748b', fontSize: 10 }}
+                              axisLine={false}
                               tickLine={false}
-                              tickFormatter={(val) => `Rp ${(val/1e6)}jt`} 
+                              tickFormatter={(val) => `Rp ${(val / 1e6)}jt`}
                             />
-                            <Tooltip 
+                            <Tooltip
                               contentStyle={{ backgroundColor: '#ffffff', borderRadius: '16px', border: 'none', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)' }}
                               formatter={(value: any) => [`Rp ${value.toLocaleString('id-ID')}`, 'Rencana Anggaran']}
                             />
@@ -360,20 +360,20 @@ export default function TataKelolaDesa() {
           <div className="space-y-8">
             {isLoadingRealisasi ? (
               <Skeleton className="h-96 rounded-3xl" />
-                        ) : currentRealisasi ? (
+            ) : currentRealisasi ? (
               <>
                 {/* Realisasi Overview and Big Metrics */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   {/* Total Card */}
-                  <Card className="rounded-[2.5rem] border-none shadow-xl bg-gradient-to-br from-emerald-50 to-teal-50/50 flex flex-col justify-between p-8 min-h-[220px]">
+                  <Card className="rounded-[2.5rem] border-none shadow-xl bg-gradient-to-br from-sky-50 to-teal-50/50 flex flex-col justify-between p-8 min-h-[220px]">
                     <div className="space-y-2">
-                      <span className="text-xs font-black bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full uppercase tracking-wider">Realisasi Anggaran Belanja</span>
+                      <span className="text-xs font-black bg-sky-100 text-sky-800 px-3 py-1 rounded-full uppercase tracking-wider">Realisasi Anggaran Belanja</span>
                       <h3 className="text-2xl font-black text-slate-900 font-display">Realisasi {selectedYear}</h3>
                     </div>
                     <div className="space-y-3 mt-4">
                       <div>
                         <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Total Realisasi Belanja</span>
-                        <div className="text-3xl font-black text-emerald-600 mt-1 font-display">
+                        <div className="text-3xl font-black text-sky-600 mt-1 font-display">
                           Rp {currentRealisasi.totalRealisasi.toLocaleString('id-ID')}
                         </div>
                       </div>
@@ -392,11 +392,11 @@ export default function TataKelolaDesa() {
                       <p className="text-xs text-slate-500 font-medium">Persentase rencana anggaran yang telah direalisasikan.</p>
                     </div>
                     <div className="my-4">
-                      <div className="text-5xl md:text-6xl font-black text-emerald-600 font-display italic">
+                      <div className="text-5xl md:text-6xl font-black text-sky-600 font-display italic">
                         {absorptionStats.formatted}
                       </div>
                       <div className="w-full bg-slate-100 rounded-full h-3 mt-3 overflow-hidden">
-                        <div className="bg-emerald-500 h-full rounded-full transition-all duration-1000" style={{ width: `${Math.min(100, absorptionStats.percentage)}%` }} />
+                        <div className="bg-sky-500 h-full rounded-full transition-all duration-1000" style={{ width: `${Math.min(100, absorptionStats.percentage)}%` }} />
                       </div>
                     </div>
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Anggaran Terserap</span>
@@ -429,32 +429,32 @@ export default function TataKelolaDesa() {
                         <h4 className="text-xl font-black text-slate-900 font-display">Perbandingan Total per Bidang</h4>
                         <p className="text-sm text-slate-500 font-medium">Jumlah realisasi belanja untuk masing-masing bidang pembangunan.</p>
                       </div>
-                      
+
                       {realisasiChartData.length > 0 ? (
                         <ResponsiveContainer width="100%" height={320}>
                           <BarChart data={realisasiChartData} margin={{ top: 20, right: 10, left: 10, bottom: 20 }}>
                             <defs>
                               <linearGradient id="realisasiColorBidang" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#10b981" stopOpacity={0.9}/>
-                                <stop offset="95%" stopColor="#047857" stopOpacity={0.4}/>
+                                <stop offset="5%" stopColor="#10b981" stopOpacity={0.9} />
+                                <stop offset="95%" stopColor="#047857" stopOpacity={0.4} />
                               </linearGradient>
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                            <XAxis 
-                              dataKey="name" 
-                              tick={{ fill: '#64748b', fontSize: 10, fontWeight: 'bold' }} 
-                              axisLine={false} 
+                            <XAxis
+                              dataKey="name"
+                              tick={{ fill: '#64748b', fontSize: 10, fontWeight: 'bold' }}
+                              axisLine={false}
                               tickLine={false}
                               interval={0}
                               tickFormatter={(value) => value.length > 15 ? `${value.substring(0, 15)}...` : value}
                             />
-                            <YAxis 
-                              tick={{ fill: '#64748b', fontSize: 10 }} 
-                              axisLine={false} 
+                            <YAxis
+                              tick={{ fill: '#64748b', fontSize: 10 }}
+                              axisLine={false}
                               tickLine={false}
-                              tickFormatter={(val) => `Rp ${(val/1e6)}jt`} 
+                              tickFormatter={(val) => `Rp ${(val / 1e6)}jt`}
                             />
-                            <Tooltip 
+                            <Tooltip
                               contentStyle={{ backgroundColor: '#ffffff', borderRadius: '16px', border: 'none', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)' }}
                               formatter={(value: any) => [`Rp ${value.toLocaleString('id-ID')}`, 'Realisasi Anggaran']}
                             />
@@ -474,30 +474,30 @@ export default function TataKelolaDesa() {
                         <h4 className="text-xl font-black text-slate-900 font-display">Perbandingan Total per Sumber Anggaran</h4>
                         <p className="text-sm text-slate-500 font-medium">Realisasi belanja dikelompokkan berdasarkan asal/sumber anggaran.</p>
                       </div>
-                      
+
                       {realisasiSumberChartData.length > 0 ? (
                         <ResponsiveContainer width="100%" height={320}>
                           <BarChart data={realisasiSumberChartData} margin={{ top: 20, right: 10, left: 10, bottom: 20 }}>
                             <defs>
                               <linearGradient id="realisasiColorSumber" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.9}/>
-                                <stop offset="95%" stopColor="#0891b2" stopOpacity={0.4}/>
+                                <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.9} />
+                                <stop offset="95%" stopColor="#0891b2" stopOpacity={0.4} />
                               </linearGradient>
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                            <XAxis 
-                              dataKey="name" 
-                              tick={{ fill: '#64748b', fontSize: 10, fontWeight: 'bold' }} 
-                              axisLine={false} 
+                            <XAxis
+                              dataKey="name"
+                              tick={{ fill: '#64748b', fontSize: 10, fontWeight: 'bold' }}
+                              axisLine={false}
                               tickLine={false}
                             />
-                            <YAxis 
-                              tick={{ fill: '#64748b', fontSize: 10 }} 
-                              axisLine={false} 
+                            <YAxis
+                              tick={{ fill: '#64748b', fontSize: 10 }}
+                              axisLine={false}
                               tickLine={false}
-                              tickFormatter={(val) => `Rp ${(val/1e6)}jt`} 
+                              tickFormatter={(val) => `Rp ${(val / 1e6)}jt`}
                             />
-                            <Tooltip 
+                            <Tooltip
                               contentStyle={{ backgroundColor: '#ffffff', borderRadius: '16px', border: 'none', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)' }}
                               formatter={(value: any) => [`Rp ${value.toLocaleString('id-ID')}`, 'Realisasi Anggaran']}
                             />
@@ -546,7 +546,7 @@ export default function TataKelolaDesa() {
                         <h3 className="text-lg font-black text-slate-900 line-clamp-2">{produk.nama}</h3>
                         <p className="text-sm text-slate-600">Nomor: {produk.nomor}</p>
                       </div>
-                      
+
                       {produk.filePdfUrl && (
                         <a href={produk.filePdfUrl} target="_blank" rel="noopener noreferrer">
                           <Button variant="outline" className="w-full rounded-xl gap-2 text-xs font-bold">
@@ -555,7 +555,7 @@ export default function TataKelolaDesa() {
                           </Button>
                         </a>
                       )}
-                      
+
                       {produk.driveLink && (
                         <a href={produk.driveLink} target="_blank" rel="noopener noreferrer">
                           <Button variant="ghost" className="w-full rounded-xl gap-2 text-xs font-bold text-primary hover:bg-primary/10">
@@ -576,7 +576,7 @@ export default function TataKelolaDesa() {
       {/* FOOTER */}
       <footer className="bg-slate-900 text-white py-8 mt-16">
         <div className="container mx-auto px-4 text-center text-sm text-slate-400">
-          © 2026 Pemerintah Desa Pangawaren Digital Portal - Tata Kelola Desa
+          © 2026 Pemerintah Desa Sidaurip Digital Portal - Tata Kelola Desa
         </div>
       </footer>
     </div>

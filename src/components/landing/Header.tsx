@@ -31,6 +31,7 @@ const primaryLinks = [
 const moreLinks = [
   { href: '/layanan-surat/', label: 'Layanan Surat' },
   { href: '/tata-kelola-desa/', label: 'Tata Kelola Desa' },
+  { href: '/desa-anti-korupsi/', label: 'Desa Anti Korupsi' },
   { href: '/pengumuman/', label: 'Pengumuman' },
   { href: '/pengaduan/', label: 'Pengaduan Warga' },
   { href: '/nomor-penting/', label: 'Nomor Penting' },
@@ -39,7 +40,7 @@ const moreLinks = [
 const potensiSubLinks = [
   { href: '/potensi-desa?tab=pariwisata-kebudayaan', label: 'Pariwisata & Kebudayaan' },
   { href: '/potensi-desa?tab=umkm-industri', label: 'UMKM & Industri Kreatif' },
-  { href: '/potensi-desa?tab=bumdes', label: 'BUMDes Pangawaren' },
+  { href: '/potensi-desa?tab=bumdes', label: 'BUMDes Sidaurip' },
   { href: '/potensi-desa?tab=pertanian-perkebunan', label: 'Pertanian & Perkebunan' },
   { href: '/potensi-desa?tab=sda-lingkungan', label: 'Sumber Daya Alam & Lingkungan' }
 ];
@@ -95,7 +96,7 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className={cn('transition-colors', isScrolled ? 'text-slate-900' : 'text-white')} aria-label="Beranda Portal Portal Desa Pangawaren">
+        <Link href="/" className={cn('transition-colors', isScrolled ? 'text-slate-900' : 'text-white')} aria-label="Beranda Portal Portal Desa Sidaurip">
           <Logo />
         </Link>
 
@@ -106,13 +107,13 @@ export function Header() {
               href={link.href}
               className={cn(
                 'group relative text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors duration-300 whitespace-nowrap',
-                isScrolled ? 'text-slate-600 hover:text-emerald-700' : 'text-white/90 hover:text-white'
+                isScrolled ? 'text-slate-600 hover:text-sky-700' : 'text-white/90 hover:text-white'
               )}
             >
               <span>{link.label}</span>
               <span className={cn(
                 'absolute bottom-[-0.4rem] left-0 h-0.5 w-full origin-left scale-x-0 rounded-full transition-transform duration-300 group-hover:scale-x-100',
-                isScrolled ? 'bg-emerald-600' : 'bg-white'
+                isScrolled ? 'bg-sky-600' : 'bg-white'
               )} />
             </Link>
           ))}
@@ -121,55 +122,40 @@ export function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger className={cn(
               'group relative flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors duration-300 whitespace-nowrap outline-none',
-              isScrolled ? 'text-slate-600 hover:text-emerald-700' : 'text-white/90 hover:text-white'
+              isScrolled ? 'text-slate-600 hover:text-sky-700' : 'text-white/90 hover:text-white'
             )}>
               <span>Potensi Desa</span>
               <ChevronDown className="h-3 w-3 transition-transform duration-200 group-data-[state=open]:rotate-180" />
               <span className={cn(
                 'absolute bottom-[-0.4rem] left-0 h-0.5 w-full origin-left scale-x-0 rounded-full transition-transform duration-300 group-hover:scale-x-100',
-                isScrolled ? 'bg-emerald-600' : 'bg-white'
+                isScrolled ? 'bg-sky-600' : 'bg-white'
               )} />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center" className="mt-3 w-60 rounded-xl border border-slate-100 bg-white/95 backdrop-blur-xl p-2 shadow-xl shadow-slate-200/50">
               {potensiSubLinks.map((link) => (
-                <DropdownMenuItem key={link.href} asChild className="rounded-lg px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600 transition-colors hover:text-emerald-700 hover:bg-emerald-50 cursor-pointer">
+                <DropdownMenuItem key={link.href} asChild className="rounded-lg px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600 transition-colors hover:text-sky-700 hover:bg-sky-50 cursor-pointer">
                   <Link href={link.href}>{link.label}</Link>
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Desa Anti Korupsi Link */}
-          <Link
-            href="/desa-anti-korupsi/"
-            className={cn(
-              'group relative text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors duration-300 whitespace-nowrap',
-              isScrolled ? 'text-slate-600 hover:text-emerald-700' : 'text-white/90 hover:text-white'
-            )}
-          >
-            <span>Desa Anti Korupsi</span>
-            <span className={cn(
-              'absolute bottom-[-0.4rem] left-0 h-0.5 w-full origin-left scale-x-0 rounded-full transition-transform duration-300 group-hover:scale-x-100',
-              isScrolled ? 'bg-emerald-600' : 'bg-white'
-            )} />
-          </Link>
-
           {/* Dropdown "Lainnya" */}
           <DropdownMenu>
             <DropdownMenuTrigger className={cn(
               'group relative flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors duration-300 whitespace-nowrap outline-none',
-              isScrolled ? 'text-slate-600 hover:text-emerald-700' : 'text-white/90 hover:text-white'
+              isScrolled ? 'text-slate-600 hover:text-sky-700' : 'text-white/90 hover:text-white'
             )}>
               <span>Lainnya</span>
               <ChevronDown className="h-3 w-3 transition-transform duration-200 group-data-[state=open]:rotate-180" />
               <span className={cn(
                 'absolute bottom-[-0.4rem] left-0 h-0.5 w-full origin-left scale-x-0 rounded-full transition-transform duration-300 group-hover:scale-x-100',
-                isScrolled ? 'bg-emerald-600' : 'bg-white'
+                isScrolled ? 'bg-sky-600' : 'bg-white'
               )} />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center" className="mt-3 w-52 rounded-xl border border-slate-100 bg-white/95 backdrop-blur-xl p-2 shadow-xl shadow-slate-200/50">
               {moreLinks.map((link) => (
-                <DropdownMenuItem key={link.href} asChild className="rounded-lg px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600 transition-colors hover:text-emerald-700 hover:bg-emerald-50 cursor-pointer">
+                <DropdownMenuItem key={link.href} asChild className="rounded-lg px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600 transition-colors hover:text-sky-700 hover:bg-sky-50 cursor-pointer">
                   <Link href={link.href}>{link.label}</Link>
                 </DropdownMenuItem>
               ))}
@@ -189,7 +175,7 @@ export function Header() {
             </Button>
           </Link>
           <Link href="/layanan-surat/" aria-label="Ajukan layanan desa">
-            <Button className="h-8 rounded-full bg-emerald-700 px-3 text-[11px] font-semibold text-white shadow-[0_12px_30px_rgba(5,150,105,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-800">
+            <Button className="h-8 rounded-full bg-sky-700 px-3 text-[11px] font-semibold text-white shadow-[0_12px_30px_rgba(5,150,105,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-sky-800">
               Ajukan Layanan
             </Button>
           </Link>
@@ -217,7 +203,7 @@ export function Header() {
                       {link.label}
                     </Link>
                   ))}
-                  
+
                   {/* Collapsible Potensi Desa on Mobile */}
                   <div className="rounded-2xl border border-white/10 overflow-hidden">
                     <button
@@ -242,11 +228,6 @@ export function Header() {
                     )}
                   </div>
 
-                  {/* Desa Anti Korupsi on Mobile */}
-                  <Link href="/desa-anti-korupsi/" className="block rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white/80 transition-colors hover:bg-white/10 hover:text-white">
-                    Desa Anti Korupsi
-                  </Link>
-
                   {moreLinks.map((link) => (
                     <Link key={link.href} href={link.href} className="block rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white/80 transition-colors hover:bg-white/10 hover:text-white">
                       {link.label}
@@ -254,7 +235,7 @@ export function Header() {
                   ))}
                 </div>
                 <Link href="/layanan-surat/" className="shrink-0">
-                  <Button className="mt-2 h-12 w-full rounded-full bg-emerald-600 text-white">
+                  <Button className="mt-2 h-12 w-full rounded-full bg-sky-600 text-white">
                     Ajukan Layanan
                     <ArrowRight className="h-4 w-4" />
                   </Button>

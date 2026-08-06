@@ -89,7 +89,7 @@ export default function PublicBeritaDetailPage() {
                 ) : (
                   <div className="flex h-full min-h-[360px] items-center justify-center bg-slate-900 text-white">
                     <div className="text-center">
-                      <Play className="mx-auto h-10 w-10 text-emerald-400" />
+                      <Play className="mx-auto h-10 w-10 text-sky-400" />
                       <p className="mt-4 text-base font-semibold">Tautan video belum valid atau tidak dikenali.</p>
                     </div>
                   </div>
@@ -97,7 +97,7 @@ export default function PublicBeritaDetailPage() {
               </div>
               {videoPlatform && (
                 <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700">
-                  <span className="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-600" />
+                  <span className="inline-flex h-2.5 w-2.5 rounded-full bg-sky-600" />
                   Platform: {videoPlatform === 'youtube' ? 'YouTube' : videoPlatform === 'tiktok' ? 'TikTok' : videoPlatform === 'instagram' ? 'Instagram' : 'Video'}
                 </div>
               )}
@@ -113,7 +113,7 @@ export default function PublicBeritaDetailPage() {
                 />
               </div>
               <figcaption className="text-center text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] px-4">
-                Dokumentasi Kegiatan Pemerintah Desa Pangawaren.
+                Dokumentasi Kegiatan Pemerintah Desa Sidaurip.
               </figcaption>
             </figure>
           )}
@@ -129,7 +129,7 @@ export default function PublicBeritaDetailPage() {
                       className="text-lg leading-8 text-justify whitespace-pre-wrap font-sans"
                     >
                       {index === 0 && (
-                        <span className="font-black text-primary uppercase mr-2">Pangawaren —</span>
+                        <span className="font-black text-primary uppercase mr-2">Sidaurip —</span>
                       )}
                       {paragraph.trim()}
                     </p>
@@ -145,7 +145,7 @@ export default function PublicBeritaDetailPage() {
               Bagikan
             </Button>
             <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">
-              Redaksi Pangawaren Digital
+              Redaksi Sidaurip Digital
             </p>
           </footer>
 
@@ -157,7 +157,7 @@ export default function PublicBeritaDetailPage() {
         <div className="container mx-auto px-4 text-center">
           <Logo />
           <p className="mt-8 text-[10px] font-bold uppercase tracking-widest">
-            © 2026 Pemerintah Desa Pangawaren • Website Resmi Pemerintahan Desa
+            © 2026 Pemerintah Desa Sidaurip • Website Resmi Pemerintahan Desa
           </p>
         </div>
       </footer>

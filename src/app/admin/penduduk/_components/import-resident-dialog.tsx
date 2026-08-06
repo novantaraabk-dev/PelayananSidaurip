@@ -145,7 +145,7 @@ export function ImportResidentDialog({ open, onOpenChange }: ImportResidentDialo
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <FileSpreadsheet className="h-5 w-5 text-emerald-600" />
+            <FileSpreadsheet className="h-5 w-5 text-sky-600" />
             Impor Data Penduduk
           </DialogTitle>
           <DialogDescription>
@@ -179,8 +179,8 @@ export function ImportResidentDialog({ open, onOpenChange }: ImportResidentDialo
           )}
 
           {importCount !== null && (
-            <Alert className="bg-emerald-50 text-emerald-700 border-emerald-200">
-              <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+            <Alert className="bg-sky-50 text-sky-700 border-sky-200">
+              <CheckCircle2 className="h-4 w-4 text-sky-600" />
               <AlertTitle>Berhasil</AlertTitle>
               <AlertDescription>{importCount} data penduduk berhasil diimpor.</AlertDescription>
             </Alert>
@@ -188,7 +188,7 @@ export function ImportResidentDialog({ open, onOpenChange }: ImportResidentDialo
         </div>
         <DialogFooter className="gap-2">
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isProcessing}>Tutup</Button>
-          <Button onClick={handleImport} disabled={isProcessing || !selectedFile} className="bg-emerald-600 hover:bg-emerald-700">
+          <Button onClick={handleImport} disabled={isProcessing || !selectedFile} className="bg-sky-600 hover:bg-sky-700">
             <Save className="mr-2 h-4 w-4" /> Mulai Impor
           </Button>
         </DialogFooter>

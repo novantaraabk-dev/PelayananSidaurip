@@ -93,7 +93,7 @@ match /produkHukumDesa/{id} {
 }
 ```
 - Public read access untuk semua warga
-- Write hanya untuk admin (email == 'pangawaren@gmail.id')
+- Write hanya untuk admin (email == 'sidaurip@gmail.id')
 
 ### 5. Navigation Updates
 - **Header Component** (src/components/landing/Header.tsx):
@@ -235,7 +235,7 @@ Struktur identik dengan `apbdes`, hanya `totalAnggaran` diganti `totalRealisasi`
 4. Check browser console untuk error message
 
 ### Admin tidak bisa upload
-1. Pastikan login dengan email: pangawaren@gmail.id
+1. Pastikan login dengan email: sidaurip@gmail.id
 2. Pastikan sudah set isAdmin=true di localStorage
 3. Check Firestore rules di Firebase Console
 

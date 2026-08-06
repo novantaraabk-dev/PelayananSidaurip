@@ -28,13 +28,13 @@ export function AnnouncementForm() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (file.size > 1024 * 1024) { 
-        toast({
-            title: "File Terlalu Besar",
-            description: "Maksimal ukuran gambar adalah 1MB.",
-            variant: "destructive",
-        });
-        return;
+    if (file.size > 1024 * 1024) {
+      toast({
+        title: "File Terlalu Besar",
+        description: "Maksimal ukuran gambar adalah 1MB.",
+        variant: "destructive",
+      });
+      return;
     }
 
     setIsUploading(true);
@@ -58,11 +58,11 @@ export function AnnouncementForm() {
       toast({ title: 'Gambar Terunggah' });
 
     } catch (error: any) {
-        toast({
-            title: 'Gagal Mengunggah',
-            description: error.message,
-            variant: 'destructive',
-        });
+      toast({
+        title: 'Gagal Mengunggah',
+        description: error.message,
+        variant: 'destructive',
+      });
     } finally {
       setIsUploading(false);
     }
@@ -89,7 +89,7 @@ export function AnnouncementForm() {
     }
 
     setIsLoading(true);
-    
+
     try {
       const announcementsCollection = collection(firestore, 'announcements');
       await addDoc(announcementsCollection, {
@@ -132,16 +132,16 @@ export function AnnouncementForm() {
           <div className="space-y-2">
             <Label>Gambar Lampiran (Opsional)</Label>
             <div className="flex flex-col gap-4">
-               {imageUrl && (
-                 <div className="relative aspect-video w-full max-w-sm overflow-hidden rounded-xl border-2 border-primary/10 bg-muted">
-                    <img src={imageUrl} alt="Preview" className="h-full w-full object-cover" />
-                 </div>
-               )}
-               <div className="flex items-center gap-4">
-                  <Input type="file" accept="image/*" onChange={handleFileChange} disabled={isUploading || isLoading} className="max-w-xs" />
-                  {isUploading && <Loader2 className="h-5 w-5 animate-spin text-primary" />}
-               </div>
-               <p className="text-[10px] text-muted-foreground uppercase font-bold">Format JPG/PNG. Maks 1MB.</p>
+              {imageUrl && (
+                <div className="relative aspect-video w-full max-w-sm overflow-hidden rounded-xl border-2 border-primary/10 bg-muted">
+                  <img src={imageUrl} alt="Preview" className="h-full w-full object-cover" />
+                </div>
+              )}
+              <div className="flex items-center gap-4">
+                <Input type="file" accept="image/*" onChange={handleFileChange} disabled={isUploading || isLoading} className="max-w-xs" />
+                {isUploading && <Loader2 className="h-5 w-5 animate-spin text-primary" />}
+              </div>
+              <p className="text-[10px] text-muted-foreground uppercase font-bold">Format JPG/PNG. Maks 1MB.</p>
             </div>
           </div>
 

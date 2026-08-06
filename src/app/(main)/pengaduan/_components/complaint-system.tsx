@@ -311,12 +311,12 @@ export function ComplaintSystem() {
                         </div>
 
                         {complaint.adminResponse && (
-                            <div className="p-6 rounded-[2rem] border bg-emerald-900 text-white space-y-4 shadow-xl">
+                            <div className="p-6 rounded-[2rem] border bg-sky-900 text-white space-y-4 shadow-xl">
                                 <h4 className="font-black uppercase tracking-[0.2em] text-[10px] text-accent flex items-center gap-2">
                                     <CornerDownRight className="w-4 h-4" />
                                     Tanggapan Pemerintah Desa
                                 </h4>
-                                <p className="text-sm font-medium leading-relaxed italic text-emerald-50">
+                                <p className="text-sm font-medium leading-relaxed italic text-sky-50">
                                     "{complaint.adminResponse}"
                                 </p>
                             </div>

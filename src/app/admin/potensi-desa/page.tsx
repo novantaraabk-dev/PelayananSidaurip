@@ -7,12 +7,12 @@ import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Landmark, 
-  PlusCircle, 
-  Trash2, 
-  Edit, 
-  Loader2, 
+import {
+  Landmark,
+  PlusCircle,
+  Trash2,
+  Edit,
+  Loader2,
   ImageIcon,
   Compass,
   FileText
@@ -23,7 +23,7 @@ import { PotensiForm, POTENSI_CATEGORIES } from './_components/potensi-form';
 export default function AdminPotensiDesa() {
   const { toast } = useToast();
   const firestore = useFirestore();
-  
+
   const [formOpen, setFormOpen] = useState(false);
   const [editingPotensi, setEditingPotensi] = useState<PotensiDesa | null>(null);
 
@@ -75,16 +75,16 @@ export default function AdminPotensiDesa() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5">
         <div>
           <h1 className="text-2xl font-black text-slate-800 uppercase tracking-wider flex items-center gap-2.5">
-            <Landmark className="h-6 w-6 text-emerald-600 animate-pulse" />
+            <Landmark className="h-6 w-6 text-sky-600 animate-pulse" />
             <span>Kelola Potensi Desa</span>
           </h1>
           <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">
-            Manajemen informasi potensi unggulan, industri kreatif, pariwisata, dan BUMDes Pangawaren
+            Manajemen informasi potensi unggulan, industri kreatif, pariwisata, dan BUMDes Sidaurip
           </p>
         </div>
-        <Button 
+        <Button
           onClick={handleCreate}
-          className="rounded-full h-11 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs uppercase tracking-wider px-6 shrink-0 shadow-lg shadow-emerald-700/10 flex items-center gap-2"
+          className="rounded-full h-11 bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs uppercase tracking-wider px-6 shrink-0 shadow-lg shadow-sky-700/10 flex items-center gap-2"
         >
           <PlusCircle className="h-4.5 w-4.5" />
           <span>Tambah Potensi</span>
@@ -94,7 +94,7 @@ export default function AdminPotensiDesa() {
       {/* Main List */}
       {isLoading ? (
         <div className="flex flex-col items-center justify-center py-20 bg-white border border-slate-100 rounded-[3rem] shadow-sm">
-          <Loader2 className="h-10 w-10 animate-spin text-emerald-600 mb-3" />
+          <Loader2 className="h-10 w-10 animate-spin text-sky-600 mb-3" />
           <p className="text-xs text-slate-450 uppercase font-black tracking-widest">Memuat data potensi desa...</p>
         </div>
       ) : !potentials || potentials.length === 0 ? (
@@ -105,7 +105,7 @@ export default function AdminPotensiDesa() {
             </div>
             <h3 className="text-slate-700 font-extrabold text-sm uppercase tracking-wider">Belum Ada Data Potensi</h3>
             <p className="text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
-              Data potensi desa belum ditambahkan. Klik tombol "Tambah Potensi" di atas untuk menambahkan potensi unggulan Desa Pangawaren.
+              Data potensi desa belum ditambahkan. Klik tombol "Tambah Potensi" di atas untuk menambahkan potensi unggulan Desa Sidaurip.
             </p>
           </div>
         </Card>
@@ -116,9 +116,9 @@ export default function AdminPotensiDesa() {
               {/* Thumbnail Slider Preview */}
               <div className="relative aspect-[16/9] w-full bg-slate-50 border-b overflow-hidden">
                 {item.imageUrls && item.imageUrls.length > 0 ? (
-                  <img 
-                    src={item.imageUrls[0]} 
-                    alt={item.title} 
+                  <img
+                    src={item.imageUrls[0]}
+                    alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-750 group-hover:scale-105"
                   />
                 ) : (
@@ -126,7 +126,7 @@ export default function AdminPotensiDesa() {
                     <ImageIcon className="h-10 w-10 text-slate-300" />
                   </div>
                 )}
-                
+
                 {/* Count badge for photos */}
                 {item.imageUrls && item.imageUrls.length > 1 && (
                   <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider">
@@ -136,7 +136,7 @@ export default function AdminPotensiDesa() {
 
                 {/* Sub category badge */}
                 <div className="absolute bottom-4 left-4">
-                  <Badge className="bg-emerald-700/90 text-white border-none rounded-full font-bold text-[9px] uppercase tracking-wider px-3 py-1 shadow-md">
+                  <Badge className="bg-sky-700/90 text-white border-none rounded-full font-bold text-[9px] uppercase tracking-wider px-3 py-1 shadow-md">
                     {getCategoryLabel(item.category)}
                   </Badge>
                 </div>
@@ -146,7 +146,7 @@ export default function AdminPotensiDesa() {
               <CardContent className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                 <div className="space-y-3">
                   <div className="space-y-1">
-                    <h2 className="text-xl font-black text-slate-800 uppercase italic tracking-tight font-display line-clamp-1 leading-tight group-hover:text-emerald-750 transition-colors">
+                    <h2 className="text-xl font-black text-slate-800 uppercase italic tracking-tight font-display line-clamp-1 leading-tight group-hover:text-sky-750 transition-colors">
                       {item.title}
                     </h2>
                     {item.subtitle && (
@@ -188,10 +188,10 @@ export default function AdminPotensiDesa() {
       )}
 
       {/* Form Dialog */}
-      <PotensiForm 
-        open={formOpen} 
-        onOpenChange={setFormOpen} 
-        potensi={editingPotensi} 
+      <PotensiForm
+        open={formOpen}
+        onOpenChange={setFormOpen}
+        potensi={editingPotensi}
       />
     </div>
   );

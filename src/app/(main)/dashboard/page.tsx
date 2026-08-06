@@ -29,16 +29,16 @@ export default function DashboardPage() {
           <h1 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900">
             {greeting}, Warga 👋
           </h1>
-          <p className="text-sm text-slate-500 font-medium">Panel akses layanan mandiri Desa Pangawaren.</p>
+          <p className="text-sm text-slate-500 font-medium">Panel akses layanan mandiri Desa Sidaurip.</p>
         </div>
-        
+
         <div className="hidden md:flex items-center gap-3 bg-white p-2 rounded-2xl border shadow-sm">
           <div className="p-3 bg-slate-100 rounded-xl">
             <Zap className="h-5 w-5 text-slate-600" />
           </div>
           <div className="pr-4">
             <p className="text-[10px] font-bold text-slate-400 uppercase">Status Sistem</p>
-            <p className="text-sm font-black text-emerald-600">AKTIF & STABIL</p>
+            <p className="text-sm font-black text-sky-600">AKTIF & STABIL</p>
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@ export default function DashboardPage() {
       {/* QUICK ACCESS CARDS - MOBILE ONLY */}
       <section className="grid grid-cols-1 gap-4 md:hidden">
         <h2 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Akses Cepat Layanan</h2>
-        
+
         <Link href="/layanan-surat/">
           <Card className="rounded-3xl border-none shadow-sm bg-white overflow-hidden active:scale-95 transition-all">
             <CardContent className="p-5 flex items-center justify-between">
@@ -68,7 +68,7 @@ export default function DashboardPage() {
           <Card className="rounded-3xl border-none shadow-sm bg-white overflow-hidden active:scale-95 transition-all">
             <CardContent className="p-5 flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-emerald-50 text-emerald-600 rounded-2xl">
+                <div className="p-3 bg-sky-50 text-sky-600 rounded-2xl">
                   <Newspaper className="h-6 w-6" />
                 </div>
                 <div>
@@ -140,7 +140,7 @@ export default function DashboardPage() {
 
               <div className="space-y-4">
                 {[
-                  { title: 'Layanan Mandiri', status: 'Online', color: 'bg-emerald-500' },
+                  { title: 'Layanan Mandiri', status: 'Online', color: 'bg-sky-500' },
                   { title: 'Antrian Loket', status: 'Lancar', color: 'bg-blue-500' },
                   { title: 'Validasi NIK', status: 'Otomatis', color: 'bg-secondary' }
                 ].map((item, i) => (

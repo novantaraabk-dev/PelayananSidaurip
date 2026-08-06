@@ -112,7 +112,7 @@ export function DashboardStats() {
 
         <Card className="rounded-[2rem] border-none shadow-sm bg-white overflow-hidden group">
           <CardContent className="p-6 flex items-center gap-4">
-            <div className="p-4 bg-emerald-50 text-emerald-600 rounded-2xl group-hover:scale-110 transition-transform">
+            <div className="p-4 bg-sky-50 text-sky-600 rounded-2xl group-hover:scale-110 transition-transform">
               <Map className="h-6 w-6" />
             </div>
             <div>
@@ -141,7 +141,7 @@ export function DashboardStats() {
             </div>
             <div>
               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</p>
-              <p className="text-2xl font-black text-emerald-600 italic">Desa Maju</p>
+              <p className="text-2xl font-black text-sky-600 italic">Desa Maju</p>
             </div>
           </CardContent>
         </Card>
@@ -162,7 +162,7 @@ export function DashboardStats() {
               <Card className="rounded-[2rem] border-none shadow-sm hover:shadow-md transition-all overflow-hidden group">
                 <CardContent className="p-6 flex flex-col h-full justify-between">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="p-3 bg-emerald-100 text-emerald-700 rounded-2xl group-hover:scale-110 transition-transform">
+                    <div className="p-3 bg-sky-100 text-sky-700 rounded-2xl group-hover:scale-110 transition-transform">
                       <CheckCircle className="h-5 w-5" />
                     </div>
                     <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Hari Ini</span>

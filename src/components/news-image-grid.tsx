@@ -267,7 +267,7 @@ export function NewsImageGrid({
 
                 <div className="mt-4 flex items-center justify-between w-full px-6 text-xs text-slate-400 font-medium">
                   <span className="line-clamp-1">{title}</span>
-                  <span className="font-bold tracking-widest text-emerald-400">
+                  <span className="font-bold tracking-widest text-sky-400">
                     {lightboxIndex + 1} / {images.length}
                   </span>
                 </div>

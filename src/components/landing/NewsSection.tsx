@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useMemoFirebase, useCollection, useFirestore, useDoc } from '@/firebase';
 import { collection, query, orderBy, limit, doc } from 'firebase/firestore';
-import { ArrowRight, Video, Newspaper } from 'lucide-react';
+import { ArrowRight, Video, Newspaper, CheckCircle2 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { News } from '@/lib/types';
 import { formatDisplayDate } from './landing-utils';
@@ -58,15 +58,15 @@ export function NewsSection() {
         className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
       >
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-700">Berita Terbaru</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-700">Berita Terbaru</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
             Berita Desa
           </h2>
           <p className="mt-4 text-lg leading-8 text-slate-600">
-            Informasi dan kegiatan terbaru dari Pemerintah Desa Pangawaren.
+            Informasi dan kegiatan terbaru dari Pemerintah Desa Sidaurip.
           </p>
         </div>
-        <Link href="/BeritaDesa/" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700">
+        <Link href="/BeritaDesa/" className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700">
           Lihat semua berita
           <ArrowRight className="h-4 w-4" />
         </Link>
@@ -75,7 +75,7 @@ export function NewsSection() {
       {isLoading ? (
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className="rounded-[1.75rem] border border-emerald-600/20 bg-white p-4 shadow-[0_20px_45px_rgba(15,23,42,0.04)]">
+            <div key={index} className="rounded-[1.75rem] border border-sky-600/20 bg-white p-4 shadow-[0_20px_45px_rgba(15,23,42,0.04)]">
               <Skeleton className="h-48 w-full rounded-[1.25rem]" />
               <Skeleton className="mt-4 h-4 w-24" />
               <Skeleton className="mt-3 h-7 w-full" />
@@ -97,33 +97,51 @@ export function NewsSection() {
             {duplicatedNews.map((item, idx) => (
               <motion.article
                 key={`${item.id}-${idx}`}
-                className="w-[340px] sm:w-[380px] shrink-0 group overflow-hidden rounded-[1.75rem] border border-emerald-600/20 hover:border-emerald-500/40 bg-white shadow-[0_20px_45px_rgba(15,23,42,0.04)] transition-all duration-300"
-                whileHover={{ y: -6 }}
+                className="w-[340px] sm:w-[380px] shrink-0 group overflow-hidden rounded-[2rem] border border-sky-600/20 hover:border-sky-500/40 bg-white/95 backdrop-blur-sm shadow-[0_20px_45px_rgba(15,23,42,0.04)] hover:shadow-[0_30px_60px_rgba(14,165,233,0.09)] transition-all duration-300 flex flex-col justify-between"
+                whileHover={{ y: -8, scale: 1.02 }}
               >
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={item.imageUrl || 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200'}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
-                    <Newspaper className="h-3.5 w-3.5 text-emerald-600" />
-                    <span className="truncate max-w-[120px]">{item.author || 'Pemerintah Desa'}</span>
-                    <span className="text-slate-300">•</span>
-                    <span>{formatDisplayDate(item.updatedAt || item.createdAt || item.date)}</span>
+                <div>
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={item.imageUrl || 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200'}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <h3 className="mt-3 text-lg font-semibold text-slate-900 line-clamp-2 h-14 leading-6 group-hover:text-emerald-800 transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 line-clamp-3 h-18">
-                    {item.subtitle}
-                  </p>
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
+                      <Newspaper className="h-3.5 w-3.5 text-sky-600" />
+                      <span className="truncate max-w-[120px]">{item.author || 'Pemerintah Desa'}</span>
+                      <span className="text-slate-300">•</span>
+                      <span>{formatDisplayDate(item.updatedAt || item.createdAt || item.date)}</span>
+                    </div>
+                    <h3 className="mt-3 text-lg font-semibold text-slate-900 line-clamp-2 h-14 leading-6 group-hover:text-sky-800 transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600 line-clamp-2">
+                      {item.subtitle}
+                    </p>
+
+                    {/* Bullet list to emphasize the card */}
+                    <ul className="mt-4 space-y-1.5 border-t border-slate-100 pt-3 text-xs font-medium text-slate-700">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-sky-600 shrink-0" />
+                        <span>Informasi Resmi Pemdes</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-sky-600 shrink-0" />
+                        <span>Kabar Pembangunan Desa</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="px-6 pb-6 pt-0">
                   <Link
                     href={`/BeritaDesa/${item.id}`}
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700"
                   >
                     Baca berita
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -140,16 +158,16 @@ export function NewsSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="mt-16 rounded-[2rem] border border-emerald-600/20 bg-white p-6 shadow-[0_20px_45px_rgba(15,23,42,0.04)] lg:p-8"
+        className="mt-16 rounded-[2rem] border border-sky-600/20 bg-white p-6 shadow-[0_20px_45px_rgba(15,23,42,0.04)] lg:p-8"
       >
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-700">Video Profil Desa</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-700">Video Profil Desa</p>
             <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-              Video Profil Resmi Desa Pangawaren
+              Video Profil Resmi Desa Sidaurip
             </h3>
             <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
-              Tonton video profil desa untuk melihat layanan, potensi wilayah, dan visi pembangunan Desa Pangawaren.
+              Tonton video profil desa untuk melihat layanan, potensi wilayah, dan visi pembangunan Desa Sidaurip.
             </p>
           </div>
         </div>
@@ -157,7 +175,7 @@ export function NewsSection() {
           {youtubeEmbedUrl ? (
             <iframe
               src={youtubeEmbedUrl}
-              title="Video Profil Desa Pangawaren"
+              title="Video Profil Desa Sidaurip"
               className="h-full w-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -165,7 +183,7 @@ export function NewsSection() {
           ) : (
             <div className="flex h-full min-h-[320px] items-center justify-center bg-slate-950 text-center text-slate-200">
               <div className="space-y-3 px-6">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-600 text-white">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-sky-600 text-white">
                   <Video className="h-6 w-6" />
                 </div>
                 <p className="text-lg font-semibold">Video profil desa belum dikonfigurasi.</p>

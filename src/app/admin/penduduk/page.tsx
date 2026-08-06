@@ -8,9 +8,9 @@ export default function AdminPendudukPage() {
     <>
       <PageHeader
         title="Database Kependudukan"
-        description="Manajemen data penduduk Desa Pangawaren. Gunakan fitur pencarian untuk menemukan warga dengan cepat."
+        description="Manajemen data penduduk Desa Sidaurip. Gunakan fitur pencarian untuk menemukan warga dengan cepat."
       />
-      
+
       <ResidentList />
     </>
   );

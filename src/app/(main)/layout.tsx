@@ -45,13 +45,13 @@ const navItems = [
 
 function MobileHeader() {
   const { toggleSidebar, openMobile } = useSidebar();
-  
+
   return (
     <header className="md:hidden sticky top-0 z-40 w-full h-16 bg-primary flex items-center justify-between px-6 shadow-md text-white border-b border-white/10">
       <Logo />
-      <Button 
-        variant="ghost" 
-        size="icon" 
+      <Button
+        variant="ghost"
+        size="icon"
         onClick={toggleSidebar}
         className="text-white hover:bg-white/10"
       >
@@ -91,9 +91,9 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
             {navItems.map((item) => (
               <SidebarMenuItem key={item.href}>
-                <SidebarMenuButton 
-                  asChild 
-                  isActive={pathname === item.href} 
+                <SidebarMenuButton
+                  asChild
+                  isActive={pathname === item.href}
                   tooltip={item.label}
                   className="rounded-2xl h-12 transition-all data-[active=true]:bg-secondary data-[active=true]:text-primary-foreground"
                 >
@@ -109,17 +109,17 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         <SidebarFooter className="p-8">
           <div className="bg-white/5 rounded-3xl p-5 border border-white/10 space-y-4">
             <p className="text-[9px] text-white/40 font-black text-center uppercase tracking-widest leading-relaxed">
-              Pelayanan Mandiri Digital Pangawaren
+              Pelayanan Mandiri Digital Sidaurip
             </p>
             {user ? (
-              <Button 
+              <Button
                 onClick={handleLogout}
                 className="w-full justify-center bg-secondary text-primary-foreground rounded-2xl hover:bg-yellow-600 transition-all font-black shadow-lg shadow-secondary/20 uppercase tracking-widest"
               >
                 KELUAR
               </Button>
             ) : (
-              <Button 
+              <Button
                 asChild
                 className="w-full justify-center bg-secondary text-primary-foreground rounded-2xl hover:bg-yellow-600 transition-all font-black shadow-lg shadow-secondary/20 uppercase tracking-widest"
               >

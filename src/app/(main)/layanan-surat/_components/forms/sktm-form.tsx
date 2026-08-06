@@ -68,7 +68,7 @@ function GoogleFileUploader({ label, onFileSelect, fieldName, isRequired, disabl
       <FormControl>
         <div className={cn(
           "relative group border-2 border-dashed rounded-2xl p-4 transition-all hover:border-primary/50 bg-slate-50/50",
-          fileName && "border-emerald-200 bg-emerald-50/30",
+          fileName && "border-sky-200 bg-sky-50/30",
           disabled && "opacity-50 cursor-not-allowed"
         )}>
           <input
@@ -82,9 +82,9 @@ function GoogleFileUploader({ label, onFileSelect, fieldName, isRequired, disabl
             {fileName ? (
               <>
                 <div className="p-2 bg-white rounded-full shadow-sm">
-                  <FileCheck className="h-6 w-6 text-emerald-600 animate-in zoom-in" />
+                  <FileCheck className="h-6 w-6 text-sky-600 animate-in zoom-in" />
                 </div>
-                <p className="text-[10px] font-black text-emerald-700 line-clamp-1 uppercase px-2 tracking-tight">{fileName}</p>
+                <p className="text-[10px] font-black text-sky-700 line-clamp-1 uppercase px-2 tracking-tight">{fileName}</p>
               </>
             ) : (
               <>
@@ -199,7 +199,7 @@ export function SktmForm({ isAdmin = false }: { isAdmin?: boolean }) {
             form.setValue('applicantBirthDate', formatDbDateToForm(resident.dateOfBirth));
             form.setValue('applicantReligion', resident.religion);
             form.setValue('applicantJob', resident.occupation);
-            const fullAddress = `${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Karangpucung, Kab. Cilacap`.toUpperCase();
+            const fullAddress = `${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Gandrungmangu, Kab. Cilacap`.toUpperCase();
             form.setValue('applicantAddress', fullAddress);
             toast({ title: "Data Pemohon Ditemukan" });
           }
@@ -224,7 +224,7 @@ export function SktmForm({ isAdmin = false }: { isAdmin?: boolean }) {
             form.setValue('childBirthDate', formatDbDateToForm(resident.dateOfBirth));
             form.setValue('childReligion', resident.religion);
             form.setValue('childJob', resident.occupation);
-            const fullAddress = `${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Karangpucung, Kab. Cilacap`.toUpperCase();
+            const fullAddress = `${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Gandrungmangu, Kab. Cilacap`.toUpperCase();
             form.setValue('childAddress', fullAddress);
             toast({ title: "Data Anak Ditemukan" });
           }
@@ -297,7 +297,7 @@ export function SktmForm({ isAdmin = false }: { isAdmin?: boolean }) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
-        <div className="p-8 md:p-12 border-2 border-primary/10 rounded-[3rem] bg-emerald-50/30 space-y-8 shadow-sm">
+        <div className="p-8 md:p-12 border-2 border-primary/10 rounded-[3rem] bg-sky-50/30 space-y-8 shadow-sm">
           <FormField
             control={form.control}
             name="submissionType"
@@ -306,11 +306,11 @@ export function SktmForm({ isAdmin = false }: { isAdmin?: boolean }) {
                 <FormLabel className="text-lg font-black uppercase tracking-tight text-primary italic">Jenis Pengajuan</FormLabel>
                 <FormControl>
                   <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col sm:flex-row gap-6">
-                    <div className="flex items-center space-x-3 bg-white px-6 py-4 rounded-2xl border-2 border-emerald-100 shadow-sm has-[:checked]:border-primary transition-all">
+                    <div className="flex items-center space-x-3 bg-white px-6 py-4 rounded-2xl border-2 border-sky-100 shadow-sm has-[:checked]:border-primary transition-all">
                       <RadioGroupItem value="self" id="self" />
                       <Label htmlFor="self" className="font-bold text-slate-700 cursor-pointer">Yang Bersangkutan</Label>
                     </div>
-                    <div className="flex items-center space-x-3 bg-white px-6 py-4 rounded-2xl border-2 border-emerald-100 shadow-sm has-[:checked]:border-primary transition-all">
+                    <div className="flex items-center space-x-3 bg-white px-6 py-4 rounded-2xl border-2 border-sky-100 shadow-sm has-[:checked]:border-primary transition-all">
                       <RadioGroupItem value="child" id="child" />
                       <Label htmlFor="child" className="font-bold text-slate-700 cursor-pointer">Orang Tua / Wali (Anak)</Label>
                     </div>

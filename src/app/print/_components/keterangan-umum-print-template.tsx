@@ -8,8 +8,8 @@ export function KeteranganUmumPrintTemplate({ submission }: { submission: Letter
   return (
     <PrintLayout submission={submission}>
       <p className="mt-8 text-justify leading-relaxed">
-        Yang bertanda tangan di bawah ini Kepala Desa Pangawaren, Kecamatan
-        Karangpucung, Kabupaten Cilacap, menerangkan dengan sebenarnya bahwa:
+        Yang bertanda tangan di bawah ini Kepala Desa Sidaurip, Kecamatan
+        Gandrungmangu, Kabupaten Cilacap, menerangkan dengan sebenarnya bahwa:
       </p>
 
       <table className="mt-4 border-collapse w-full">
@@ -24,7 +24,7 @@ export function KeteranganUmumPrintTemplate({ submission }: { submission: Letter
       </table>
 
       <p className="mt-8 text-justify leading-relaxed">
-        Berdasarkan catatan yang ada di kantor kami, nama tersebut di atas adalah benar-benar warga Desa Pangawaren, Kecamatan Karangpucung, Kabupaten Cilacap.
+        Berdasarkan catatan yang ada di kantor kami, nama tersebut di atas adalah benar-benar warga Desa Sidaurip, Kecamatan Gandrungmangu, Kabupaten Cilacap.
       </p>
 
       <p className="mt-4 text-justify leading-relaxed">

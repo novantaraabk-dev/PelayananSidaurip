@@ -14,19 +14,19 @@ export function SkckPrintTemplate({ submission }: { submission: LetterSubmission
       <div className="flex justify-between text-center items-start text-sm">
         <div className="w-1/3">
           <p className="font-bold">CAMAT</p>
-          <p>Karangpucung</p>
+          <p>Gandrungmangu</p>
           <div className="h-20"></div>
           <div className="border-b-2 border-black w-[80%] mx-auto"></div>
         </div>
         <div className="w-1/3">
           <p className="font-bold">DAN RAMIL 10</p>
-          <p>Karangpucung</p>
+          <p>Gandrungmangu</p>
           <div className="h-20"></div>
           <div className="border-b-2 border-black w-[80%] mx-auto"></div>
         </div>
         <div className="w-1/3">
           <p className="font-bold">KAPOLSEK</p>
-          <p>Karangpucung</p>
+          <p>Gandrungmangu</p>
           <div className="h-20"></div>
           <div className="border-b-2 border-black w-[80%] mx-auto"></div>
         </div>
@@ -41,8 +41,8 @@ export function SkckPrintTemplate({ submission }: { submission: LetterSubmission
       additionalFooter={additionalFooter}
     >
       <p className="mt-8 text-justify leading-relaxed">
-        Yang bertanda tangan di bawah ini Kepala Desa Pangawaren, Kecamatan
-        Karangpucung, Kabupaten Cilacap, menerangkan dengan sebenar-benarnya bahwa:
+        Yang bertanda tangan di bawah ini Kepala Desa Sidaurip, Kecamatan
+        Gandrungmangu, Kabupaten Cilacap, menerangkan dengan sebenar-benarnya bahwa:
       </p>
 
       <table className="mt-4 border-collapse w-full">

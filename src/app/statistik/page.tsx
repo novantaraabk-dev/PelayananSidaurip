@@ -43,7 +43,7 @@ export default function StatistikPublikPage() {
         <div className="container mx-auto px-4 text-center">
           <Logo />
           <p className="mt-8 text-[10px] font-bold uppercase tracking-widest">
-            © 2026 Pemerintah Desa Pangawaren • Data Terbuka & Transparansi Publik
+            © 2026 Pemerintah Desa Sidaurip • Data Terbuka & Transparansi Publik
           </p>
         </div>
       </footer>

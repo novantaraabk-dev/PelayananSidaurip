@@ -99,7 +99,7 @@ export function DesaAntiKorupsiDriveForm() {
     <Card className="border border-slate-200 rounded-3xl overflow-hidden shadow-sm bg-white col-span-2">
       <CardHeader className="bg-slate-50/50 border-b border-slate-100 p-6">
         <CardTitle className="flex items-center gap-2 text-slate-800">
-          <FolderGit className="h-5 w-5 text-emerald-600" />
+          <FolderGit className="h-5 w-5 text-sky-600" />
           Folder Google Drive per Sub-Menu Desa Anti Korupsi
         </CardTitle>
         <CardDescription className="text-xs">
@@ -117,7 +117,7 @@ export function DesaAntiKorupsiDriveForm() {
               >
                 <AccordionTrigger className="hover:no-underline py-4 text-left font-bold text-slate-800 text-xs md:text-sm">
                   <div className="flex items-center gap-2">
-                    <span className="bg-emerald-100 text-emerald-800 rounded px-2 py-0.5 text-[10px] font-bold">
+                    <span className="bg-sky-100 text-sky-800 rounded px-2 py-0.5 text-[10px] font-bold">
                       PILAR {pilar.id}
                     </span>
                     <span>{pilar.title}</span>
@@ -127,7 +127,7 @@ export function DesaAntiKorupsiDriveForm() {
                   {pilar.subMenus.map((subMenu) => (
                     <div key={subMenu.id} className="space-y-3 p-4 rounded-2xl border border-slate-200/50 bg-slate-50/50">
                       <div className="flex items-start gap-2 border-b border-slate-200/80 pb-2">
-                        <span className="font-mono text-emerald-600 font-bold bg-emerald-100/80 px-1.5 py-0.5 rounded text-[10px] shrink-0 mt-0.5">
+                        <span className="font-mono text-sky-600 font-bold bg-sky-100/80 px-1.5 py-0.5 rounded text-[10px] shrink-0 mt-0.5">
                           {subMenu.id}
                         </span>
                         <h4 className="text-xs font-bold text-slate-800 leading-relaxed">
@@ -149,7 +149,7 @@ export function DesaAntiKorupsiDriveForm() {
                               value={folderMappings[item.id] || ''}
                               onChange={(e) => handleInputChange(item.id, e.target.value)}
                               disabled={isSaving}
-                              className="rounded-xl border-slate-200 bg-white focus-visible:ring-emerald-500 text-xs h-9"
+                              className="rounded-xl border-slate-200 bg-white focus-visible:ring-sky-500 text-xs h-9"
                             />
                           </div>
                         ))}
@@ -165,7 +165,7 @@ export function DesaAntiKorupsiDriveForm() {
             <Button 
               type="submit" 
               disabled={isSaving}
-              className="rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold uppercase tracking-wider text-xs px-6 h-10 shadow-lg shadow-emerald-600/10"
+              className="rounded-full bg-sky-600 hover:bg-sky-700 text-white font-bold uppercase tracking-wider text-xs px-6 h-10 shadow-lg shadow-sky-600/10"
             >
               {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
               Simpan Folder Sub-Menu

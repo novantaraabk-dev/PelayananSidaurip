@@ -14,14 +14,14 @@ export default function PengaduanPage() {
         <div className="container mx-auto px-4 h-20 flex items-center justify-between">
           <Logo />
           <div className="flex items-center gap-3">
-             <Link href="/">
-                <Button variant="ghost" className="font-bold gap-2 text-primary hover:bg-slate-100 rounded-xl">
+            <Link href="/">
+              <Button variant="ghost" className="font-bold gap-2 text-primary hover:bg-slate-100 rounded-xl">
                 <ArrowLeft className="h-4 w-4" />
                 <span className="hidden sm:inline">Beranda</span>
-                </Button>
+              </Button>
             </Link>
             <Link href="/layanan-surat/">
-                <Button className="bg-secondary hover:bg-yellow-600 text-primary-foreground font-black px-6 rounded-xl shadow-lg shadow-secondary/20 h-10">Portal Layanan</Button>
+              <Button className="bg-secondary hover:bg-yellow-600 text-primary-foreground font-black px-6 rounded-xl shadow-lg shadow-secondary/20 h-10">Portal Layanan</Button>
             </Link>
           </div>
         </div>
@@ -39,7 +39,7 @@ export default function PengaduanPage() {
                 Pengaduan Warga
               </h1>
               <p className="text-sm text-slate-500 font-medium mt-1">
-                Sampaikan keluhan dan masukan Anda untuk kemajuan Desa Pangawaren.
+                Sampaikan keluhan dan masukan Anda untuk kemajuan Desa Sidaurip.
               </p>
             </div>
           </div>

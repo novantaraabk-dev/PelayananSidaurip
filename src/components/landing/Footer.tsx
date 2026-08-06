@@ -48,7 +48,7 @@ export function Footer() {
           <div className="space-y-5">
             <Logo />
             <p className="max-w-sm text-sm leading-7 text-slate-400">
-              Portal resmi layanan masyarakat Desa Pangawaren yang menghubungkan warga dengan informasi, administrasi, dan pelayanan publik secara digital.
+              Portal resmi layanan masyarakat Desa Sidaurip yang menghubungkan warga dengan informasi, administrasi, dan pelayanan publik secara digital.
             </p>
           </div>
 
@@ -65,28 +65,52 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-white">Kontak</h3>
             <ul className="mt-5 space-y-4 text-sm text-slate-400">
-              <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span>Desa Pangawaren, Kecamatan Karangpucung, Cilacap</span></li>
-              <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span>0851-1131-8412</span></li>
-              <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span>pemdespangawaren@gmail.com</span></li>
-              <li className="flex gap-3"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span>Senin - Jumat, 08.00 - 16.00 WIB</span></li>
+              <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sky-400" /><span>Jl. Perintis No.144, Sidaurip, Kec. Sidaurip, Cilacap</span></li>
+              <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-sky-400" /><span>0851-3221-7144</span></li>
+              <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-sky-400" /><span>sidaurip818@gmail.com</span></li>
+              <li className="flex gap-3"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-sky-400" /><span>Senin - Jumat, 08.00 - 16.00 WIB</span></li>
             </ul>
           </div>
 
           <div className="flex flex-col items-start gap-4 lg:items-end lg:text-right">
             <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-white">Media Sosial</h3>
             <div className="flex gap-3">
-              <a href="#" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-colors hover:border-emerald-400 hover:text-white" aria-label="Facebook Desa Pangawaren">
+              <a
+                href="https://www.facebook.com/DesaSidaurip.Gandrungmangu/?locale=id_ID"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-blue-500 hover:bg-blue-600 hover:text-white hover:scale-110 shadow-sm"
+                aria-label="Facebook Desa Sidaurip"
+              >
                 <Facebook className="h-4 w-4" />
               </a>
-              <a href="https://www.instagram.com/pemdespangawaren/" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-colors hover:border-emerald-400 hover:text-white" aria-label="Instagram Desa Pangawaren">
+              <a
+                href="https://www.instagram.com/pemdes_sidaurip_gdm/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-pink-500 hover:bg-gradient-to-tr hover:from-amber-500 hover:via-rose-500 hover:to-purple-600 hover:text-white hover:scale-110 shadow-sm"
+                aria-label="Instagram Desa Sidaurip"
+              >
                 <Instagram className="h-4 w-4" />
               </a>
-              <a href="https://www.tiktok.com/@pemdes.pangawaren" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-colors hover:border-emerald-400 hover:text-white" aria-label="TikTok Desa Pangawaren">
+              <a
+                href="https://www.tiktok.com/@mascamat.gandrungmangu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-slate-300 hover:bg-slate-800 hover:text-white hover:scale-110 shadow-sm"
+                aria-label="TikTok Desa Sidaurip"
+              >
                 <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.82.94 1.93 1.63 3.16 2.01v3.74c-1.39-.02-2.77-.42-3.95-1.16-.72-.45-1.36-1.02-1.87-1.7v7.66c0 1.25-.26 2.47-.79 3.6-1.06 2.22-3.15 3.8-5.6 4.21-1.35.23-2.74.15-4.05-.24-2.26-.67-4.14-2.31-5.11-4.47-.6-1.34-.84-2.82-.7-4.29.28-2.9 2.06-5.46 4.81-6.42 1.27-.45 2.64-.5 3.94-.16v3.83c-.8-.28-1.68-.28-2.47.01-1.33.49-2.28 1.77-2.39 3.18-.12 1.63.89 3.16 2.46 3.51.68.15 1.39.11 2.05-.12.98-.35 1.72-1.19 1.92-2.2.06-.31.08-.63.08-.94V0h.02z"/>
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.82.94 1.93 1.63 3.16 2.01v3.74c-1.39-.02-2.77-.42-3.95-1.16-.72-.45-1.36-1.02-1.87-1.7v7.66c0 1.25-.26 2.47-.79 3.6-1.06 2.22-3.15 3.8-5.6 4.21-1.35.23-2.74.15-4.05-.24-2.26-.67-4.14-2.31-5.11-4.47-.6-1.34-.84-2.82-.7-4.29.28-2.9 2.06-5.46 4.81-6.42 1.27-.45 2.64-.5 3.94-.16v3.83c-.8-.28-1.68-.28-2.47.01-1.33.49-2.28 1.77-2.39 3.18-.12 1.63.89 3.16 2.46 3.51.68.15 1.39.11 2.05-.12.98-.35 1.72-1.19 1.92-2.2.06-.31.08-.63.08-.94V0h.02z" />
                 </svg>
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-colors hover:border-emerald-400 hover:text-white" aria-label="YouTube Desa Pangawaren">
+              <a
+                href="https://www.youtube.com/@Mascamat.Gandrungmangu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-red-500 hover:bg-red-600 hover:text-white hover:scale-110 shadow-sm"
+                aria-label="YouTube Desa Sidaurip"
+              >
                 <Youtube className="h-4 w-4" />
               </a>
             </div>
@@ -95,7 +119,7 @@ export function Footer() {
 
         <div className="mt-12 border-t border-white/10 pt-6 flex flex-col-reverse gap-6 md:flex-row md:items-center md:justify-between">
           <div className="text-center text-sm text-slate-500 md:text-left">
-            © 2026 Pemerintah Desa Pangawaren. Semua hak cipta dilindungi.
+            © 2026 Pemerintah Desa Sidaurip. Semua hak cipta dilindungi.
           </div>
           {activeLogo.length > 0 && (
             <div className="flex flex-wrap items-center justify-center gap-6 md:justify-end">

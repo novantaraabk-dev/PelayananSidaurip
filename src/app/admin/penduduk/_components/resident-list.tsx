@@ -350,7 +350,7 @@ export function ResidentList() {
               Generate Data Testing
             </Button>
 
-            <Button variant="outline" size="sm" onClick={handleRecalculate} disabled={isRecalculating} className="border-emerald-600 text-emerald-700 hover:bg-emerald-50">
+            <Button variant="outline" size="sm" onClick={handleRecalculate} disabled={isRecalculating} className="border-sky-600 text-sky-700 hover:bg-sky-50">
               {isRecalculating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <BarChart3 className="mr-2 h-4 w-4" />}
               Update Statistik Grafik
             </Button>
@@ -402,7 +402,7 @@ export function ResidentList() {
                     <TableCell className="text-[10px] font-semibold">{resident.relationshipToHeadOfFamily || '-'}</TableCell>
                     <TableCell className="text-[10px] min-w-[300px]">
                       <p className="leading-tight truncate">
-                        {`${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Karangpucung, Kab. Cilacap`}
+                        {`${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Gandrungmangu, Kab. Cilacap`}
                       </p>
                     </TableCell>
                     <TableCell className="text-right">

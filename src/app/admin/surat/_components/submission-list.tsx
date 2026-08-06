@@ -291,7 +291,7 @@ export function SubmissionList() {
                           <span>Lihat Detail</span>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator className="opacity-50" />
-                        <DropdownMenuItem onClick={() => handleStatusChange(submission.id, 'approved')} className="rounded-xl font-bold cursor-pointer text-emerald-600 focus:text-emerald-700 focus:bg-emerald-50"><CheckCircle className="mr-2 h-4 w-4" /><span>Setujui</span></DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleStatusChange(submission.id, 'approved')} className="rounded-xl font-bold cursor-pointer text-sky-600 focus:text-sky-700 focus:bg-sky-50"><CheckCircle className="mr-2 h-4 w-4" /><span>Setujui</span></DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleStatusChange(submission.id, 'rejected')} className="rounded-xl font-bold cursor-pointer text-red-600 focus:text-red-700 focus:bg-red-50"><XCircle className="mr-2 h-4 w-4" /><span>Tolak</span></DropdownMenuItem>
 
                         <DropdownMenuItem
@@ -348,10 +348,10 @@ export function SubmissionList() {
             {selectedSubmission && (
               <>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-5 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center gap-4">
-                    <div className="p-3 bg-white rounded-xl shadow-sm"><Phone className="h-5 w-5 text-emerald-600" /></div>
+                  <div className="p-5 rounded-2xl bg-sky-50 border border-sky-100 flex items-center gap-4">
+                    <div className="p-3 bg-white rounded-xl shadow-sm"><Phone className="h-5 w-5 text-sky-600" /></div>
                     <div>
-                      <p className="text-[10px] text-emerald-600/70 font-black uppercase tracking-widest">WhatsApp</p>
+                      <p className="text-[10px] text-sky-600/70 font-black uppercase tracking-widest">WhatsApp</p>
                       <p className="text-sm font-black">{selectedSubmission.phoneNumber || 'Tidak ada'}</p>
                     </div>
                   </div>
@@ -451,7 +451,7 @@ export function SubmissionList() {
                 <RadioGroupItem value="kades" id="signer-kades" />
                 <Label htmlFor="signer-kades" className="flex-1 cursor-pointer space-y-1">
                   <p className="font-black uppercase tracking-tight text-slate-800">Kepala Desa</p>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Suhud</p>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">TASIMIN</p>
                 </Label>
               </div>
 
@@ -459,7 +459,7 @@ export function SubmissionList() {
                 <RadioGroupItem value="sekdes" id="signer-sekdes" />
                 <Label htmlFor="signer-sekdes" className="flex-1 cursor-pointer space-y-1">
                   <p className="font-black uppercase tracking-tight text-slate-800">Sekretaris Desa</p>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">BAMBANG, S.PD</p>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">SOFA BURHANI</p>
                 </Label>
               </div>
             </RadioGroup>

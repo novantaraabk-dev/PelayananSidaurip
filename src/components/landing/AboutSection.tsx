@@ -16,7 +16,7 @@ export function AboutSection() {
   }, [firestore]);
 
   const { data: aboutData } = useDoc<{ description?: string; imageUrl?: string }>(aboutRef);
-  const description = aboutData?.description || 'Desa Pangawaren merupakan wilayah yang berkembang dengan semangat gotong royong, pelayanan publik yang responsif, dan komitmen menjaga kesejahteraan masyarakat melalui tata kelola pemerintahan yang modern dan terbuka.';
+  const description = aboutData?.description || 'Desa Sidaurip merupakan wilayah yang berkembang dengan semangat gotong royong, pelayanan publik yang responsif, dan komitmen menjaga kesejahteraan masyarakat melalui tata kelola pemerintahan yang modern dan terbuka.';
   const imageUrl = aboutData?.imageUrl || 'https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200';
 
   return (
@@ -27,16 +27,17 @@ export function AboutSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.4 }}
-          className="relative"
+          whileHover={{ y: -6 }}
+          className="relative group"
         >
-          <div className="absolute inset-0 -translate-y-4 rotate-2 rounded-[2rem] bg-emerald-100/70" />
-          <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-3 shadow-[0_25px_70px_rgba(15,23,42,0.08)]">
+          <div className="absolute inset-0 -translate-y-4 rotate-2 rounded-[2.5rem] bg-sky-200/50 transition-transform group-hover:rotate-1" />
+          <div className="relative overflow-hidden rounded-[2.5rem] border border-sky-600/20 bg-white p-3 shadow-[0_25px_70px_rgba(15,23,42,0.08)] group-hover:shadow-[0_30px_70px_rgba(14,165,233,0.12)] transition-all duration-500">
             <Image
               src={imageUrl}
-              alt="Kantor Desa Pangawaren"
+              alt="Kantor Desa Sidaurip"
               width={900}
               height={700}
-              className="h-[420px] w-full rounded-[1.5rem] object-cover"
+              className="h-[420px] w-full rounded-[2rem] object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
         </motion.div>
@@ -48,12 +49,12 @@ export function AboutSection() {
           transition={{ duration: 0.4 }}
           className="space-y-6"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700">
+          <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-sky-700">
             <Landmark className="h-4 w-4" />
             Tentang Desa
           </div>
           <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-            Tentang Desa Pangawaren
+            Tentang Desa Sidaurip
           </h2>
           <div className="space-y-4 text-lg leading-8 text-slate-600">
             <p>{description}</p>
@@ -63,7 +64,7 @@ export function AboutSection() {
           </div>
           <div className="flex flex-wrap gap-3">
             <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700">
-              <BadgeCheck className="h-4 w-4 text-emerald-600" />
+              <BadgeCheck className="h-4 w-4 text-sky-600" />
               Layanan resmi desa
             </div>
             <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700">
@@ -72,7 +73,7 @@ export function AboutSection() {
             </div>
           </div>
           <Link href="/profil-desa/" aria-label="Lihat profil desa lengkap">
-            <Button className="h-11 rounded-full bg-emerald-700 px-6 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-800">
+            <Button className="h-11 rounded-full bg-sky-700 px-6 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-sky-800">
               Selengkapnya
               <ArrowRight className="h-4 w-4" />
             </Button>

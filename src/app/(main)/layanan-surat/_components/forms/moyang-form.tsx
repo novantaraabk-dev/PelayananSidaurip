@@ -67,7 +67,7 @@ function GoogleFileUploader({ label, onFileSelect, fieldName, isRequired, disabl
         <div className="relative">
           <Input type="file" onChange={handleFileChange} disabled={disabled || !!fileName} className="pr-10" accept="image/jpeg,image/png,application/pdf" />
           <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4">
-            {fileName ? <FileCheck className="text-green-600" /> : <Paperclip className="text-muted-foreground" />}
+            {fileName ? <FileCheck className="text-sky-600" /> : <Paperclip className="text-muted-foreground" />}
           </div>
         </div>
       </FormControl>
@@ -139,7 +139,7 @@ export function MoyangForm({ isAdmin = false }: { isAdmin?: boolean }) {
           form.setValue(`${prefix}.religion`, resident.religion);
           form.setValue(`${prefix}.job`, resident.occupation);
 
-          const fullAddress = `${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Karangpucung, Kab. Cilacap`.toUpperCase();
+          const fullAddress = `${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Gandrungmangu, Kab. Cilacap`.toUpperCase();
           form.setValue(`${prefix}.address`, fullAddress);
 
           toast({ title: "Data Ditemukan", description: `Data ${prefix === 'moyang' ? 'Orang Tua' : 'Anak'} telah diisi otomatis.` });

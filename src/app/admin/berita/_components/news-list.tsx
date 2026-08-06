@@ -101,7 +101,7 @@ export function NewsList() {
                         alt={item.title}
                       />
                       {photoCount > 1 && (
-                        <Badge className="absolute -top-2 -right-2 bg-emerald-600 text-white text-[8px] font-bold px-1 py-0 h-4 min-w-4 flex items-center justify-center rounded-full shadow">
+                        <Badge className="absolute -top-2 -right-2 bg-sky-600 text-white text-[8px] font-bold px-1 py-0 h-4 min-w-4 flex items-center justify-center rounded-full shadow">
                           {photoCount}
                         </Badge>
                       )}
@@ -119,7 +119,7 @@ export function NewsList() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-8 w-8 text-slate-500 hover:text-emerald-600"
+                      className="h-8 w-8 text-slate-500 hover:text-sky-600"
                       onClick={() => handleSetHeadline(item.id)}
                       aria-label={item.isHeadline ? 'Headline saat ini' : 'Jadikan headline'}
                     >

@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .swirl { fill: #94a3b8; fill-opacity: 0.2; }
+      .swirl-accent { fill: #cbd5e1; fill-opacity: 0.3; }
+    </style>
+  </defs>
+
+  <rect width="300" height="300" class="bg" />
+
+  <g id="feather-pattern">
+    <!-- Center Node (150, 150) -->
+    <g transform="translate(150, 150)">
+      <!-- Swirl Fan 1 (Top-Right) -->
+      <path class="swirl" d="M0,0 C25,-20 65,-28 105,-15 C70,-8 40,-8 0,0 Z" />
+      <path class="swirl" d="M0,0 C32,-8 75,2 118,22 C78,14 44,6 0,0 Z" />
+      <path class="swirl" d="M0,0 C36,10 78,30 110,58 C74,42 45,22 0,0 Z" />
+      <path class="swirl" d="M0,0 C34,26 70,62 94,98 C66,70 42,44 0,0 Z" />
+      <path class="swirl" d="M0,0 C26,38 52,80 62,120 C46,84 30,54 0,0 Z" />
+
+      <!-- Swirl Fan 2 (Bottom-Left) -->
+      <path class="swirl" d="M0,0 C-25,20 -65,28 -105,15 C-70,8 -40,8 0,0 Z" />
+      <path class="swirl" d="M0,0 C-32,8 -75,-2 -118,-22 C-78,-14 -44,-6 0,0 Z" />
+      <path class="swirl" d="M0,0 C-36,-10 -78,-30 -110,-58 C-74,-42 -45,-22 0,0 Z" />
+      <path class="swirl" d="M0,0 C-34,-26 -70,-62 -94,-98 C-66,-70 -42,-44 0,0 Z" />
+      <path class="swirl" d="M0,0 C-26,-38 -52,-80 -62,-120 C-46,-84 -30,-54 0,0 Z" />
+
+      <!-- Interlocking Arcs -->
+      <path class="swirl-accent" d="M0,0 C-18,-30 -50,-55 -85,-75 C-55,-48 -30,-28 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C-10,-42 -30,-80 -45,-115 C-28,-78 -14,-46 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C10,-42 25,-82 32,-120 C18,-82 8,-48 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C18,30 50,55 85,75 C55,48 30,28 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C10,42 30,80 45,115 C28,78 14,46 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C-10,42 -25,82 -32,120 C-18,82 -8,48 0,0 Z" />
+    </g>
+
+    <!-- Corner Tile Nodes (0,0), (300,0), (0,300), (300,300) for seamless repeating -->
+    <g transform="translate(0, 0)">
+      <path class="swirl" d="M0,0 C25,-20 65,-28 105,-15 C70,-8 40,-8 0,0 Z" />
+      <path class="swirl" d="M0,0 C32,-8 75,2 118,22 C78,14 44,6 0,0 Z" />
+      <path class="swirl" d="M0,0 C36,10 78,30 110,58 C74,42 45,22 0,0 Z" />
+      <path class="swirl" d="M0,0 C34,26 70,62 94,98 C66,70 42,44 0,0 Z" />
+      <path class="swirl" d="M0,0 C26,38 52,80 62,120 C46,84 30,54 0,0 Z" />
+
+      <path class="swirl" d="M0,0 C-25,20 -65,28 -105,15 C-70,8 -40,8 0,0 Z" />
+      <path class="swirl" d="M0,0 C-32,8 -75,-2 -118,-22 C-78,-14 -44,-6 0,0 Z" />
+      <path class="swirl" d="M0,0 C-36,-10 -78,-30 -110,-58 C-74,-42 -45,-22 0,0 Z" />
+      <path class="swirl" d="M0,0 C-34,-26 -70,-62 -94,-98 C-66,-70 -42,-44 0,0 Z" />
+      <path class="swirl" d="M0,0 C-26,-38 -52,-80 -62,-120 C-46,-84 -30,-54 0,0 Z" />
+
+      <path class="swirl-accent" d="M0,0 C-18,-30 -50,-55 -85,-75 C-55,-48 -30,-28 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C-10,-42 -30,-80 -45,-115 C-28,-78 -14,-46 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C10,-42 25,-82 32,-120 C18,-82 8,-48 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C18,30 50,55 85,75 C55,48 30,28 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C10,42 30,80 45,115 C28,78 14,46 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C-10,42 -25,82 -32,120 C-18,82 -8,48 0,0 Z" />
+    </g>
+
+    <g transform="translate(300, 0)">
+      <path class="swirl" d="M0,0 C25,-20 65,-28 105,-15 C70,-8 40,-8 0,0 Z" />
+      <path class="swirl" d="M0,0 C32,-8 75,2 118,22 C78,14 44,6 0,0 Z" />
+      <path class="swirl" d="M0,0 C36,10 78,30 110,58 C74,42 45,22 0,0 Z" />
+      <path class="swirl" d="M0,0 C34,26 70,62 94,98 C66,70 42,44 0,0 Z" />
+      <path class="swirl" d="M0,0 C26,38 52,80 62,120 C46,84 30,54 0,0 Z" />
+
+      <path class="swirl" d="M0,0 C-25,20 -65,28 -105,15 C-70,8 -40,8 0,0 Z" />
+      <path class="swirl" d="M0,0 C-32,8 -75,-2 -118,-22 C-78,-14 -44,-6 0,0 Z" />
+      <path class="swirl" d="M0,0 C-36,-10 -78,-30 -110,-58 C-74,-42 -45,-22 0,0 Z" />
+      <path class="swirl" d="M0,0 C-34,-26 -70,-62 -94,-98 C-66,-70 -42,-44 0,0 Z" />
+      <path class="swirl" d="M0,0 C-26,-38 -52,-80 -62,-120 C-46,-84 -30,-54 0,0 Z" />
+
+      <path class="swirl-accent" d="M0,0 C-18,-30 -50,-55 -85,-75 C-55,-48 -30,-28 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C-10,-42 -30,-80 -45,-115 C-28,-78 -14,-46 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C10,-42 25,-82 32,-120 C18,-82 8,-48 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C18,30 50,55 85,75 C55,48 30,28 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C10,42 30,80 45,115 C28,78 14,46 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C-10,42 -25,82 -32,120 C-18,82 -8,48 0,0 Z" />
+    </g>
+
+    <g transform="translate(0, 300)">
+      <path class="swirl" d="M0,0 C25,-20 65,-28 105,-15 C70,-8 40,-8 0,0 Z" />
+      <path class="swirl" d="M0,0 C32,-8 75,2 118,22 C78,14 44,6 0,0 Z" />
+      <path class="swirl" d="M0,0 C36,10 78,30 110,58 C74,42 45,22 0,0 Z" />
+      <path class="swirl" d="M0,0 C34,26 70,62 94,98 C66,70 42,44 0,0 Z" />
+      <path class="swirl" d="M0,0 C26,38 52,80 62,120 C46,84 30,54 0,0 Z" />
+
+      <path class="swirl" d="M0,0 C-25,20 -65,28 -105,15 C-70,8 -40,8 0,0 Z" />
+      <path class="swirl" d="M0,0 C-32,8 -75,-2 -118,-22 C-78,-14 -44,-6 0,0 Z" />
+      <path class="swirl" d="M0,0 C-36,-10 -78,-30 -110,-58 C-74,-42 -45,-22 0,0 Z" />
+      <path class="swirl" d="M0,0 C-34,-26 -70,-62 -94,-98 C-66,-70 -42,-44 0,0 Z" />
+      <path class="swirl" d="M0,0 C-26,-38 -52,-80 -62,-120 C-46,-84 -30,-54 0,0 Z" />
+
+      <path class="swirl-accent" d="M0,0 C-18,-30 -50,-55 -85,-75 C-55,-48 -30,-28 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C-10,-42 -30,-80 -45,-115 C-28,-78 -14,-46 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C10,-42 25,-82 32,-120 C18,-82 8,-48 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C18,30 50,55 85,75 C55,48 30,28 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C10,42 30,80 45,115 C28,78 14,46 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C-10,42 -25,82 -32,120 C-18,82 -8,48 0,0 Z" />
+    </g>
+
+    <g transform="translate(300, 300)">
+      <path class="swirl" d="M0,0 C25,-20 65,-28 105,-15 C70,-8 40,-8 0,0 Z" />
+      <path class="swirl" d="M0,0 C32,-8 75,2 118,22 C78,14 44,6 0,0 Z" />
+      <path class="swirl" d="M0,0 C36,10 78,30 110,58 C74,42 45,22 0,0 Z" />
+      <path class="swirl" d="M0,0 C34,26 70,62 94,98 C66,70 42,44 0,0 Z" />
+      <path class="swirl" d="M0,0 C26,38 52,80 62,120 C46,84 30,54 0,0 Z" />
+
+      <path class="swirl" d="M0,0 C-25,20 -65,28 -105,15 C-70,8 -40,8 0,0 Z" />
+      <path class="swirl" d="M0,0 C-32,8 -75,-2 -118,-22 C-78,-14 -44,-6 0,0 Z" />
+      <path class="swirl" d="M0,0 C-36,-10 -78,-30 -110,-58 C-74,-42 -45,-22 0,0 Z" />
+      <path class="swirl" d="M0,0 C-34,-26 -70,-62 -94,-98 C-66,-70 -42,-44 0,0 Z" />
+      <path class="swirl" d="M0,0 C-26,-38 -52,-80 -62,-120 C-46,-84 -30,-54 0,0 Z" />
+
+      <path class="swirl-accent" d="M0,0 C-18,-30 -50,-55 -85,-75 C-55,-48 -30,-28 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C-10,-42 -30,-80 -45,-115 C-28,-78 -14,-46 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C10,-42 25,-82 32,-120 C18,-82 8,-48 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C18,30 50,55 85,75 C55,48 30,28 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C10,42 30,80 45,115 C28,78 14,46 0,0 Z" />
+      <path class="swirl-accent" d="M0,0 C-10,42 -25,82 -32,120 C-18,82 -8,48 0,0 Z" />
+    </g>
+  </g>
+</svg>

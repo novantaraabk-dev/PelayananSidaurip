@@ -398,13 +398,13 @@ export default function AdminTataKelolaDesa() {
                             <td className="px-4 py-3 text-slate-600">{item.kodeRekening}</td>
                             <td className="px-4 py-3 text-slate-600">{item.kegiatan}</td>
                             <td className="px-4 py-3 text-right">{item.volume}</td>
-                            <td className="px-4 py-3 text-right text-emerald-600 font-bold">Rp {item.nominal.toLocaleString('id-ID')}</td>
+                            <td className="px-4 py-3 text-right text-sky-600 font-bold">Rp {item.nominal.toLocaleString('id-ID')}</td>
                             <td className="px-4 py-3 text-slate-600">{item.sumberAnggaran}</td>
                           </tr>
                         ))}
-                        <tr className="bg-emerald-50 font-bold">
+                        <tr className="bg-sky-50 font-bold">
                           <td colSpan={4} className="px-4 py-3 text-right">Total Realisasi:</td>
-                          <td className="px-4 py-3 text-right text-emerald-600">Rp {currentRealisasi.totalRealisasi.toLocaleString('id-ID')}</td>
+                          <td className="px-4 py-3 text-right text-sky-600">Rp {currentRealisasi.totalRealisasi.toLocaleString('id-ID')}</td>
                           <td></td>
                         </tr>
                       </tbody>

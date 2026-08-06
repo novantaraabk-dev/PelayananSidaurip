@@ -103,18 +103,18 @@ export default function KenaliKamiPage() {
 
       <main className="container mx-auto px-4 py-12 md:py-16">
         <div className="max-w-4xl mx-auto text-center mb-12 space-y-4">
-           <h1 className="text-4xl md:text-5xl font-display font-semibold text-slate-900 uppercase tracking-tighter">
-             Pemerintahan <span className="text-secondary italic">Desa</span>
-           </h1>
-           <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.3em] font-sans">Mengenal Struktur Organisasi Desa Pangawaren</p>
+          <h1 className="text-4xl md:text-5xl font-display font-semibold text-slate-900 uppercase tracking-tighter">
+            Pemerintahan <span className="text-secondary italic">Desa</span>
+          </h1>
+          <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.3em] font-sans">Mengenal Struktur Organisasi Desa Sidaurip</p>
         </div>
 
         <Tabs defaultValue="perangkat" className="w-full">
           <div className="flex justify-center mb-12">
             <TabsList className="bg-slate-200/50 p-1.5 rounded-2xl h-auto flex flex-wrap justify-center border">
               {categories.map(cat => (
-                <TabsTrigger 
-                  key={cat.id} 
+                <TabsTrigger
+                  key={cat.id}
                   value={cat.id}
                   className="rounded-xl px-8 py-3 font-black uppercase text-[10px] tracking-widest data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg transition-all"
                 >
@@ -127,7 +127,7 @@ export default function KenaliKamiPage() {
 
           <TabsContent value="perangkat">
             {isLoading ? (
-               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {Array.from({ length: 8 }).map((_, i) => <Skeleton key={i} className="aspect-[4/5] rounded-[2.5rem]" />)}
               </div>
             ) : (
@@ -155,19 +155,19 @@ export default function KenaliKamiPage() {
 
           <TabsContent value="rtrw">
             {isLoading ? (
-               <div className="space-y-12">
-                  {Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-64 w-full rounded-3xl" />)}
-               </div>
+              <div className="space-y-12">
+                {Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-64 w-full rounded-3xl" />)}
+              </div>
             ) : (
               <div className="space-y-20">
                 {processedData.rtrwGroups.map((group, i) => (
                   <div key={i} className="space-y-8">
                     <div className="flex items-center gap-4">
-                       <div className="h-px flex-1 bg-slate-200" />
-                       <h3 className="font-black text-xs uppercase tracking-[0.4em] text-slate-400 bg-white px-6 py-2 rounded-full border">
-                         {group.rwLabel}
-                       </h3>
-                       <div className="h-px flex-1 bg-slate-200" />
+                      <div className="h-px flex-1 bg-slate-200" />
+                      <h3 className="font-black text-xs uppercase tracking-[0.4em] text-slate-400 bg-white px-6 py-2 rounded-full border">
+                        {group.rwLabel}
+                      </h3>
+                      <div className="h-px flex-1 bg-slate-200" />
                     </div>
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
                       {group.members.map(official => (
@@ -186,7 +186,7 @@ export default function KenaliKamiPage() {
         <div className="container mx-auto px-4 text-center">
           <Logo />
           <p className="mt-8 text-[10px] font-bold uppercase tracking-widest">
-            © 2026 Pemerintah Desa Pangawaren • Website Resmi Pemerintahan Desa
+            © 2026 Pemerintah Desa Sidaurip • Website Resmi Pemerintahan Desa
           </p>
         </div>
       </footer>
@@ -199,14 +199,14 @@ function OfficialCard({ official, isSmall = false }: { official: Official, isSma
     <div className={`group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden`}>
       <div className="relative aspect-[4/5] w-full bg-slate-100 overflow-hidden">
         {official.imageUrl ? (
-          <img 
-            src={official.imageUrl} 
-            alt={official.name} 
+          <img
+            src={official.imageUrl}
+            alt={official.name}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-primary/5">
-             <UserCircle2 className="h-20 w-20 text-primary/10" />
+            <UserCircle2 className="h-20 w-20 text-primary/10" />
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-60" />

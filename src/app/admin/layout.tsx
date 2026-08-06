@@ -68,13 +68,13 @@ const adminNavItems = [
 
 function AdminMobileHeader() {
   const { toggleSidebar, openMobile } = useSidebar();
-  
+
   return (
     <header className="md:hidden sticky top-0 z-40 w-full h-16 bg-primary flex items-center justify-between px-6 shadow-md border-b border-white/10 text-white">
       <Logo />
-      <Button 
-        variant="ghost" 
-        size="icon" 
+      <Button
+        variant="ghost"
+        size="icon"
         onClick={toggleSidebar}
         className="text-white hover:bg-white/10"
       >
@@ -88,7 +88,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const router = useRouter();
   const pathname = usePathname();
   const { auth, user } = useFirebase();
-  
+
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [isSuratOpen, setIsSuratOpen] = useState(pathname.startsWith('/admin/surat'));
@@ -123,8 +123,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return (
       <div className="flex h-screen w-full items-center justify-center bg-primary">
         <div className="flex flex-col items-center">
-            <Loader2 className="h-12 w-12 animate-spin text-secondary mb-4" />
-            <p className="text-[10px] font-black tracking-[0.4em] text-white/50 uppercase">Otoritas Terverifikasi...</p>
+          <Loader2 className="h-12 w-12 animate-spin text-secondary mb-4" />
+          <p className="text-[10px] font-black tracking-[0.4em] text-white/50 uppercase">Otoritas Terverifikasi...</p>
         </div>
       </div>
     );
@@ -141,7 +141,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="mb-6 px-4">
             <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">Navigasi Admin</p>
           </div>
-          
+
           <SidebarMenu className="gap-3 font-sans">
             <div className="mb-2 mt-2 px-4">
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/40">Prioritas Utama</p>
@@ -154,8 +154,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             >
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
-                  <SidebarMenuButton 
-                    tooltip="Manajemen Surat" 
+                  <SidebarMenuButton
+                    tooltip="Manajemen Surat"
                     isActive={pathname.startsWith('/admin/surat')}
                     className="rounded-2xl h-12 transition-all data-[active=true]:bg-secondary data-[active=true]:text-primary-foreground"
                   >
@@ -202,8 +202,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             >
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
-                  <SidebarMenuButton 
-                    tooltip="Berita" 
+                  <SidebarMenuButton
+                    tooltip="Berita"
                     isActive={pathname.startsWith('/admin/berita')}
                     className="rounded-2xl h-12 transition-all data-[active=true]:bg-secondary data-[active=true]:text-primary-foreground"
                   >
@@ -297,13 +297,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <main className="max-w-[1400px] mx-auto w-full p-4 md:p-12 flex-1 overflow-x-hidden">
           {children}
         </main>
-        
+
         <footer className="bg-primary border-t border-white/10 py-8 px-4 md:px-12 mt-auto text-white">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
             <div className="flex items-center gap-3">
               <div className="w-1.5 h-4 bg-secondary rounded-full" />
               <p className="text-[10px] font-black uppercase tracking-widest text-white/40">
-                Sistem Administrasi Desa Pangawaren v1.0
+                Sistem Administrasi Desa Sidaurip v1.0
               </p>
             </div>
             <p className="text-[10px] font-bold text-white/20 uppercase">

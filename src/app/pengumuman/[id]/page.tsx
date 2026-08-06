@@ -26,10 +26,10 @@ export default function AnnouncementDetailPage() {
 
   const formatDate = (date: any) => {
     if (!date) return '-';
-    return date.toDate().toLocaleDateString('id-ID', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toDate().toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   };
 
@@ -40,14 +40,14 @@ export default function AnnouncementDetailPage() {
         <div className="container mx-auto px-4 h-20 flex items-center justify-between">
           <Logo />
           <div className="flex items-center gap-3">
-             <Link href="/">
-                <Button variant="ghost" className="font-bold gap-2 text-primary hover:bg-slate-100 rounded-xl">
+            <Link href="/">
+              <Button variant="ghost" className="font-bold gap-2 text-primary hover:bg-slate-100 rounded-xl">
                 <ArrowLeft className="h-4 w-4" />
                 <span className="hidden sm:inline">Beranda</span>
-                </Button>
+              </Button>
             </Link>
             <Link href="/pengumuman/">
-                <Button className="bg-secondary hover:bg-yellow-600 text-primary-foreground font-black px-6 rounded-xl shadow-lg shadow-secondary/20 h-10">Daftar Pengumuman</Button>
+              <Button className="bg-secondary hover:bg-yellow-600 text-primary-foreground font-black px-6 rounded-xl shadow-lg shadow-secondary/20 h-10">Daftar Pengumuman</Button>
             </Link>
           </div>
         </div>
@@ -81,8 +81,8 @@ export default function AnnouncementDetailPage() {
           </div>
         ) : (
           <div className="max-w-4xl mx-auto space-y-10 pb-20">
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               onClick={() => router.push('/pengumuman')}
               className="font-black text-[10px] uppercase tracking-[0.4em] text-slate-400 hover:text-primary transition-all p-0"
             >
@@ -93,10 +93,10 @@ export default function AnnouncementDetailPage() {
               {/* IMAGE AREA */}
               <div className="relative w-full bg-slate-50 overflow-hidden border-b">
                 {announcement.imageUrl ? (
-                  <img 
-                    src={announcement.imageUrl} 
-                    alt={announcement.title} 
-                    className="w-full h-auto block max-h-[800px] object-contain mx-auto" 
+                  <img
+                    src={announcement.imageUrl}
+                    alt={announcement.title}
+                    className="w-full h-auto block max-h-[800px] object-contain mx-auto"
                   />
                 ) : (
                   <div className="w-full aspect-video flex items-center justify-center bg-primary/10">
@@ -108,12 +108,12 @@ export default function AnnouncementDetailPage() {
               {/* CONTENT AREA */}
               <div className="p-8 md:p-12 space-y-10">
                 <div className="space-y-6">
-                   <Badge className="bg-secondary text-primary-foreground font-black uppercase text-[10px] tracking-widest px-4 py-1.5 border-none shadow-sm">
-                      Informasi Resmi
-                   </Badge>
-                   <h1 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight uppercase tracking-tight font-display italic">
-                     {announcement.title}
-                   </h1>
+                  <Badge className="bg-secondary text-primary-foreground font-black uppercase text-[10px] tracking-widest px-4 py-1.5 border-none shadow-sm">
+                    Informasi Resmi
+                  </Badge>
+                  <h1 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight uppercase tracking-tight font-display italic">
+                    {announcement.title}
+                  </h1>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-8 border-b pb-8">
@@ -150,10 +150,10 @@ export default function AnnouncementDetailPage() {
                     </div>
                     <div>
                       <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em]">Sekretariat Desa</p>
-                      <p className="text-sm font-bold text-slate-500 uppercase tracking-tight italic">Pangawaren Digital Portal</p>
+                      <p className="text-sm font-bold text-slate-500 uppercase tracking-tight italic">Sidaurip Digital Portal</p>
                     </div>
                   </div>
-                  
+
                   <Link href="/">
                     <Button className="bg-primary text-white font-black px-8 h-14 rounded-2xl hover:bg-slate-800 transition-all uppercase tracking-widest text-[10px] shadow-lg shadow-primary/20">
                       Kembali ke Beranda

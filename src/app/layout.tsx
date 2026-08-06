@@ -1,4 +1,4 @@
-import type {Metadata} from 'next';
+import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { FirebaseClientProvider } from '@/firebase';
@@ -19,8 +19,8 @@ const display = Lora({
 });
 
 export const metadata: Metadata = {
-  title: 'PELAYANAN DESA PANGAWAREN',
-  description: 'Aplikasi Pelayanan Publik Desa Pangawaren',
+  title: 'PELAYANAN DESA SIDAURIP',
+  description: 'Aplikasi Pelayanan Publik Desa Sidaurip',
 };
 
 export default function RootLayout({

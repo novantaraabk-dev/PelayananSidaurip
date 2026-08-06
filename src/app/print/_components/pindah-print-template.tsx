@@ -8,8 +8,8 @@ export function PindahPrintTemplate({ submission }: { submission: LetterSubmissi
   return (
     <PrintLayout submission={submission}>
       <p className="mt-8 text-justify leading-relaxed">
-        Yang bertanda tangan di bawah ini Kepala Desa Pangawaren, Kecamatan
-        Karangpucung, Kabupaten Cilacap, menerangkan bahwa:
+        Yang bertanda tangan di bawah ini Kepala Desa Sidaurip, Kecamatan
+        Gandrungmangu, Kabupaten Cilacap, menerangkan bahwa:
       </p>
 
       <table className="mt-4 border-collapse w-full">
@@ -18,7 +18,7 @@ export function PindahPrintTemplate({ submission }: { submission: LetterSubmissi
           <DataRow label="NIK" value={formData.nik} />
           <DataRow label="Nomor KK" value={formData.kkNumber} />
           <DataRow label="Nama Kepala Keluarga" value={formData.kkHead} />
-          <DataRow label="Alamat Asal" value={`Desa Pangawaren, RT ${formData.currentAddressRt} / RW ${formData.currentAddressRw}, Kecamatan Karangpucung, Kabupaten Cilacap, Provinsi Jawa Tengah`} />
+          <DataRow label="Alamat Asal" value={`Desa Sidaurip, RT ${formData.currentAddressRt} / RW ${formData.currentAddressRw}, Kecamatan Gandrungmangu, Kabupaten Cilacap, Provinsi Jawa Tengah`} />
         </tbody>
       </table>
 

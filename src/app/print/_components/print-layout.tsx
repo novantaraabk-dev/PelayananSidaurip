@@ -67,7 +67,7 @@ const parseDateInput = (dateInput: any): Date | null => {
 export const toProperCase = (str: string): string => {
   if (!str) return '';
   let cleaned = str.replace(/`/g, '');
-  
+
   return cleaned.replace(/\b[a-zA-Z]+\b/g, (word) => {
     const upperWord = word.toUpperCase();
     if (['RT', 'RW', 'WNI', 'KK', 'NIK', 'HP', 'WA', 'BPJS', 'SKCK', 'SKTM', 'KUR', 'UMKM'].includes(upperWord)) {
@@ -266,9 +266,9 @@ export function PrintLayout({
           <div className={cn("flex justify-between text-center items-start", reverseSignatures && "flex-row-reverse")}>
             <div className={cn("w-[40%]", hideRequesterSignature && "invisible")}>
               {reverseSignatures ? (
-                <p className="mb-1">Pangawaren, {formattedDate}</p>
+                <p className="mb-1">Sidaurip, {formattedDate}</p>
               ) : (
-                <p className="invisible mb-1">Pangawaren, 00 Bulan 0000</p>
+                <p className="invisible mb-1">Sidaurip, 00 Bulan 0000</p>
               )}
               <p>{requesterLabel}</p>
               <div className="h-16"></div>
@@ -279,23 +279,23 @@ export function PrintLayout({
 
             <div className="w-[45%]">
               {!reverseSignatures ? (
-                <p className="mb-1">Pangawaren, {formattedDate}</p>
+                <p className="mb-1">Sidaurip, {formattedDate}</p>
               ) : (
-                <p className="invisible mb-1">Pangawaren, 00 Bulan 0000</p>
+                <p className="invisible mb-1">Sidaurip, 00 Bulan 0000</p>
               )}
 
               {signerType === 'sekdes' ? (
                 <>
-                  <p>A.n. Kepala Desa Pangawaren</p>
-                  <p>Sekretaris Desa Pangawaren</p>
+                  <p>A.n. Kepala Desa Sidaurip</p>
+                  <p>Sekretaris Desa Sidaurip</p>
                   <div className="h-16"></div>
-                  <p className="font-bold underline tracking-wider uppercase">BAMBANG, S.PD</p>
+                  <p className="font-bold underline tracking-wider uppercase">SOFA BURHANI</p>
                 </>
               ) : (
                 <>
-                  <p>Kepala Desa Pangawaren</p>
+                  <p>Kepala Desa Sidaurip</p>
                   <div className="h-16"></div>
-                  <p className="font-bold underline tracking-wider uppercase">SUHUD</p>
+                  <p className="font-bold underline tracking-wider uppercase">TASIMIN</p>
                 </>
               )}
             </div>
@@ -353,10 +353,10 @@ export const DataRow = ({ label, value }: { label: string; value: any }) => {
   if (typeof displayValue === 'string') {
     const lowerLabel = label.toLowerCase();
     if (
-      lowerLabel.includes('nama') || 
-      lowerLabel.includes('alamat') || 
-      lowerLabel.includes('tempat') || 
-      lowerLabel.includes('tgl lahir') || 
+      lowerLabel.includes('nama') ||
+      lowerLabel.includes('alamat') ||
+      lowerLabel.includes('tempat') ||
+      lowerLabel.includes('tgl lahir') ||
       lowerLabel.includes('tanggal lahir') ||
       lowerLabel.includes('pekerjaan')
     ) {

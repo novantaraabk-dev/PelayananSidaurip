@@ -14,19 +14,19 @@ export function IjinKeramaianPrintTemplate({ submission }: { submission: LetterS
       <div className="flex justify-between text-center items-start text-sm">
         <div className="w-1/3">
           <p className="font-bold">CAMAT</p>
-          <p>Karangpucung</p>
+          <p>Gandrungmangu</p>
           <div className="h-20"></div>
           <p>__________________________</p>
         </div>
         <div className="w-1/3">
           <p className="font-bold">DAN RAMIL 10</p>
-          <p>Karangpucung</p>
+          <p>Gandrungmangu</p>
           <div className="h-20"></div>
           <p>__________________________</p>
         </div>
         <div className="w-1/3">
           <p className="font-bold">KAPOLSEK</p>
-          <p>Karangpucung</p>
+          <p>Gandrungmangu</p>
           <div className="h-20"></div>
           <p>__________________________</p>
         </div>
@@ -40,7 +40,7 @@ export function IjinKeramaianPrintTemplate({ submission }: { submission: LetterS
       additionalFooter={additionalFooter}
     >
       <p className="mt-8 text-justify leading-relaxed">
-        Yang bertanda tangan dibawah ini kepala Desa Pangawaren, Kecamatan Karangpucung, Kabupaten Cilacap, menerangkan dengan sebenarnya bahwa:
+        Yang bertanda tangan dibawah ini kepala Desa Sidaurip, Kecamatan Gandrungmangu, Kabupaten Cilacap, menerangkan dengan sebenarnya bahwa:
       </p>
 
       <table className="mt-4 border-collapse w-full">
@@ -54,7 +54,7 @@ export function IjinKeramaianPrintTemplate({ submission }: { submission: LetterS
       </table>
 
       <p className="mt-4 text-justify leading-relaxed">
-        Orang tersebut di atas adalah benar-benar penduduk Desa Pangawaren, Kecamatan Karangpucung, Kabupaten Cilacap.
+        Orang tersebut di atas adalah benar-benar penduduk Desa Sidaurip, Kecamatan Gandrungmangu, Kabupaten Cilacap.
       </p>
 
       <p className="mt-4 text-justify leading-relaxed">

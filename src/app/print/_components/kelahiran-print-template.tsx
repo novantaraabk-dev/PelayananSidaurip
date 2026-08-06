@@ -43,8 +43,8 @@ export function KelahiranPrintTemplate({ submission }: { submission: LetterSubmi
       requesterNameOverride={formData.reporterName}
     >
       <p className="mt-6 text-justify leading-relaxed">
-        Yang bertanda tangan di bawah ini, Kepala Desa Pangawaren, Kecamatan
-        Karangpucung, Kabupaten Cilacap, dengan ini menerangkan kepada :
+        Yang bertanda tangan di bawah ini, Kepala Desa Sidaurip, Kecamatan
+        Gandrungmangu, Kabupaten Cilacap, dengan ini menerangkan kepada :
       </p>
 
       <table className="mt-4 border-collapse w-full text-sm">

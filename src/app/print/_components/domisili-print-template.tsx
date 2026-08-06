@@ -8,8 +8,8 @@ export function DomisiliPrintTemplate({ submission }: { submission: LetterSubmis
   return (
     <PrintLayout submission={submission} hideRequesterSignature={true}>
       <p className="mt-8 text-justify leading-relaxed">
-        Yang bertanda tangan dibawah ini, Kepala Desa Pangawaren, Kecamatan
-        Karangpucung, Kabupaten Cilacap, menerangkan dengan sebenarnya bahwa :
+        Yang bertanda tangan dibawah ini, Kepala Desa Sidaurip, Kecamatan
+        Gandrungmangu, Kabupaten Cilacap, menerangkan dengan sebenarnya bahwa :
       </p>
 
       <table className="mt-4 border-collapse w-full">
@@ -25,7 +25,7 @@ export function DomisiliPrintTemplate({ submission }: { submission: LetterSubmis
       </table>
 
       <p className="mt-6 text-justify leading-relaxed">
-        Adalah benar penduduk Desa Pangawaren, Kecamatan Karangpucung, Kabupaten Cilacap dan saat ini berdomisili di :
+        Adalah benar penduduk Desa Sidaurip, Kecamatan Gandrungmangu, Kabupaten Cilacap dan saat ini berdomisili di :
       </p>
 
       <table className="mt-2 border-collapse w-full">

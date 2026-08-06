@@ -18,17 +18,17 @@ Fitur upload logo footer menggunakan Cloudinary untuk storage dan serve image. B
 2. Scroll ke bagian **Upload presets**
 3. Klik **Add upload preset**
 4. Isi form:
-   - **Name**: `desa_pangawaren` (HARUS sama dengan yang di code)
+   - **Name**: `desa_Sidaurip` (HARUS sama dengan yang di code)
    - **Unsigned**: Pilih **ON** (sangat penting untuk client-side)
    - **Resource type**: Images
-   - **Folder**: `desa-pangawaren/footer-logos` (optional, untuk organisir)
+   - **Folder**: `desa-sidaurip/footer-logos` (optional, untuk organisir)
 5. Klik **Save**
 
 ## 3. Verifikasi Setup
 
 Upload preset harus memiliki setting:
 - ✅ Unsigned = ON
-- ✅ Name = `desa_pangawaren`
+- ✅ Name = `desa_Sidaurip`
 - ✅ Resource type = Image
 
 ## 4. Update Code jika Berbeda
@@ -37,10 +37,10 @@ File: `src/app/admin/settings/_components/footer-logos-settings-form.tsx`
 
 Jika Cloud Name Anda berbeda, ubah baris ini:
 ```typescript
-const response = await fetch('https://api.cloudinary.com/v1_1/desa-pangawaren/image/upload', {
+const response = await fetch('https://api.cloudinary.com/v1_1/desa-sidaurip/image/upload', {
 ```
 
-Ganti `desa-pangawaren` dengan Cloud Name Anda.
+Ganti `desa-sidaurip` dengan Cloud Name Anda.
 
 ## 5. Test Upload
 
@@ -79,7 +79,7 @@ Ganti `desa-pangawaren` dengan Cloud Name Anda.
 - Cek Cloudinary URL valid dengan buka di tab baru
 
 ### Upload preset tidak ditemukan
-- Pastikan nama preset tepat: `desa_pangawaren` (case sensitive)
+- Pastikan nama preset tepat: `desa_Sidaurip` (case sensitive)
 - Verify di Settings → Upload → Upload presets
 
 ## Security Note

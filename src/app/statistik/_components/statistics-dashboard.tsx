@@ -5,14 +5,14 @@ import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
 import { doc } from 'firebase/firestore';
 import { Resident } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
-  PieChart, Pie, Cell, Legend, LineChart, Line 
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  PieChart, Pie, Cell, Legend, LineChart, Line
 } from 'recharts';
-import { 
-  Users, Home, UserCheck, UserPlus, 
-  Download, FileDown, Filter, Calendar, 
-  MapPin, Loader2, BarChart3, PieChart as PieChartIcon 
+import {
+  Users, Home, UserCheck, UserPlus,
+  Download, FileDown, Filter, Calendar,
+  MapPin, Loader2, BarChart3, PieChart as PieChartIcon
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -119,17 +119,17 @@ export function StatisticsDashboard() {
     const ws = XLSX.utils.json_to_sheet(stats.rwData);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Statistik");
-    XLSX.writeFile(wb, `Statistik_Pangawaren_${filterDusun}.xlsx`);
+    XLSX.writeFile(wb, `Statistik_Sidaurip_${filterDusun}.xlsx`);
     toast({ title: "Berhasil Unduh", description: "Data statistik telah disimpan dalam format Excel." });
   };
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(18);
-    doc.text('Grafik & Statistik Kependudukan Desa Pangawaren', 14, 22);
+    doc.text('Grafik & Statistik Kependudukan Desa Sidaurip', 14, 22);
     doc.setFontSize(11);
     doc.text(`Wilayah: ${filterDusun} | Tahun: ${filterTahun}`, 14, 30);
-    
+
     autoTable(doc, {
       startY: 40,
       head: [['Kategori', 'Jumlah']],
@@ -162,7 +162,7 @@ export function StatisticsDashboard() {
   if (!stats) {
     return (
       <div className="flex flex-col items-center justify-center p-12 text-center bg-white rounded-[3rem] border border-slate-100 shadow-sm max-w-2xl mx-auto space-y-6 my-12">
-        <BarChart3 className="h-16 w-16 text-emerald-600 animate-pulse" />
+        <BarChart3 className="h-16 w-16 text-sky-600 animate-pulse" />
         <h2 className="text-2xl font-black uppercase tracking-tight text-slate-800">Statistik Belum Tersedia</h2>
         <p className="text-slate-500 leading-relaxed font-medium">
           Data grafik dan statistik demografi belum dibuat atau sedang diperbarui oleh administrator.
@@ -230,7 +230,7 @@ export function StatisticsDashboard() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
         {[
           { label: 'Total Penduduk', value: stats?.total.toLocaleString('id-ID'), icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
-          { label: 'Total Keluarga (KK)', value: stats?.totalKK.toLocaleString('id-ID'), icon: Home, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+          { label: 'Total Keluarga (KK)', value: stats?.totalKK.toLocaleString('id-ID'), icon: Home, color: 'text-sky-600', bg: 'bg-sky-50' },
           { label: 'Laki-Laki (%)', value: `${stats?.malePercent}%`, icon: UserCheck, color: 'text-amber-600', bg: 'bg-amber-50' },
           { label: 'Perempuan (%)', value: `${stats?.femalePercent}%`, icon: UserPlus, color: 'text-rose-600', bg: 'bg-rose-50' },
         ].map((card, i) => (
@@ -253,11 +253,11 @@ export function StatisticsDashboard() {
         <Card className="rounded-[3rem] border-none shadow-sm overflow-hidden bg-white">
           <CardHeader className="p-10 pb-0">
             <div className="flex items-center gap-4">
-               <div className="p-3 bg-primary/5 text-primary rounded-2xl"><PieChartIcon className="h-6 w-6" /></div>
-               <div>
-                  <CardTitle className="text-xl font-black uppercase italic tracking-tight leading-none">Kelompok Umur</CardTitle>
-                  <CardDescription className="text-xs font-bold uppercase text-slate-400 mt-2 tracking-widest">Distribusi Rentang Usia</CardDescription>
-               </div>
+              <div className="p-3 bg-primary/5 text-primary rounded-2xl"><PieChartIcon className="h-6 w-6" /></div>
+              <div>
+                <CardTitle className="text-xl font-black uppercase italic tracking-tight leading-none">Kelompok Umur</CardTitle>
+                <CardDescription className="text-xs font-bold uppercase text-slate-400 mt-2 tracking-widest">Distribusi Rentang Usia</CardDescription>
+              </div>
             </div>
           </CardHeader>
           <CardContent className="p-10 h-[350px]">
@@ -286,11 +286,11 @@ export function StatisticsDashboard() {
         <Card className="rounded-[3rem] border-none shadow-sm overflow-hidden bg-white">
           <CardHeader className="p-10 pb-0">
             <div className="flex items-center gap-4">
-               <div className="p-3 bg-primary/5 text-primary rounded-2xl"><FileDown className="h-6 w-6" /></div>
-               <div>
-                  <CardTitle className="text-xl font-black uppercase italic tracking-tight leading-none">Tingkat Pendidikan</CardTitle>
-                  <CardDescription className="text-xs font-bold uppercase text-slate-400 mt-2 tracking-widest">Jenjang Pendidikan Terakhir</CardDescription>
-               </div>
+              <div className="p-3 bg-primary/5 text-primary rounded-2xl"><FileDown className="h-6 w-6" /></div>
+              <div>
+                <CardTitle className="text-xl font-black uppercase italic tracking-tight leading-none">Tingkat Pendidikan</CardTitle>
+                <CardDescription className="text-xs font-bold uppercase text-slate-400 mt-2 tracking-widest">Jenjang Pendidikan Terakhir</CardDescription>
+              </div>
             </div>
           </CardHeader>
           <CardContent className="p-10 h-[350px]">
@@ -317,13 +317,13 @@ export function StatisticsDashboard() {
           <ResponsiveContainer width="100%" height="100%">
             <BarChart layout="vertical" data={stats?.jobData} margin={{ left: 40, right: 40 }}>
               <XAxis type="number" hide />
-              <YAxis 
-                type="category" 
-                dataKey="name" 
-                width={100} 
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fontSize: 10, fontWeight: 900, fill: '#64748b' }} 
+              <YAxis
+                type="category"
+                dataKey="name"
+                width={100}
+                axisLine={false}
+                tickLine={false}
+                tick={{ fontSize: 10, fontWeight: 900, fill: '#64748b' }}
               />
               <Tooltip />
               <Bar dataKey="value" fill="#eab308" radius={[0, 10, 10, 0]} barSize={24} />
@@ -362,7 +362,7 @@ export function StatisticsDashboard() {
                 <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 800 }} />
                 <YAxis hide />
                 <Tooltip />
-                <Legend verticalAlign="top" height={36}/>
+                <Legend verticalAlign="top" height={36} />
                 <Line type="monotone" dataKey="lahir" stroke="#059669" strokeWidth={4} dot={{ r: 4 }} />
                 <Line type="monotone" dataKey="mati" stroke="#f43f5e" strokeWidth={4} dot={{ r: 4 }} />
                 <Line type="monotone" dataKey="datang" stroke="#3b82f6" strokeWidth={4} dot={{ r: 4 }} />
@@ -378,7 +378,7 @@ export function StatisticsDashboard() {
         <div className="space-y-1 text-center md:text-left">
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary">Akurasi & Integritas</p>
           <p className="text-sm font-medium text-slate-400 italic leading-relaxed">
-            Sumber Data: Sistem Informasi Desa (SID) Pangawaren Digital. <br className="hidden sm:block"/>
+            Sumber Data: Sistem Informasi Desa (SID) Sidaurip Digital. <br className="hidden sm:block" />
             Data diperbarui secara otomatis berdasarkan pendaftaran penduduk terbaru.
           </p>
         </div>

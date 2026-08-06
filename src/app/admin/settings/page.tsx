@@ -10,18 +10,20 @@ import { VideoProfileSettingsForm } from './_components/video-profile-settings-f
 import { FooterLogosSettingsForm } from './_components/footer-logos-settings-form';
 import { AccompanyingImageSettingsForm, KadesPhotoSettingsForm, PengaduanImageSettingsForm } from './_components/cloudinary-images-form';
 import { DesaAntiKorupsiDriveForm } from './_components/desa-anti-korupsi-drive-form';
+import { ImportantNumbersSettingsForm } from './_components/important-numbers-settings-form';
 
 export default function AdminSettingsPage() {
   return (
     <div className="space-y-10 pb-20">
       <PageHeader
         title="Pengaturan Sistem"
-        description="Kelola identitas visual desa, templat dokumen, dan konfigurasi penyimpanan sistem."
+        description="Kelola identitas visual desa, templat dokumen, nomor penting, dan konfigurasi penyimpanan sistem."
       />
 
       <div className="grid gap-8">
         <HeroSettingsForm />
         <VideoProfileSettingsForm />
+        <ImportantNumbersSettingsForm />
 
         {/* Baris 1: Upload Gambar Pendamping + Upload Foto Kades */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">

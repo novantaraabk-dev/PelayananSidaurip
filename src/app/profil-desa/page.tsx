@@ -25,7 +25,15 @@ import {
   ArrowRight,
   CheckCircle2,
   TrendingUp,
-  Activity
+  Activity,
+  Heart,
+  GraduationCap,
+  Stethoscope,
+  Fish,
+  Sprout,
+  Store,
+  Beef,
+  Target
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -70,7 +78,7 @@ export default function ProfilDesaPage() {
     return doc(firestore, 'villageProfile', 'default');
   }, [firestore]);
 
-  const { data: profileData } = useDoc<{ youtubeVideoUrl?: string; kadesPhotoUrl?: string }>(profileRef);
+  const { data: profileData } = useDoc<{ youtubeVideoUrl?: string; kadesPhotoUrl?: string; description?: string }>(profileRef);
 
   const getYoutubeEmbedUrl = (url: string | undefined) => {
     if (!url) return null;
@@ -132,6 +140,7 @@ export default function ProfilDesaPage() {
 
     return { perangkat, bpd, rtrwGroups };
   }, [officials]);
+
   const tabs = [
     { id: 'sambutan', label: 'Profil & Sambutan', icon: User },
     { id: 'kenali', label: 'Kenali Kami', icon: Users },
@@ -188,7 +197,7 @@ export default function ProfilDesaPage() {
 
             {/* Mobile Menu Dropdown Selector */}
             <div className="block lg:hidden w-full relative mb-6">
-              <button 
+              <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="w-full flex items-center justify-between bg-primary text-white px-5 py-4 rounded-xl shadow-md font-black uppercase text-[10px] tracking-wider"
               >
@@ -198,7 +207,7 @@ export default function ProfilDesaPage() {
                 </div>
                 <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", isMenuOpen && "rotate-180")} />
               </button>
-              
+
               {isMenuOpen && (
                 <>
                   <div className="fixed inset-0 z-40" onClick={() => setIsMenuOpen(false)} />
@@ -244,7 +253,7 @@ export default function ProfilDesaPage() {
 
           {/* MAIN CONTENT AREA */}
           <main className="lg:col-span-9 space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            {activeTab === 'sambutan' && <SambutanTab kadesPhotoUrl={profileData?.kadesPhotoUrl} />}
+            {activeTab === 'sambutan' && <SambutanTab kadesPhotoUrl={profileData?.kadesPhotoUrl} customDesc={profileData?.description} />}
             {activeTab === 'kenali' && <KenaliTab data={processedOfficials} isLoading={isLoadingOfficials} />}
             {activeTab === 'sejarah' && <SejarahTab />}
             {activeTab === 'peta' && <PetaTab />}
@@ -259,7 +268,7 @@ export default function ProfilDesaPage() {
         <div className="container mx-auto px-4 text-center">
           <Logo />
           <p className="mt-8 text-[10px] font-bold uppercase tracking-widest">
-            © 2026 Pemerintah Desa Pangawaren Digital Portal
+            © 2026 Pemerintah Desa Sidaurip • Kecamatan Gandrungmangu, Kabupaten Cilacap
           </p>
         </div>
       </footer>
@@ -269,55 +278,104 @@ export default function ProfilDesaPage() {
 
 // --- TAB COMPONENTS ---
 
-function SambutanTab({ kadesPhotoUrl }: { kadesPhotoUrl?: string }) {
+function SambutanTab({ kadesPhotoUrl, customDesc }: { kadesPhotoUrl?: string; customDesc?: string }) {
   const imageUrl = kadesPhotoUrl || "https://picsum.photos/seed/kades/600/800";
   return (
-    <div className="grid md:grid-cols-12 gap-8 items-stretch">
-      <div className="md:col-span-4 lg:col-span-4">
-        <Card className="rounded-3xl md:rounded-[3rem] overflow-hidden border-none shadow-xl bg-white sticky top-28">
-          <div className="aspect-[3/4] relative bg-slate-100">
-            <img
-              src={imageUrl}
-              alt="Kepala Desa"
-              className="w-full h-full object-cover"
-              data-ai-hint="official portrait"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-          </div>
-          <div className="p-6 md:p-8 text-center bg-primary text-white">
-            <h3 className="text-xl font-black uppercase tracking-tight font-display italic">SUHUD</h3>
-            <p className="text-[10px] font-bold text-secondary uppercase tracking-[0.3em] mt-1">Kepala Desa Pangawaren</p>
-          </div>
-        </Card>
-      </div>
-      <div className="md:col-span-8 lg:col-span-8 bg-white p-6 md:p-16 rounded-3xl md:rounded-[4rem] border shadow-sm space-y-8">
-        <div className="space-y-4">
-          <Badge className="bg-emerald-50 text-emerald-700 font-black uppercase text-[10px] tracking-widest px-4 py-1.5 border-none shadow-sm">
-            Sambutan Resmi
-          </Badge>
-          <h2 className="text-2xl sm:text-4xl md:text-6xl font-black text-slate-900 leading-tight uppercase font-display italic tracking-tighter">
-            Melayani dengan <span className="text-primary not-italic">Hati</span>, Membangun dengan <span className="text-secondary">Inovasi</span>.
-          </h2>
-        </div>
-        <div className="prose prose-slate max-w-none">
-          <p className="text-sm md:text-lg leading-relaxed text-slate-600 font-medium italic border-l-4 md:border-l-8 border-secondary pl-4 md:pl-8 py-2">
-            "Assalamu'alaikum Warahmatullahi Wabarakatuh. Selamat datang di portal resmi digital Desa Pangawaren. Website ini adalah perwujudan dari visi kami untuk menciptakan transparansi dan kemudahan layanan bagi seluruh warga."
-          </p>
-          <div className="space-y-6 text-slate-700 text-sm md:text-lg leading-relaxed pt-6">
-            <p>
-              Di era transformasi digital ini, kami menyadari bahwa kecepatan informasi dan kemudahan akses layanan adalah kunci kemajuan sebuah wilayah. Desa Pangawaren tidak ingin tertinggal. Kami hadirkan sistem layanan mandiri ini agar warga dapat mengurus administrasi dari mana saja, kapan saja.
-            </p>
-            <p>
-              Portal ini tidak hanya tentang surat-menyurat, tapi juga tentang keterbukaan anggaran desa, promosi produk UMKM warga, dan penyebaran berita kegiatan pembangunan desa secara real-time. Mari bersama-sama kita bangun Pangawaren menjadi desa yang mandiri, cerdas, dan bermartabat.
-            </p>
-          </div>
-        </div>
-        <div className="pt-6 flex flex-wrap gap-2 sm:gap-4">
-          {["Transparansi", "Efisiensi", "Gotong Royong", "Digitalisasi"].map(tag => (
-            <div key={tag} className="flex items-center gap-2 px-5 py-2 bg-slate-50 border rounded-full text-[10px] font-black uppercase tracking-widest text-primary">
-              <CheckCircle2 className="h-3 w-3 text-secondary" /> {tag}
+    <div className="space-y-10">
+      <div className="grid md:grid-cols-12 gap-8 items-stretch">
+        <div className="md:col-span-4 lg:col-span-4">
+          <Card className="rounded-3xl md:rounded-[3rem] overflow-hidden border-none shadow-xl bg-white sticky top-28">
+            <div className="aspect-[3/4] relative bg-slate-100">
+              <img
+                src={imageUrl}
+                alt="Kepala Desa Sidaurip"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
             </div>
-          ))}
+            <div className="p-6 md:p-8 text-center bg-primary text-white">
+              <h3 className="text-xl font-black uppercase tracking-tight font-display italic">SUHUD</h3>
+              <p className="text-[10px] font-bold text-secondary uppercase tracking-[0.3em] mt-1">Kepala Desa Sidaurip</p>
+            </div>
+          </Card>
+        </div>
+        <div className="md:col-span-8 lg:col-span-8 bg-white p-6 md:p-14 rounded-3xl md:rounded-[4rem] border shadow-sm space-y-8">
+          <div className="space-y-4">
+            <Badge className="bg-sky-50 text-sky-700 font-black uppercase text-[10px] tracking-widest px-4 py-1.5 border-none shadow-sm">
+              Profil Resmi Desa Sidaurip
+            </Badge>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight uppercase font-display italic tracking-tighter">
+              Selamat Datang di <span className="text-primary not-italic">Desa Sidaurip</span>
+            </h2>
+            <p className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-widest">
+              Kecamatan Gandrungmangu, Kabupaten Cilacap, Provinsi Jawa Tengah
+            </p>
+          </div>
+          <div className="prose prose-slate max-w-none space-y-4 text-slate-700 text-sm md:text-base leading-relaxed">
+            <p className="text-sm md:text-base leading-relaxed text-slate-600 font-medium italic border-l-4 md:border-l-8 border-secondary pl-4 md:pl-6 py-2">
+              "Desa Sidaurip merupakan salah satu desa di wilayah Kecamatan Gandrungmangu, Kabupaten Cilacap, Provinsi Jawa Tengah yang terus berkembang dengan mengedepankan semangat gotong royong, pelayanan publik yang profesional, tata kelola pemerintahan yang transparan, serta pembangunan berkelanjutan berbasis potensi lokal."
+            </p>
+            <p>
+              Sebagai desa yang memiliki wilayah cukup luas di Kecamatan Gandrungmangu (luas ± 17,04 km² atau 14,29% dari total luas kecamatan), Desa Sidaurip memiliki sumber daya alam, sumber daya manusia, serta potensi pertanian yang menjadi kekuatan utama dalam meningkatkan kesejahteraan masyarakat.
+            </p>
+            <p>
+              Pemerintah Desa Sidaurip berkomitmen mewujudkan pelayanan publik yang cepat, mudah, transparan, akuntabel serta mendorong transformasi digital desa sebagai bagian dari upaya meningkatkan kualitas pelayanan kepada masyarakat.
+            </p>
+          </div>
+          <div className="pt-4 flex flex-wrap gap-2 sm:gap-4">
+            {["Profesional", "Transparan", "Akuntabel", "Gotong Royong", "Desa Digital"].map(tag => (
+              <div key={tag} className="flex items-center gap-2 px-5 py-2 bg-slate-50 border rounded-full text-[10px] font-black uppercase tracking-widest text-primary">
+                <CheckCircle2 className="h-3 w-3 text-secondary" /> {tag}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* VISI & MISI DESA */}
+      <div className="bg-white p-8 md:p-14 rounded-3xl md:rounded-[4rem] border shadow-sm space-y-10">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <Badge className="bg-sky-50 text-sky-700 font-black uppercase text-[10px] tracking-widest px-4 py-1.5 border-none shadow-sm">
+            Visi & Misi Pembangunan
+          </Badge>
+          <h3 className="text-3xl font-black text-slate-900 uppercase font-display italic">Arah Pembangunan Desa</h3>
+        </div>
+
+        {/* VISI CARD */}
+        <div className="p-8 md:p-10 rounded-3xl bg-gradient-to-r from-primary to-sky-900 text-white shadow-xl space-y-4">
+          <div className="flex items-center gap-3 text-secondary">
+            <Target className="h-6 w-6" />
+            <h4 className="text-xs font-black uppercase tracking-[0.3em]">Visi Pembangunan Desa</h4>
+          </div>
+          <p className="text-lg md:text-2xl font-black font-display italic leading-relaxed text-slate-100">
+            "Mewujudkan Desa Sidaurip yang Maju, Mandiri, Sejahtera, Religius, Berbudaya, Transparan, Berdaya saing, dan Berbasis pelayanan publik yang prima."
+          </p>
+        </div>
+
+        {/* MISI LIST */}
+        <div className="space-y-6">
+          <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight flex items-center gap-3">
+            <CheckCircle2 className="h-5 w-5 text-primary" /> Misi Desa Sidaurip
+          </h4>
+          <div className="grid md:grid-cols-2 gap-4">
+            {[
+              'Meningkatkan kualitas pelayanan kepada masyarakat.',
+              'Mengembangkan infrastruktur desa.',
+              'Mendorong pertumbuhan ekonomi berbasis potensi lokal.',
+              'Meningkatkan kualitas sumber daya manusia.',
+              'Memperkuat tata kelola pemerintahan yang bersih.',
+              'Mengembangkan digitalisasi pelayanan desa.',
+              'Meningkatkan partisipasi masyarakat dalam pembangunan.',
+              'Pengelolaan lingkungan hidup dan ketahanan pangan.'
+            ].map((misi, i) => (
+              <div key={i} className="p-5 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-4 hover:bg-sky-50/50 transition-colors">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-primary text-white font-black text-xs">
+                  {i + 1}
+                </span>
+                <p className="text-sm font-bold text-slate-800 leading-snug">{misi}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -329,7 +387,7 @@ function KenaliTab({ data, isLoading }: { data: any, isLoading: boolean }) {
     <div className="space-y-16">
       <div className="space-y-4">
         <h2 className="text-4xl font-black text-slate-900 uppercase font-display italic">Struktur <span className="text-primary not-italic">Pemerintahan</span></h2>
-        <p className="text-slate-500 font-medium text-lg border-l-4 border-secondary pl-4 uppercase tracking-tight">Mengenal Pelayan Masyarakat Desa Pangawaren</p>
+        <p className="text-slate-500 font-medium text-lg border-l-4 border-secondary pl-4 uppercase tracking-tight">Mengenal Pelayan Masyarakat Desa Sidaurip</p>
       </div>
 
       <div className="space-y-20">
@@ -397,19 +455,73 @@ function KenaliTab({ data, isLoading }: { data: any, isLoading: boolean }) {
 
 function SejarahTab() {
   const historyEvents = [
-    { year: 'Masa Lampau', title: 'Asal-Usul Nama', desc: 'Nama Pangawaren berakar dari kata "Kawer" yang merujuk pada kondisi geografis wilayah yang subur sebagai lumbung pangan potensial.', icon: Landmark },
-    { year: '1970 - 1980', title: 'Era Pembangunan Awal', desc: 'Pembentukan struktur pemerintahan desa yang lebih terorganisir dan pembangunan infrastruktur dasar jalan desa.', icon: MapPin },
-    { year: '1990 - 2010', title: 'Modernisasi Pertanian', desc: 'Optimalisasi lahan sawah dan irigasi teknis yang menjadikan desa sebagai produsen padi utama di tingkat kecamatan.', icon: Zap },
-    { year: '2020 - 2025', title: 'Transformasi Desa Digital', desc: 'Peluncuran sistem pelayanan mandiri online, transparansi anggaran daring, dan penyediaan akses internet publik di area balai desa.', icon: Activity },
-    { year: '2026', title: 'Masa Depan', desc: 'Visi mewujudkan kemandirian ekonomi desa berbasis inovasi teknologi dan pemberdayaan UMKM lokal.', icon: TrendingUp },
+    {
+      year: 'Cikal Bakal',
+      title: 'Penggabungan Dua Wilayah',
+      desc: 'Nama "Sidaurip" berasal dari penggabungan dua wilayah cikal bakal yaitu Dusun Sidasari dan Dusun Kuripan. Kedua dusun sepakat bersatu membentuk landasan kehidupan desa.',
+      icon: Landmark
+    },
+    {
+      year: '1984',
+      title: 'Pemekaran Desa Cisumur & Berdiri Definitif',
+      desc: 'Desa Sidaurip merupakan hasil pemekaran dari Desa Cisumur dan resmi berdiri sebagai desa definitif pada tahun 1984 atas aspirasi warga yang menghendaki pelayanan pemerintahan lebih dekat dan cepat.',
+      icon: Calendar
+    },
+    {
+      year: 'Makna Filosofi',
+      title: 'Harapan Kehidupan Sejahtera',
+      desc: 'Filosofi nama: "Sida" berarti menjadi, terwujud, atau berhasil; dan "Urip" berarti hidup, kehidupan, atau kesejahteraan. Sidaurip bermakna harapan agar masyarakat selalu memperoleh kehidupan yang lebih baik, sejahtera, tenteram, dan maju.',
+      icon: Heart
+    },
+    {
+      year: 'Masa Kini',
+      title: 'Pertumbuhan & Pembangunan Berkelanjutan',
+      desc: 'Seiring berjalannya waktu, Desa Sidaurip terus berkembang pesat dalam pelayanan pemerintahan, infrastruktur, kependudukan, pendidikan, dan perekonomian masyarakat secara mandiri.',
+      icon: TrendingUp
+    },
   ];
 
   return (
     <div className="space-y-16 max-w-4xl mx-auto">
       <div className="text-center space-y-4">
-        <h2 className="text-4xl font-black text-slate-900 uppercase font-display italic">Garis Waktu <span className="text-primary not-italic">Sejarah</span></h2>
-        <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.4em]">Menelusuri Jejak Langkah Desa Pangawaren</p>
+        <h2 className="text-4xl font-black text-slate-900 uppercase font-display italic">Sejarah <span className="text-primary not-italic">Desa Sidaurip</span></h2>
+        <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.4em]">Menelusuri Jejak Berdirinya Desa Definitif Tahun 1984</p>
       </div>
+
+      {/* Rincian Sejarah Narrative Card */}
+      <Card className="rounded-3xl md:rounded-[3rem] border-none shadow-sm bg-white p-8 md:p-12 space-y-6">
+        <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-sky-700">
+          <History className="h-4 w-4" /> Asal-Usul & Filosofi Nama
+        </div>
+        <div className="prose prose-slate max-w-none text-slate-700 space-y-4 text-base leading-relaxed">
+          <p>
+            Desa Sidaurip merupakan desa hasil pemekaran dari <strong>Desa Cisumur</strong>. Berdasarkan berbagai referensi lokal, Desa Sidaurip resmi berdiri sebagai desa definitif pada <strong>tahun 1984</strong>. Pembentukan desa ini berawal dari aspirasi masyarakat yang menghendaki pelayanan pemerintahan lebih dekat, efektif, dan mampu mempercepat pembangunan wilayah.
+          </p>
+          <p>
+            Nama <strong>"Sidaurip"</strong> berasal dari gabungan dua wilayah yang menjadi cikal bakal berdirinya desa, yaitu:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 font-semibold text-slate-800">
+            <li><strong>Dusun Sidasari</strong></li>
+            <li><strong>Dusun Kuripan</strong></li>
+          </ul>
+          <p>
+            Kedua nama tersebut digabung menjadi Sidaurip, yang memiliki makna filosofis mendalam:
+          </p>
+          <div className="grid md:grid-cols-2 gap-4 pt-2">
+            <div className="p-5 rounded-2xl bg-sky-50/70 border border-sky-100 space-y-2">
+              <span className="text-xs font-black uppercase text-primary tracking-widest">Sida</span>
+              <p className="text-sm font-bold text-slate-800">Berarti menjadi, terwujud, atau berhasil.</p>
+            </div>
+            <div className="p-5 rounded-2xl bg-amber-50/70 border border-amber-100 space-y-2">
+              <span className="text-xs font-black uppercase text-amber-800 tracking-widest">Urip</span>
+              <p className="text-sm font-bold text-slate-800">Berarti hidup, kehidupan, atau kesejahteraan.</p>
+            </div>
+          </div>
+          <p className="pt-2 italic font-medium text-slate-600">
+            Secara filosofi, nama Desa Sidaurip dapat dimaknai sebagai harapan agar masyarakat selalu memperoleh kehidupan yang lebih baik, sejahtera, tenteram, dan maju.
+          </p>
+        </div>
+      </Card>
 
       <div className="relative space-y-12">
         {/* Vertical Line */}
@@ -457,33 +569,51 @@ function SejarahTab() {
 function PetaTab() {
   return (
     <div className="grid lg:grid-cols-12 gap-6 lg:gap-10">
-      <div className="lg:col-span-8">
-        <Card className="rounded-3xl md:rounded-[3rem] overflow-hidden border-none shadow-xl h-[350px] sm:h-[500px] md:h-[650px] relative group">
+      <div className="lg:col-span-8 space-y-6">
+        <Card className="rounded-3xl md:rounded-[3rem] overflow-hidden border-none shadow-xl h-[350px] sm:h-[500px] md:h-[550px] relative group">
           <VillageMap />
           <div className="absolute top-4 md:top-8 left-4 md:left-8 pointer-events-none z-10">
             <Badge className="bg-primary text-white font-black uppercase text-[8px] md:text-[10px] tracking-widest px-4 md:px-6 py-1.5 md:py-2 rounded-full border-none shadow-2xl">
-              Live Map Interface
+              Peta Interaktif Desa Sidaurip
             </Badge>
           </div>
         </Card>
+
+        {/* Ringkasan Jarak */}
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="p-6 rounded-3xl bg-white border border-slate-100 shadow-sm space-y-1">
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Jarak ke Ibukota Kecamatan</p>
+            <p className="text-2xl font-black text-primary font-display">± 5 KM</p>
+            <p className="text-xs text-slate-500 font-medium">Kecamatan Gandrungmangu</p>
+          </div>
+          <div className="p-6 rounded-3xl bg-white border border-slate-100 shadow-sm space-y-1">
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Jarak ke Ibukota Kabupaten</p>
+            <p className="text-2xl font-black text-primary font-display">± 50 KM</p>
+            <p className="text-xs text-slate-500 font-medium">Kabupaten Cilacap</p>
+          </div>
+        </div>
       </div>
+
       <div className="lg:col-span-4 space-y-8">
         <Card className="rounded-3xl md:rounded-[3rem] border-none bg-primary text-white overflow-hidden shadow-2xl">
           <CardContent className="p-6 md:p-10 space-y-8 md:space-y-10">
             <div className="space-y-4">
-              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary">Geografis</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary">Geografis & Batas</p>
               <h3 className="text-3xl font-display font-semibold italic">Batas Wilayah</h3>
+              <p className="text-xs text-slate-300 leading-relaxed font-medium">
+                Desa Sidaurip berada di bagian selatan Kecamatan Gandrungmangu dengan luas wilayah ± 17,04 km² (14,29% luas kecamatan).
+              </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-5">
               {[
-                { dir: 'UTARA', label: 'Desa Tayem Timur' },
-                { dir: 'SELATAN', label: 'Desa Cidadap' },
-                { dir: 'TIMUR', label: 'Desa Karangpucung' },
-                { dir: 'BARAT', label: 'Desa Pamulihan' },
+                { dir: 'UTARA', label: 'Desa Bulusari' },
+                { dir: 'SELATAN', label: 'Desa Ujung Gagak, Kec. Kampung Laut' },
+                { dir: 'TIMUR', label: 'Desa Layansari & Desa Gandrungmanis' },
+                { dir: 'BARAT', label: 'Desa Cisumur' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4 group cursor-default">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center font-black text-[10px] text-secondary border border-white/5 group-hover:bg-secondary group-hover:text-primary transition-all">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center font-black text-[10px] text-secondary border border-white/5 group-hover:bg-secondary group-hover:text-primary transition-all shrink-0">
                     {item.dir[0]}
                   </div>
                   <div className="space-y-0.5">
@@ -494,14 +624,14 @@ function PetaTab() {
               ))}
             </div>
 
-            <div className="pt-8 border-t border-white/10 space-y-4">
+            <div className="pt-6 border-t border-white/10 space-y-3">
               <div className="flex items-center gap-3">
                 <Compass className="h-5 w-5 text-secondary" />
-                <p className="text-[10px] font-black uppercase tracking-widest">Titik Koordinat Pusat</p>
+                <p className="text-[10px] font-black uppercase tracking-widest">Luas Wilayah Total</p>
               </div>
-              <div className="p-5 rounded-2xl bg-white/5 border border-white/10 font-mono text-xs text-secondary flex justify-between">
-                <span>LON: 108.862209</span>
-                <span>LAT: -7.389</span>
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 font-mono text-xs text-secondary flex justify-between">
+                <span>Luas: 17,04 km²</span>
+                <span>Porsi: 14,29% Kec.</span>
               </div>
             </div>
           </CardContent>
@@ -513,44 +643,58 @@ function PetaTab() {
 
 function WilayahTab() {
   const dusuns = [
-    { name: 'DUSUN I', rw: 2, rt: 8, color: 'bg-primary' },
-    { name: 'DUSUN II', rw: 3, rt: 12, color: 'bg-secondary' },
-    { name: 'DUSUN III', rw: 2, rt: 10, color: 'bg-accent' },
-    { name: 'DUSUN IV', rw: 3, rt: 11, color: 'bg-slate-900' },
+    { name: 'DUSUN KURIPAN', desc: 'Wilayah pemukiman dan pusat aktivitas kemasyarakatan.', color: 'bg-primary' },
+    { name: 'DUSUN SIDAURIP', desc: 'Pusat pemerintahan desa dan sentra pelayanan publik.', color: 'bg-secondary' },
+    { name: 'DUSUN SIDASARI', desc: 'Kawasan lahan pertanian produktif dan perkebunan.', color: 'bg-accent' },
+    { name: 'DUSUN GEBANGSARI', desc: 'Kawasan pertanian serta potensi perikanan air tawar.', color: 'bg-slate-900' },
   ];
 
   return (
     <div className="space-y-12">
-      <div className="max-w-2xl space-y-4">
-        <h2 className="text-4xl font-black text-slate-900 uppercase font-display italic">Data <span className="text-primary not-italic">Wilayah</span></h2>
-        <p className="text-slate-500 font-medium leading-relaxed italic">Distribusi pembagian wilayah administratif Desa Pangawaren yang terdiri dari 4 Dusun utama.</p>
+      <div className="max-w-3xl space-y-4">
+        <Badge className="bg-sky-50 text-sky-700 font-black uppercase text-[10px] tracking-widest px-4 py-1.5 border-none shadow-sm">
+          Pembagian Wilayah Administrasi
+        </Badge>
+        <h2 className="text-4xl font-black text-slate-900 uppercase font-display italic">Wilayah & <span className="text-primary not-italic">Demografi</span></h2>
+        <p className="text-slate-500 font-medium leading-relaxed">
+          Desa Sidaurip terbagi menjadi <strong>4 Dusun</strong> utama dengan total <strong>8 RW</strong> dan <strong>45 RT</strong> (Data BPS 2024). Kepadatan penduduk mencapai ~464 jiwa/km², memberikan peluang luas bagi pengembangan permukiman dan pertanian.
+        </p>
+      </div>
+
+      {/* Ringkasan Demografi Badges */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="p-6 rounded-3xl bg-white border border-slate-100 shadow-sm space-y-1">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Jumlah Dusun</p>
+          <p className="text-3xl font-black text-primary font-display">4 Dusun</p>
+        </div>
+        <div className="p-6 rounded-3xl bg-white border border-slate-100 shadow-sm space-y-1">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Jumlah RW</p>
+          <p className="text-3xl font-black text-primary font-display">8 RW</p>
+        </div>
+        <div className="p-6 rounded-3xl bg-white border border-slate-100 shadow-sm space-y-1">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Jumlah RT</p>
+          <p className="text-3xl font-black text-primary font-display">45 RT</p>
+        </div>
+        <div className="p-6 rounded-3xl bg-white border border-slate-100 shadow-sm space-y-1">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Kepadatan Penduduk</p>
+          <p className="text-3xl font-black text-primary font-display">464 <span className="text-xs font-normal">jiwa/km²</span></p>
+        </div>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-6 md:grid-cols-2 md:gap-8">
         {dusuns.map((dusun, i) => (
           <Card key={i} className="rounded-3xl md:rounded-[3rem] border-none shadow-sm hover:shadow-2xl transition-all duration-500 bg-white overflow-hidden group">
             <div className={cn("h-3 w-full", dusun.color)} />
-            <CardContent className="p-6 md:p-10 space-y-6 md:space-y-8">
+            <CardContent className="p-6 md:p-10 space-y-6">
               <div className="flex justify-between items-center">
                 <h3 className="text-2xl font-black text-slate-800 tracking-tighter">{dusun.name}</h3>
                 <div className="p-3 bg-slate-50 rounded-2xl group-hover:bg-primary group-hover:text-white transition-all">
                   <Milestone className="h-6 w-6" />
                 </div>
               </div>
-
-              <div className="grid grid-cols-2 gap-6">
-                <div className="space-y-1">
-                  <p className="text-5xl font-black text-slate-900 tracking-tighter">{dusun.rw}</p>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Jumlah RW</p>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-5xl font-black text-slate-900 tracking-tighter">{dusun.rt}</p>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Jumlah RT</p>
-                </div>
-              </div>
-
-              <div className="pt-6 border-t border-slate-50 flex items-center justify-between text-primary font-black uppercase text-[10px] tracking-widest group-hover:translate-x-2 transition-transform">
-                <span>Lihat Detail Wilayah</span>
+              <p className="text-sm text-slate-600 font-medium leading-relaxed">{dusun.desc}</p>
+              <div className="pt-4 border-t border-slate-50 flex items-center justify-between text-primary font-black uppercase text-[10px] tracking-widest group-hover:translate-x-2 transition-transform">
+                <span>Wilayah Administrasi Desa Sidaurip</span>
                 <ChevronRight className="h-4 w-4" />
               </div>
             </CardContent>
@@ -563,29 +707,56 @@ function WilayahTab() {
 
 function PotensiTab() {
   const potentials = [
-    { title: 'Pertanian Utama', desc: 'Lahan sawah seluas 500+ hektar yang menghasilkan padi kualitas premium serta komoditas palawija unggulan.', icon: Zap, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-    { title: 'UMKM Mandiri', desc: 'Produk olahan makanan lokal seperti keripik dan kerajinan tangan hasil karya ibu-ibu PKK desa.', icon: Landmark, color: 'text-amber-600', bg: 'bg-amber-50' },
-    { title: 'Wisata Alam', desc: 'Potensi wisata agro dan river tubing yang sedang dikembangkan untuk menarik minat wisatawan daerah.', icon: MapIcon, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { title: 'Budaya Lokal', desc: 'Tradisi gotong royong yang kuat serta pelestarian seni banyumasan yang tetap eksis di tengah warga.', icon: Users, color: 'text-rose-600', bg: 'bg-rose-50' },
+    {
+      title: '1. Sektor Pertanian Utama',
+      desc: 'Komoditas unggulan meliputi Padi, Jagung, Kelapa, Singkong, Hortikultura, dan tanaman pekarangan. Pertanian merupakan mata pencaharian utama warga Desa Sidaurip.',
+      icon: Sprout,
+      color: 'text-sky-600',
+      bg: 'bg-sky-50'
+    },
+    {
+      title: '2. Sektor Peternakan',
+      desc: 'Usaha peternakan sapi, kambing, ayam, dan itik menjadi penopang ekonomi keluarga dan penyedia pangan hewani lokal.',
+      icon: Beef,
+      color: 'text-amber-600',
+      bg: 'bg-amber-50'
+    },
+    {
+      title: '3. Perikanan Air Tawar & Pesisir',
+      desc: 'Wilayah bagian selatan yang berdekatan dengan kawasan rawa/pesisir memberikan potensi besar bagi pengembangan perikanan air tawar dan budidaya.',
+      icon: Fish,
+      color: 'text-blue-600',
+      bg: 'bg-blue-50'
+    },
+    {
+      title: '4. UMKM & Kerajinan',
+      desc: 'Pengembangan perdagangan, warung sembako, kuliner lokal, industri rumah tangga, dan kerajinan sebagai penggerak ekonomi warga.',
+      icon: Store,
+      color: 'text-rose-600',
+      bg: 'bg-rose-50'
+    },
   ];
 
   return (
     <div className="space-y-16">
       <div className="text-center space-y-4 max-w-3xl mx-auto">
+        <Badge className="bg-sky-50 text-sky-700 font-black uppercase text-[10px] tracking-widest px-4 py-1.5 border-none shadow-sm">
+          Potensi Ekonomi & Kemasyarakatan
+        </Badge>
         <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase font-display italic">Potensi <span className="text-primary not-italic">Unggulan</span></h2>
-        <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.4em]">Aset Ekonomi & Kekayaan Budaya Pangawaren</p>
+        <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.4em]">Sektor Pertanian, Peternakan, Perikanan, & UMKM Desa Sidaurip</p>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8">
         {potentials.map((item, i) => (
           <Card key={i} className="rounded-3xl md:rounded-[2.5rem] border-none shadow-sm hover:shadow-2xl transition-all duration-500 bg-white group flex flex-col h-full">
-            <CardContent className="p-6 md:p-10 flex flex-col h-full space-y-6">
+            <CardContent className="p-8 md:p-10 flex flex-col h-full space-y-6">
               <div className={cn("w-16 h-16 rounded-3xl flex items-center justify-center transition-transform group-hover:rotate-12 group-hover:scale-110", item.bg, item.color)}>
                 <item.icon className="h-8 w-8" />
               </div>
               <div className="space-y-3 flex-1">
                 <h4 className="text-xl font-black uppercase tracking-tight text-slate-800 leading-tight">{item.title}</h4>
-                <p className="text-sm text-slate-500 leading-relaxed font-medium">
+                <p className="text-sm text-slate-600 leading-relaxed font-medium">
                   {item.desc}
                 </p>
               </div>
@@ -594,12 +765,38 @@ function PotensiTab() {
           </Card>
         ))}
       </div>
+
+      {/* PENDIDIKAN & KESEHATAN & SOSIAL BUDAYA */}
+      <div className="grid md:grid-cols-3 gap-6">
+        <div className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm space-y-4">
+          <div className="p-3 bg-sky-50 text-sky-700 w-fit rounded-2xl"><GraduationCap className="h-6 w-6" /></div>
+          <h4 className="text-lg font-black text-slate-900 uppercase">Pendidikan</h4>
+          <p className="text-xs text-slate-600 leading-relaxed font-medium">
+            Fasilitas pendidikan dasar dan program literasi masyarakat terus dikembangkan untuk peningkatan SDM generasi muda Desa Sidaurip.
+          </p>
+        </div>
+
+        <div className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm space-y-4">
+          <div className="p-3 bg-rose-50 text-rose-600 w-fit rounded-2xl"><Stethoscope className="h-6 w-6" /></div>
+          <h4 className="text-lg font-black text-slate-900 uppercase">Kesehatan</h4>
+          <p className="text-xs text-slate-600 leading-relaxed font-medium">
+            Didukung Posyandu, Posbindu, kader kesehatan, pencegahan stunting, serta koordinasi dengan Puskesmas Gandrungmangu.
+          </p>
+        </div>
+
+        <div className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm space-y-4">
+          <div className="p-3 bg-amber-50 text-amber-600 w-fit rounded-2xl"><Users className="h-6 w-6" /></div>
+          <h4 className="text-lg font-black text-slate-900 uppercase">Sosial Budaya</h4>
+          <p className="text-xs text-slate-600 leading-relaxed font-medium">
+            Tradisi gotong royong, kerja bakti, pengajian, Karang Taruna, PKK, LPMD, dan Linmas sebagai modal sosial pembangunan desa.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
 
 function GaleriTab({ youtubeEmbedUrl, newsData, isLoadingNews }: { youtubeEmbedUrl: string | null, newsData?: any[] | null, isLoadingNews?: boolean }) {
-  // Filter news yang memiliki imageUrl untuk dokumentasi kegiatan
   const documentationPhotos = useMemo(() => {
     if (!newsData) return [];
     return newsData
@@ -617,13 +814,13 @@ function GaleriTab({ youtubeEmbedUrl, newsData, isLoadingNews }: { youtubeEmbedU
       <section className="space-y-8">
         <div className="flex items-center gap-4">
           <div className="p-3 bg-rose-50 text-rose-600 rounded-2xl"><PlayCircle className="h-6 w-6" /></div>
-          <h3 className="text-2xl font-black uppercase tracking-tight text-slate-800">Video Profil Resmi Desa</h3>
+          <h3 className="text-2xl font-black uppercase tracking-tight text-slate-800">Video Profil Resmi Desa Sidaurip</h3>
         </div>
         <Card className="rounded-3xl md:rounded-[3rem] overflow-hidden border-none shadow-2xl aspect-video bg-slate-900 group">
           {youtubeEmbedUrl ? (
             <iframe
               src={youtubeEmbedUrl}
-              title="Profil Desa Pangawaren"
+              title="Profil Desa Sidaurip"
               className="w-full h-full opacity-80 group-hover:opacity-100 transition-opacity"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -641,14 +838,14 @@ function GaleriTab({ youtubeEmbedUrl, newsData, isLoadingNews }: { youtubeEmbedU
           )}
         </Card>
       </section>
- 
-      {/* Photo Gallery Grid - Dokumentasi Kegiatan dari Berita */}
+
+      {/* Photo Gallery Grid */}
       <section className="space-y-10">
         <div className="flex items-center gap-4">
           <div className="p-3 bg-primary text-white rounded-2xl"><ImageIcon className="h-6 w-6" /></div>
           <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight text-slate-800">Dokumentasi Kegiatan</h3>
         </div>
- 
+
         {isLoadingNews ? (
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-6 space-y-4 md:space-y-6">
             {Array.from({ length: 6 }).map((_, i) => (
@@ -697,7 +894,6 @@ function GaleriTab({ youtubeEmbedUrl, newsData, isLoadingNews }: { youtubeEmbedU
   );
 }
 
-// Reuse OfficialCard for internal Kenali tab
 function OfficialCard({ official, isSmall = false }: { official: Official, isSmall?: boolean }) {
   return (
     <div className={`group bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden`}>

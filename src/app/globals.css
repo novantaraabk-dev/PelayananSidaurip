@@ -13,16 +13,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 25% 15%;
 
-    --primary: 152 64% 22%;
+    --primary: 199 89% 38%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 45 95% 54%;
-    --secondary-foreground: 152 64% 18%;
+    --secondary-foreground: 199 89% 20%;
 
     --muted: 214 20% 94%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 152 40% 44%;
+    --accent: 199 75% 55%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
@@ -30,17 +30,17 @@
 
     --border: 214 20% 88%;
     --input: 214 20% 88%;
-    --ring: 152 64% 22%;
+    --ring: 199 89% 38%;
 
     --radius: 1.25rem;
 
-    --sidebar-background: 152 64% 16%;
+    --sidebar-background: 199 80% 18%;
     --sidebar-foreground: 210 40% 97%;
     --sidebar-primary: 45 95% 54%;
-    --sidebar-primary-foreground: 152 64% 16%;
-    --sidebar-accent: 152 40% 24%;
+    --sidebar-primary-foreground: 199 80% 18%;
+    --sidebar-accent: 199 60% 26%;
     --sidebar-accent-foreground: 45 95% 54%;
-    --sidebar-border: 152 40% 24%;
+    --sidebar-border: 199 60% 26%;
     --sidebar-ring: 45 95% 54%;
   }
 }
@@ -85,7 +85,7 @@ div[class*="shadow"][class*="bg-card"][class*="rounded-"],
 .bg-card,
 .border-slate-100,
 .border-slate-200 {
-  border: 1px solid rgba(16, 185, 129, 0.18) !important;
+  border: 1px solid rgba(14, 165, 233, 0.18) !important;
   transition: all 0.3s ease-in-out;
 }
 
@@ -95,7 +95,7 @@ div[class*="shadow"][class*="bg-card"][class*="rounded-"]:hover,
 .bg-card:hover,
 .border-slate-100:hover,
 .border-slate-200:hover {
-  border-color: rgba(16, 185, 129, 0.45) !important;
+  border-color: rgba(14, 165, 233, 0.45) !important;
 }
 
 @keyframes marquee {
@@ -132,4 +132,47 @@ div[class*="shadow"][class*="bg-card"][class*="rounded-"]:hover,
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* Custom Thin Line Scrollbar (Ganti box scrollbar default menjadi garis tipis elegan) */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Scrollbar untuk area terang / halaman utama */
+main::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+main::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
+
+/* Support Firefox thin scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
 

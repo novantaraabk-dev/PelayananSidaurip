@@ -83,7 +83,7 @@ export function ResidentForm({ open, onOpenChange, resident }: ResidentFormProps
       address: '',
       rt: '',
       rw: '',
-      kelurahan: 'PANGAWAREN',
+      kelurahan: 'SIDAURIP',
       relationshipToHeadOfFamily: '',
       maritalStatus: '',
       educationLevel: '',
@@ -142,7 +142,7 @@ export function ResidentForm({ open, onOpenChange, resident }: ResidentFormProps
         address: '',
         rt: '',
         rw: '',
-        kelurahan: 'PANGAWAREN',
+        kelurahan: 'SIDAURIP',
         relationshipToHeadOfFamily: '',
         maritalStatus: '',
         educationLevel: '',
@@ -167,7 +167,7 @@ export function ResidentForm({ open, onOpenChange, resident }: ResidentFormProps
 
     try {
       const docRef = doc(firestore, 'residents', values.nik);
-      
+
       await setDoc(docRef, {
         ...values,
         fullName: values.fullName.toUpperCase(),
@@ -194,12 +194,12 @@ export function ResidentForm({ open, onOpenChange, resident }: ResidentFormProps
           <DialogTitle>{resident ? 'Edit Data Penduduk' : 'Tambah Penduduk Baru'}</DialogTitle>
           <DialogDescription>Seluruh 25 data kependudukan wajib diisi sesuai format resmi.</DialogDescription>
         </DialogHeader>
-        
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col flex-1 overflow-hidden">
             {/* Area Form yang dapat digulir dengan Keyboard Support */}
-            <div 
-              className="flex-1 overflow-y-auto px-6 py-4 outline-none" 
+            <div
+              className="flex-1 overflow-y-auto px-6 py-4 outline-none"
               tabIndex={0}
             >
               <div className="space-y-8 pb-8">
@@ -222,7 +222,7 @@ export function ResidentForm({ open, onOpenChange, resident }: ResidentFormProps
                       <FormItem><FormLabel>Jenis Kelamin (JENIS_KLM)</FormLabel><FormControl><Input placeholder="Contoh: Laki-laki / Perempuan" {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
                     <div className="grid grid-cols-2 gap-2">
-                       <FormField control={form.control} name="dateOfBirth" render={({ field }) => (
+                      <FormField control={form.control} name="dateOfBirth" render={({ field }) => (
                         <FormItem><FormLabel>Tgl Lahir (TGL_LAHIR)</FormLabel><FormControl><Input {...field} placeholder="DD-MM-YYYY" /></FormControl><FormMessage /></FormItem>
                       )} />
                       <FormField control={form.control} name="age" render={({ field }) => (
@@ -248,7 +248,7 @@ export function ResidentForm({ open, onOpenChange, resident }: ResidentFormProps
                       <FormItem className="md:col-span-2"><FormLabel>Alamat (Dusun/jalan)</FormLabel><FormControl><Textarea {...field} className="uppercase" placeholder="Nama Jalan atau Dusun" /></FormControl><FormMessage /></FormItem>
                     )} />
                     <div className="grid grid-cols-2 gap-2">
-                       <FormField control={form.control} name="rt" render={({ field }) => (
+                      <FormField control={form.control} name="rt" render={({ field }) => (
                         <FormItem><FormLabel>RT (NO_RT)</FormLabel><FormControl><Input {...field} placeholder="001" /></FormControl><FormMessage /></FormItem>
                       )} />
                       <FormField control={form.control} name="rw" render={({ field }) => (
@@ -283,7 +283,7 @@ export function ResidentForm({ open, onOpenChange, resident }: ResidentFormProps
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="grid grid-cols-2 gap-2">
-                       <FormField control={form.control} name="hasBirthCertificate" render={({ field }) => (
+                      <FormField control={form.control} name="hasBirthCertificate" render={({ field }) => (
                         <FormItem><FormLabel>Akta Lahir (AKTA_LAHIR)</FormLabel><FormControl><Input placeholder="ADA / TIDAK" {...field} /></FormControl><FormMessage /></FormItem>
                       )} />
                       <FormField control={form.control} name="birthCertificateNumber" render={({ field }) => (
@@ -291,7 +291,7 @@ export function ResidentForm({ open, onOpenChange, resident }: ResidentFormProps
                       )} />
                     </div>
                     <div className="grid grid-cols-2 gap-2">
-                       <FormField control={form.control} name="hasMarriageCertificate" render={({ field }) => (
+                      <FormField control={form.control} name="hasMarriageCertificate" render={({ field }) => (
                         <FormItem><FormLabel>Akta Kawin (AKTA_KAWIN)</FormLabel><FormControl><Input placeholder="ADA / TIDAK" {...field} /></FormControl><FormMessage /></FormItem>
                       )} />
                       <FormField control={form.control} name="marriageCertificateNumber" render={({ field }) => (
@@ -299,7 +299,7 @@ export function ResidentForm({ open, onOpenChange, resident }: ResidentFormProps
                       )} />
                     </div>
                     <div className="grid grid-cols-2 gap-2">
-                       <FormField control={form.control} name="hasDivorceCertificate" render={({ field }) => (
+                      <FormField control={form.control} name="hasDivorceCertificate" render={({ field }) => (
                         <FormItem><FormLabel>Akta Cerai (AKTA_CERAI)</FormLabel><FormControl><Input placeholder="ADA / TIDAK" {...field} /></FormControl><FormMessage /></FormItem>
                       )} />
                       <FormField control={form.control} name="divorceCertificateNumber" render={({ field }) => (
@@ -307,17 +307,17 @@ export function ResidentForm({ open, onOpenChange, resident }: ResidentFormProps
                       )} />
                     </div>
                     <div className="space-y-4 md:col-span-2 pt-2">
-                       <div className="flex items-center gap-2 text-muted-foreground font-bold text-xs uppercase">
-                         <Users className="h-3 w-3" /> Data Orang Tua
-                       </div>
-                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                         <FormField control={form.control} name="fatherName" render={({ field }) => (
-                           <FormItem><FormLabel>Nama Ayah (NAMA_AYAH)</FormLabel><FormControl><Input className="uppercase" {...field} /></FormControl><FormMessage /></FormItem>
-                         )} />
-                         <FormField control={form.control} name="motherName" render={({ field }) => (
-                           <FormItem><FormLabel>Nama Ibu (NAMA_IBU)</FormLabel><FormControl><Input className="uppercase" {...field} /></FormControl><FormMessage /></FormItem>
-                         )} />
-                       </div>
+                      <div className="flex items-center gap-2 text-muted-foreground font-bold text-xs uppercase">
+                        <Users className="h-3 w-3" /> Data Orang Tua
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <FormField control={form.control} name="fatherName" render={({ field }) => (
+                          <FormItem><FormLabel>Nama Ayah (NAMA_AYAH)</FormLabel><FormControl><Input className="uppercase" {...field} /></FormControl><FormMessage /></FormItem>
+                        )} />
+                        <FormField control={form.control} name="motherName" render={({ field }) => (
+                          <FormItem><FormLabel>Nama Ibu (NAMA_IBU)</FormLabel><FormControl><Input className="uppercase" {...field} /></FormControl><FormMessage /></FormItem>
+                        )} />
+                      </div>
                     </div>
                   </div>
                 </div>

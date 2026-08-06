@@ -66,7 +66,7 @@ function GoogleFileUploader({ label, onFileSelect, fieldName, isRequired, disabl
       <FormControl>
         <div className={cn(
           "relative group border-2 border-dashed rounded-2xl p-4 transition-all hover:border-primary/50 bg-slate-50/50",
-          fileName && "border-emerald-200 bg-emerald-50/30",
+          fileName && "border-sky-200 bg-sky-50/30",
           disabled && "opacity-50 cursor-not-allowed"
         )}>
           <input
@@ -80,9 +80,9 @@ function GoogleFileUploader({ label, onFileSelect, fieldName, isRequired, disabl
             {fileName ? (
               <>
                 <div className="p-2 bg-white rounded-full shadow-sm">
-                  <FileCheck className="h-6 w-6 text-emerald-600 animate-in zoom-in" />
+                  <FileCheck className="h-6 w-6 text-sky-600 animate-in zoom-in" />
                 </div>
-                <p className="text-[10px] font-black text-emerald-700 line-clamp-1 uppercase px-2 tracking-tight">{fileName}</p>
+                <p className="text-[10px] font-black text-sky-700 line-clamp-1 uppercase px-2 tracking-tight">{fileName}</p>
               </>
             ) : (
               <>
@@ -163,7 +163,7 @@ export function WaliForm({ isAdmin = false }: { isAdmin?: boolean }) {
           form.setValue(`${prefix}.birthDate`, formatDbDateToForm(resident.dateOfBirth));
           if (prefix === 'wali') form.setValue(`wali.job`, resident.occupation);
 
-          const fullAddress = `${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Karangpucung, Kab. Cilacap`.toUpperCase();
+          const fullAddress = `${resident.address}, RT ${resident.rt} RW ${resident.rw}, ${resident.kelurahan}Kec. Gandrungmangu, Kab. Cilacap`.toUpperCase();
           form.setValue(`${prefix}.address`, fullAddress);
 
           toast({ title: "Data Ditemukan", description: `Data ${prefix === 'wali' ? 'Wali' : 'Anak'} telah diisi otomatis.` });
@@ -239,7 +239,7 @@ export function WaliForm({ isAdmin = false }: { isAdmin?: boolean }) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
-        <div className="p-8 border-2 border-primary/10 rounded-[3rem] bg-emerald-50/30 flex flex-col sm:flex-row items-center gap-6 shadow-sm">
+        <div className="p-8 border-2 border-primary/10 rounded-[3rem] bg-sky-50/30 flex flex-col sm:flex-row items-center gap-6 shadow-sm">
           <div className="p-4 bg-primary text-white rounded-2xl">
             <ShieldCheck className="h-8 w-8" />
           </div>
