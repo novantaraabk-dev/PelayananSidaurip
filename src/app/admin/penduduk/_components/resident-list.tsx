@@ -32,7 +32,13 @@ import {
   ShieldAlert,
   Database,
   BarChart3,
+  FileSpreadsheet,
+  FileText,
+  Download,
 } from 'lucide-react';
+import * as XLSX from 'xlsx';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import { Resident } from '@/lib/types';
 import { useFirestore } from '@/firebase';
 import {
@@ -74,6 +80,8 @@ export function ResidentList() {
   const [isDeletingAll, setIsDeletingAll] = useState(false);
   const [isSeeding, setIsSeeding] = useState(false);
   const [isRecalculating, setIsRecalculating] = useState(false);
+  const [isExportingExcel, setIsExportingExcel] = useState(false);
+  const [isExportingPDF, setIsExportingPDF] = useState(false);
 
   const [residents, setResidents] = useState<Resident[]>([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -82,6 +90,131 @@ export function ResidentList() {
 
   const firestore = useFirestore();
   const { toast } = useToast();
+
+  const handleDownloadExcel = async () => {
+    if (!firestore) return;
+    setIsExportingExcel(true);
+    try {
+      let dataToExport = residents;
+      if (dataToExport.length === 0) {
+        const snap = await getDocs(query(collection(firestore, 'residents'), limit(5000)));
+        dataToExport = snap.docs.map(d => ({ id: d.id, ...d.data() } as Resident));
+      }
+
+      if (dataToExport.length === 0) {
+        toast({ title: "Data Kosong", description: "Tidak ada data penduduk untuk diunduh." });
+        return;
+      }
+
+      const excelData = dataToExport.map((r, index) => ({
+        'No': index + 1,
+        'NIK': r.nik || '',
+        'No. KK': r.noKk || '',
+        'Nama Lengkap': r.fullName || '',
+        'Jenis Kelamin': r.gender || '',
+        'Tempat Lahir': r.placeOfBirth || '',
+        'Tanggal Lahir': r.dateOfBirth || '',
+        'Agama': r.religion || '',
+        'Status Perkawinan': r.maritalStatus || '',
+        'Pendidikan': r.educationLevel || '',
+        'Pekerjaan': r.occupation || '',
+        'Hubungan Keluarga': r.relationshipToHeadOfFamily || '',
+        'Golongan Darah': r.bloodType || '',
+        'Alamat': r.address || '',
+        'RT': r.rt || '',
+        'RW': r.rw || '',
+        'Kelurahan/Desa': r.kelurahan || 'Sidaurip',
+        'Nama Ayah': r.fatherName || '',
+        'Nama Ibu': r.motherName || '',
+      }));
+
+      const worksheet = XLSX.utils.json_to_sheet(excelData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Data Penduduk');
+
+      const fileName = `Data_Penduduk_Desa_Sidaurip_${new Date().toISOString().split('T')[0]}.xlsx`;
+      XLSX.writeFile(workbook, fileName);
+
+      toast({
+        title: "Excel Berhasil Diunduh",
+        description: `${dataToExport.length} data penduduk telah diekspor ke file Excel.`,
+      });
+    } catch (error: any) {
+      console.error("Error exporting Excel:", error);
+      toast({ variant: "destructive", title: "Gagal Ekspor Excel", description: error.message });
+    } finally {
+      setIsExportingExcel(false);
+    }
+  };
+
+  const handleDownloadPDF = async () => {
+    if (!firestore) return;
+    setIsExportingPDF(true);
+    try {
+      let dataToExport = residents;
+      if (dataToExport.length === 0) {
+        const snap = await getDocs(query(collection(firestore, 'residents'), limit(5000)));
+        dataToExport = snap.docs.map(d => ({ id: d.id, ...d.data() } as Resident));
+      }
+
+      if (dataToExport.length === 0) {
+        toast({ title: "Data Kosong", description: "Tidak ada data penduduk untuk diunduh." });
+        return;
+      }
+
+      const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+
+      pdf.setFontSize(14);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('PEMERINTAH KABUPATEN CILACAP', 148, 14, { align: 'center' });
+      pdf.setFontSize(12);
+      pdf.text('KECAMATAN GANDRUNGMANGU - DESA SIDAURIP', 148, 20, { align: 'center' });
+      pdf.setFontSize(10);
+      pdf.setFont('helvetica', 'normal');
+      pdf.text('LAPORAN DATA KEPENDUDUKAN DESA SIDAURIP', 148, 26, { align: 'center' });
+      pdf.setLineWidth(0.5);
+      pdf.line(14, 29, 283, 29);
+
+      const tableColumn = [
+        'No', 'NIK', 'No. KK', 'Nama Lengkap', 'JK', 'Tgl Lahir', 'Agama', 'SHDK', 'Pekerjaan', 'RT/RW'
+      ];
+
+      const tableRows = dataToExport.map((r, index) => [
+        index + 1,
+        r.nik || '-',
+        r.noKk || '-',
+        r.fullName || '-',
+        r.gender || '-',
+        r.dateOfBirth || '-',
+        r.religion || '-',
+        r.relationshipToHeadOfFamily || '-',
+        r.occupation || '-',
+        `RT ${r.rt || '-'}/RW ${r.rw || '-'}`
+      ]);
+
+      autoTable(pdf, {
+        head: [tableColumn],
+        body: tableRows,
+        startY: 33,
+        styles: { fontSize: 8, cellPadding: 2 },
+        headStyles: { fillColor: [2, 132, 199], textColor: [255, 255, 255], fontStyle: 'bold' },
+        alternateRowStyles: { fillColor: [248, 250, 252] },
+      });
+
+      const fileName = `Data_Penduduk_Desa_Sidaurip_${new Date().toISOString().split('T')[0]}.pdf`;
+      pdf.save(fileName);
+
+      toast({
+        title: "PDF Berhasil Diunduh",
+        description: `${dataToExport.length} data penduduk telah diekspor ke file PDF.`,
+      });
+    } catch (error: any) {
+      console.error("Error exporting PDF:", error);
+      toast({ variant: "destructive", title: "Gagal Ekspor PDF", description: error.message });
+    } finally {
+      setIsExportingPDF(false);
+    }
+  };
 
   const fetchTotalCount = async () => {
     if (!firestore) return;
@@ -356,7 +489,27 @@ export function ResidentList() {
             </Button>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleDownloadExcel}
+              disabled={isExportingExcel}
+              className="border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-semibold"
+            >
+              {isExportingExcel ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <FileSpreadsheet className="mr-2 h-4 w-4 text-emerald-600" />}
+              Unduh Excel
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleDownloadPDF}
+              disabled={isExportingPDF}
+              className="border-rose-600 text-rose-700 hover:bg-rose-50 font-semibold"
+            >
+              {isExportingPDF ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <FileText className="mr-2 h-4 w-4 text-rose-600" />}
+              Unduh PDF
+            </Button>
             <Button variant="outline" size="sm" onClick={() => setIsImportOpen(true)}>
               <FileUp className="mr-2 h-4 w-4" />
               Impor Excel
